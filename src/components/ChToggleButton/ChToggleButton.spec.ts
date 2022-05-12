@@ -4,7 +4,7 @@ import ChToggleButton from './ChToggleButton.vue'
 
 describe('ChToggleButton', () => {
   it('renders properly', () => {
-    const wrapper = mount(ChToggleButton, { label: 'Hello Vitest' })
+    const wrapper = mount(ChToggleButton, { props: { label: 'Hello Vitest' } })
     expect(wrapper.text()).toContain('Hello Vitest')
   })
 })
