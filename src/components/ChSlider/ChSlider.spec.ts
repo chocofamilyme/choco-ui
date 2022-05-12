@@ -4,7 +4,7 @@ import ChSlider from './ChSlider.vue'
 
 describe('ChSlider', () => {
   it('renders properly', () => {
-    const wrapper = mount(ChSlider, { slots: { default: 'Hello Vitest' } })
-    expect(wrapper.text()).toContain('Hello Vitest')
+    const wrapper = mount(ChSlider, { props: { title: 'Hello Vitest' } })
+    expect(wrapper.html()).toContain('Hello Vitest')
   })
 })
