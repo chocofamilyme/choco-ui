@@ -4,7 +4,7 @@ import ChTextBlock from './ChTextBlock.vue'
 
 describe('ChTextBlock', () => {
   it('renders properly', () => {
-    const wrapper = mount(ChTextBlock, { label: 'Hello Vitest' })
-    expect(wrapper.text()).toContain('Hello Vitest')
+    const wrapper = mount(ChTextBlock, { props: { label: 'Hello Vitest' } })
+    expect(wrapper.html()).toContain('Hello Vitest')
   })
 })
