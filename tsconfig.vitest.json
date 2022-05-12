@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.app.json",
   "exclude": [],
+  "include": ["./src/components"],
   "compilerOptions": {
     "composite": true,
     "lib": [],
