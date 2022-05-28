@@ -13,5 +13,21 @@ export default defineConfig({
   },
   test: {
     setupFiles: './setup-tests.js'
+  },
+  build: {
+    lib: {
+      entry: fileURLToPath(new URL('./src/index.js', import.meta.url)),
+      name: 'choco-ui',
+      formats: ['es', 'umd'],
+      fileName: format => `choco-ui.${format}.js`
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    }
   }
 })
