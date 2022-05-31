@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Install
+        run: npm i
       - name: Install and Build
-        run: npx -p @storybook/storybook-deployer storybook-to-ghpages --ci
+        run: npx -p @storybook/storybook-deployer storybook-to-ghpages -- --ci
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
