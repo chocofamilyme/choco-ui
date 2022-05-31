@@ -10,14 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and Build
-          run: |
-            npm install
-            npm run build-storybook
+        run: |
+          npm install
+          npm run build-storybook
       - name: Deploy
-          uses: JamesIves/github-pages-deploy-action@3.6.2
-          with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            BRANCH: storybook-deploy
-            FOLDER: docs
-            CLEAN: true
-            TARGET_FOLDER: docs
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: storybook-deploy
+          FOLDER: docs
+          CLEAN: true
+          TARGET_FOLDER: docs
