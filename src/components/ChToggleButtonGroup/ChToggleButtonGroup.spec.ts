@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import ChToggleButtonGroup from './ChToggleButtonGroup.vue'
-// @ts-ignore
 import { WithLabel } from './ChToggleButtonGroup.stories.js'
 
 describe('ChToggleButtonGroup', () => {
