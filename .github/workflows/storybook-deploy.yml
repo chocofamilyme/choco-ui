@@ -9,15 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install and Build
-        run: |
-          npm install
-          npm run build-storybook
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - uses: actions/setup-node@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: storybook-deploy
-          FOLDER: storybook-static
-          CLEAN: true
-          TARGET_FOLDER: docs
+          node-version: 14
+          cache: 'npm'
+      - name: Install
+        run: npm i
+      - name: Install and Build
+        run: npx -p @storybook/storybook-deployer storybook-to-ghpages -- --ci
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
