@@ -1,0 +1,15 @@
+name: Build & Deploy Storybook
+on:
+  push:
+    branches:
+      - main
+      - storybook-deploy
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install and Build
+        run: npx -p @storybook/storybook-deployer storybook-to-ghpages --ci
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
