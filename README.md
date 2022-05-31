@@ -54,3 +54,12 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+### Usage
+
+```html
+<script>
+import { ChButton, ChInput } from 'choco-ui';
+import 'choco-ui/dist/style.css';
+</script>
+```
