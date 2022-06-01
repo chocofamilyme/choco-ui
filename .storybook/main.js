@@ -17,5 +17,6 @@ export default {
     }
 
     return config
-  }
+  },
+  staticDirs: ['../choco-ui'],
 }
