@@ -17,24 +17,9 @@ export default {
     }
 
     if (configType === 'PRODUCTION') {
-      config.publicDir = '/choco-ui/';
-      config.build.assetsDir = '/choco-ui/';
+      config.base = '/choco-ui/';
     }
 
     return config
-  },
-  webpackFinal: async (config, { configType }) => {
-    if (configType === 'PRODUCTION') {
-      config.output.publicPath = '/choco-ui/';
-    }
-
-    return config;
-  },
-  managerWebpack: async (config, { configType }) => {
-    if (configType === 'PRODUCTION') {
-      config.output.publicPath = '/choco-ui/';
-    }
-
-    return config;
   },
 }
