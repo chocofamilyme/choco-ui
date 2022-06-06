@@ -18,7 +18,7 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "storybook": "node -r esm ./node_modules/.bin/start-storybook -p 6006",
-    "build-storybook": "node -r esm ./node_modules/.bin/build-storybook  -- --preview-url=/choco-ui/iframe.html"
+    "build-storybook": "node -r esm ./node_modules/.bin/build-storybook"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
