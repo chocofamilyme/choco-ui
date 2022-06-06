@@ -16,9 +16,12 @@ export default {
       ]
     }
 
+    return config
+  },
+  webpackFinal: async (config) => {
     config.output.publicPath = '/choco-ui/';
 
-    return config
+    return config;
   },
   managerWebpack: async (config) => {
     config.output.publicPath = '/choco-ui/';
