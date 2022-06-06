@@ -16,7 +16,13 @@ export default {
       ]
     }
 
+    config.output.publicPath = '/choco-ui/';
+
     return config
   },
-  staticDirs: ['../choco-ui', '../'],
+  managerWebpack: async (config) => {
+    config.output.publicPath = '/choco-ui/';
+
+    return config;
+  },
 }
