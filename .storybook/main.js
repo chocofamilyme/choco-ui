@@ -8,7 +8,7 @@ export default {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: '@storybook/vue3',
   core: { builder: '@storybook/builder-vite' },
-  viteFinal: config => {
+  viteFinal: (config, { configType }) => {
     config.resolve = {
       alias: [
         { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' },
@@ -16,15 +16,23 @@ export default {
       ]
     }
 
+    if (configType === 'PRODUCTION') {
+      config.base = '/choco-ui/';
+    }
+
     return config
   },
-  webpackFinal: async (config) => {
-    config.output.publicPath = '/choco-ui/';
+  webpackFinal: async (config, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      config.output.publicPath = '/choco-ui/';
+    }
 
     return config;
   },
-  managerWebpack: async (config) => {
-    config.output.publicPath = '/choco-ui/';
+  managerWebpack: async (config, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      config.output.publicPath = '/choco-ui/';
+    }
 
     return config;
   },
