@@ -17,7 +17,8 @@ export default {
     }
 
     if (configType === 'PRODUCTION') {
-      config.base = '/choco-ui/';
+      config.publicDir = '/choco-ui/';
+      config.build.assetsDir = '/choco-ui/';
     }
 
     return config
