@@ -1,6 +1,10 @@
 <template>
   <transition name="bottom-sheet-slide-up">
-    <div v-if="controller?.isVisible(props.name)" class="bottom-sheet-container">
+    <div
+      v-if="controller?.isVisible(props.name)"
+      class="bottom-sheet-container"
+      data-test-id="bottom-sheet-container"
+    >
       <div
         class="bottom-sheet-container__blackout"
         @touchstart="onBlackoutTouchStart"
@@ -20,8 +24,13 @@
           <div class="bottom-sheet__handle-bar-container" @click="controller?.hide(props.name)">
             <span class="bottom-sheet__handle-bar"></span>
           </div>
-          <slot name="header" v-bind="{ hide }"></slot>
-          <div ref="contentRef" class="bottom-sheet__body">
+          <div data-test-id="bottom-sheet-header">
+            <slot
+              name="header"
+              v-bind="{ hide, params: controller?.getParams(props.name) || {} }"
+            ></slot>
+          </div>
+          <div ref="contentRef" class="bottom-sheet__body" data-test-id="bottom-sheet-content">
             <slot
               v-bind="{
                 hide,
@@ -44,10 +53,6 @@ const props = defineProps<{
   name: string
 }>()
 
-const emit = defineEmits<{
-  (e: 'onClose'): void
-}>()
-
 const controller = inject<ModalBottomSheetController>('modalBottomSheetController')
 const contentRef = ref()
 const bottomSheetState = ref({
@@ -58,7 +63,6 @@ const bottomSheetState = ref({
 })
 
 onBeforeUnmount(() => {
-  emit('onClose')
   controller?.hide(props.name)
 })
 
