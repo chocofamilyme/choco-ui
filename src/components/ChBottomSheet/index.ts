@@ -1,1 +1,1 @@
-export { default } from './ChBottonSheet.vue'
+export { default } from './ChBottomSheet.vue'
