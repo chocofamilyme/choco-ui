@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="ChBottomSheet/README" component/>
+
+# ChBottomSheet
+
+Вся логика открытия и закрытия реализована через `useModalBottomSheetController`.
+Компонент ожидает объект `modalBottomSheetController` типа `ModalBottomSheetController` в `inject`
+
+Для использования нужно сделать provide `modalBottomSheetController` на верхнем уровне
+
+```js
+// App.vue
+import { useModalBottomSheetController } from '@choco-ui';
+
+new Vue({
+  provide: {
+    modalBottomSheetController: useModalBottomSheetController()
+  },
+  router,
+  render: h => h(App)
+}).$mount('#app');
+```
+
+```html
+<!-- ComponentWithBottomSheet.vue -->
+<template>
+  <div>
+    <button @click="modalBottomSheetController.show('example-bottom-sheet', { foo: 'bar'})">Открыть UiBottomSheet</button>
+    <ChBottomSheet name="example-bottom-sheet" v-slot="{ params }">
+      Hello {{ params.foo }}
+    </ChBottomSheet>
+  </div>
+<template>
+
+<script>
+  import { ChBottomSheet } from '@choco-ui';
+
+  export default {
+    inject: ['modalBottomSheetController'],
+    components: {
+      ChBottomSheet
+    }
+  }
+</script>
+```
+
+# useModalBottomSheetController
+
+Composable для управления состоянием модальных окон
+
+### Возвращаемый объект
+
+Возвращает объект с полями
+
+| Название      | Тип                  | Описание                                                                                                                     |
+|---------------|----------------------|------------------------------------------------------------------------------------------------------------------------------|
+| show          | Function             | Метод для отображения модального окна по имени. Может быть вызван с параметрами для того, чтобы передать их в модальное окно |
+| hide          | Function             | Метод для закрытия модального окна по имени                                                                                  |
+| isVisible     | Function             | Метод для проверки активно ли выбранное модальное окно                                                                       |
+| getParams     | Function             | Метод для получения параметров модального окна по имени                                                                      |
+| state         | ModalBottomSheet[]   | Массив со всеми модальными окнами                                                                                            |
