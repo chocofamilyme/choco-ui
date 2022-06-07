@@ -8,8 +8,7 @@ export default {
   title: 'ChBottomSheet',
   component: ChBottomSheet,
   args: {
-    name: exampleBottomSheetName,
-    onClose: {}
+    name: exampleBottomSheetName
   }
 }
 
