@@ -1,7 +1,9 @@
 {
   "name": "choco-ui",
   "version": "0.1.0",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/choco-ui.umd.js",
   "module": "./dist/choco-ui.es.js",
   "exports": {
@@ -14,11 +16,14 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
-    "test:unit": "vitest --environment jsdom",
+    "test:unit": "vitest run --environment jsdom",
+    "test:watch": "vitest --environment jsdom",
     "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint-staged": "lint-staged",
     "storybook": "node -r esm ./node_modules/.bin/start-storybook -p 6006",
-    "build-storybook": "node -r esm ./node_modules/.bin/build-storybook"
+    "build-storybook": "node -r esm ./node_modules/.bin/build-storybook",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -48,7 +53,9 @@
     "eslint-plugin-storybook": "^0.5.11",
     "eslint-plugin-vue": "^8.2.0",
     "esm": "^3.2.25",
+    "husky": "^8.0.1",
     "jsdom": "^19.0.0",
+    "lint-staged": "^13.0.0",
     "prettier": "^2.5.1",
     "sass": "^1.51.0",
     "typescript": "~4.6.3",
