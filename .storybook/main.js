@@ -16,6 +16,7 @@ export default {
       ]
     }
 
+    config.css = viteConfig.css
     return config
   }
 }

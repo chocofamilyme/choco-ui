@@ -14,6 +14,15 @@ export default defineConfig({
   test: {
     setupFiles: './setup-tests.js'
   },
+  css: {
+    preprocessorOptions: {
+      sass: {
+        additionalData: `
+          @import @/assets/styles/abstracts
+        `
+      }
+    }
+  },
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.js', import.meta.url)),

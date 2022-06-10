@@ -1,7 +1,9 @@
 {
   "name": "choco-ui",
   "version": "0.1.0",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/choco-ui.umd.js",
   "module": "./dist/choco-ui.es.js",
   "exports": {
