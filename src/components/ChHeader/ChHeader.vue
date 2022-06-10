@@ -22,22 +22,12 @@
 
   &__left-action, &__right-action
     flex-shrink: 0
-    width: 58px
+    width: 3.625rem
+
+  &__right-action
+    display: flex
+    justify-content: right
 
   &__content
     flex-grow: 1
-</style>
-
-<style lang="sass">
-.ch-header__default-button
-  display: flex
-  align-items: center
-  justify-content: center
-  width: 36px
-  height: 36px
-  padding: 0
-  background-color: transparent
-  border: none
-  outline: none
-  cursor: pointer
 </style>
