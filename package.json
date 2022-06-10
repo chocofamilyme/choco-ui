@@ -13,7 +13,6 @@
     }
   },
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "test:unit": "vitest run --environment jsdom",
@@ -21,7 +20,7 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "lint-staged": "lint-staged",
-    "storybook": "./node_modules/.bin/start-storybook -p 6006",
+    "storybook": "node  -r esm ./node_modules/.bin/start-storybook -p 6006",
     "build-storybook": "node -r esm ./node_modules/.bin/build-storybook",
     "prepare": "husky install"
   },
