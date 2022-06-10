@@ -4,10 +4,11 @@ import ChRadio from './ChRadio.vue'
 
 describe('ChRadio', () => {
   it('renders properly', () => {
+    const defaultText = 'Hello Vitest'
     const wrapper = mount(ChRadio, {
-      props: { name: 'Hello Vitest' },
-      slots: { default: 'Hello Vitest' }
+      props: { name: defaultText },
+      slots: { default: defaultText }
     })
-    expect(wrapper.text()).toContain('Hello Vitest')
+    expect(wrapper.text()).toContain(defaultText)
   })
 })

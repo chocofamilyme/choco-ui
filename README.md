@@ -6,6 +6,11 @@ This template should help get you started developing with Vue 3 in Vite.
 
 [Описаны здесь](./CONTRIBUTING.md)
 
+## Иконки
+Мы используем phosphor - https://phosphoricons.com/. Нажав на иконку, отобразится код для копирования.
+
+Если надо использовать иконки в компонентах, то используем слоты. 
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
