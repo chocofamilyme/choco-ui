@@ -3,6 +3,7 @@
     <div class="ch-slider__top-bar" v-if="title">
       <h3 class="ch-slider__label">{{ title }}</h3>
     </div>
+    <div class="ch-slider__body" ref="sliderBody"></div>
     <div class="ch-slider__controls">
       <div class="ch-slider__rail" ref="rail"></div>
       <template v-if="isRangeMode">
@@ -31,7 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref } from 'vue'
+import { computed, toRefs, ref, onMounted } from 'vue'
+import noUiSlider from 'nouislider'
+import 'nouislider/dist/nouislider.css'
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -55,6 +58,17 @@ const props = defineProps({
 })
 
 const { modelValue, min, max, step } = toRefs(props)
+const sliderBody = ref<null | HTMLElement>(null)
+
+onMounted(() => {
+  noUiSlider.create(sliderBody.value, {
+    start: [4000, 8000],
+    range: {
+      min: [2000],
+      max: [10000]
+    }
+  })
+})
 
 const value = computed({
   get() {
@@ -64,95 +78,10 @@ const value = computed({
     emit('update:modelValue', value)
   }
 })
-
-const isRangeMode = computed(() => Array.isArray(value.value) && value.value.length > 1)
-let needForRAF = true
-let thumbDragStart = false
-const rail = ref<null | HTMLElement>(null)
-const track = ref<null | HTMLElement>(null)
-const currentThumb = ref<null | HTMLElement>(null)
-const thumbWidth = ref(0)
-
-function onThumbMouseDown(e: MouseEvent | TouchEvent) {
-  const target = e.target as HTMLInputElement
-  const { width: targetWidth } = target.getBoundingClientRect()
-
-  thumbDragStart = true
-  thumbWidth.value = targetWidth
-  currentThumb.value = target
-}
-
-let oldCursorXPos = 0
-const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints
-
-function onThumbMouseMove(e: MouseEvent | TouchEvent) {
-  function update(touch?: Touch) {
-    if (!thumbDragStart && !needForRAF) return
-    const { left: leftOffset = 0, width: railWidth = 0 } = rail.value
-      ? rail.value.getBoundingClientRect()
-      : {}
-
-    const maxCursorPos = railWidth - thumbWidth.value
-
-    const cursorStep = Math.round(
-      step?.value
-        ? step.value <= max.value
-          ? 100 * (step.value / max.value)
-          : 100 * (max.value / max.value)
-        : (max.value / maxCursorPos) * 100
-    )
-
-    const clientX = isTouch ? touch?.clientX || 0 : (e as MouseEvent).clientX
-    const thumbHalfWidth = thumbWidth.value / 2
-    const leftPosition = ((clientX - leftOffset - thumbHalfWidth) / maxCursorPos) * 100
-    const minCursorPos = 100 * (min.value / max.value)
-    const cursorXPos = -Math.round(minCursorPos - leftPosition)
-    const cursorXPosDiff = Math.abs(cursorXPos - oldCursorXPos)
-
-    needForRAF = false
-
-    console.log({ cursorXPosDiff, oldCursorXPos, cursorStep, cursorXPos })
-    if (cursorXPosDiff > cursorStep) {
-      oldCursorXPos = cursorXPos
-
-      const allowableLeftPosition =
-        cursorXPos >= maxCursorPos
-          ? maxCursorPos
-          : cursorXPos <= minCursorPos
-          ? minCursorPos
-          : cursorXPos
-
-      requestAnimationFrame(() => {
-        if (currentThumb.value) currentThumb.value.style.left = `${allowableLeftPosition}%`
-      })
-    }
-  }
-
-  if (isTouch) {
-    var touches = (e as TouchEvent).changedTouches
-
-    for (var i = 0; i < touches.length; i++) {
-      update(touches[i])
-    }
-  } else {
-    update()
-  }
-}
-
-function onThumbMouseUp() {
-  thumbDragStart = false
-  thumbWidth.value = 0
-}
-
-document.addEventListener('mousemove', onThumbMouseMove)
-document.addEventListener('touchmove', onThumbMouseMove)
-document.addEventListener('mouseup', onThumbMouseUp)
-document.addEventListener('touchend', onThumbMouseUp)
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .ch-slider
-
   &__top-bar
     margin-bottom: 8px
 
@@ -162,11 +91,17 @@ document.addEventListener('touchend', onThumbMouseUp)
     justify-content: space-between
     margin-top: 8px
 
-  &__controls
+  &__controls, &__body
     position: relative
     padding: 18px 0
 
-  &__rail
+  .noUi-target
+    background: inherit
+    border-radius: 0
+    border: 0
+    box-shadow: none
+
+  .noUi-connects
     background: var(--color-primary-grey)
     height: 2px
     width: 100%
@@ -179,7 +114,7 @@ document.addEventListener('touchend', onThumbMouseUp)
     height: 4px
     width: 100%
 
-  &__thumb
+  .noUi-handle
     width: 36px
     height: 36px
     border: 10px solid var(--color-light)
@@ -192,4 +127,7 @@ document.addEventListener('touchend', onThumbMouseUp)
     will-change: left
     transform: translateY(-50%)
     cursor: pointer
+
+    &:before, &:after
+      display: none
 </style>
