@@ -1,5 +1,5 @@
 <template>
-  <span class="ch-label" :class="labelClasses">
+  <span class="ch-toast" :class="toastClasses">
     <slot />
   </span>
 </template>
@@ -17,11 +17,11 @@ const props = defineProps({
   }
 })
 
-const labelClasses = computed(() => (props.variant === 'regular' ? '--regular' : '--wide'))
+const toastClasses = computed(() => (props.variant === 'regular' ? '--regular' : '--wide'))
 </script>
 
 <style lang="sass" scoped>
-.ch-label
+.ch-toast
   border-radius: 1em
 
   &.--regular

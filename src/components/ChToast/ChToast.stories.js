@@ -1,31 +1,31 @@
-import ChLabel from './ChLabel.vue'
+import ChToast from './ChToast.vue'
 
 export default {
-  title: 'Label',
-  component: ChLabel,
+  title: 'Toast',
+  component: ChToast,
   args: {
     variant: 'regular'
   },
   parameters: {
-    text: 'Label',
+    text: 'Toast',
     styles: 'background-color: #e3e3e3;'
   }
 }
 
 const Template = (args, { parameters }) => ({
-  components: { ChLabel },
+  components: { ChToast },
   setup() {
     return { args, parameters }
   },
   template: `
-    <ChLabel v-bind="args" :style="parameters.styles">
+    <ChToast v-bind="args" :style="parameters.styles">
       <template v-if="parameters.template">
         <span v-html="parameters.template" />
       </template>
       <template v-else>
         {{ parameters.text }}
       </template>
-    </ChLabel>
+    </ChToast>
   `
 })
 
