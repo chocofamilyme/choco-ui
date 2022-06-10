@@ -13,7 +13,7 @@ jobs:
           node-version: 14
           cache: 'npm'
       - name: Install
-        run: npm i
+        run: npm i --force
       - name: Install and Build
         run: npx -p @storybook/storybook-deployer storybook-to-ghpages -- --ci
         env:

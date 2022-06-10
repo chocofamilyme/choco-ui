@@ -15,5 +15,5 @@ const Template = args => ({
 
 export const WithLabel = Template.bind({})
 WithLabel.args = {
-  options: ['Label', { label: 'Label 2', icon: ['fas', 'location'], active: true }]
+  options: ['Label', { label: 'Label 2', active: true }]
 }

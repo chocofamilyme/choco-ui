@@ -6,7 +6,6 @@
       :key="i"
       :active="getActiveOption(option, i)"
       :label="typeof option === 'string' ? option : option.label"
-      :icon="typeof option === 'string' ? undefined : option.icon"
     />
   </div>
 </template>
@@ -17,7 +16,6 @@ import ChToggleButton from '../ChToggleButton'
 
 interface IOption {
   label: string
-  icon: string[]
   active?: boolean
 }
 

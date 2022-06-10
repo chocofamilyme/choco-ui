@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="ch-input__clear-btn" v-if="isClearable" @click="onClear">
-        <fa-icon :icon="['fas', 'xmark']" />
+        <ph-x></ph-x>
       </div>
       <div class="ch-input__append" v-if="Boolean($slots.append)">
         <slot name="append" />
@@ -56,6 +56,7 @@
 <script setup lang="ts">
 import { computed, toRefs, ref } from 'vue'
 import uuid from '@/utils/uuid'
+import { PhX } from 'phosphor-vue'
 
 const props = defineProps({
   disabled: Boolean,

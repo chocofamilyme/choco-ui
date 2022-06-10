@@ -8,7 +8,6 @@
     <div class="ch-text-block__caption">
       <slot v-if="$slots.default" />
       <div class="ch-text-block__caption-item" v-else>
-        <fa-icon class="ch-text-block__caption-icon" v-if="icon" :icon="icon" />
         <p class="ch-text-block__caption-text">{{ caption }}</p>
       </div>
     </div>
@@ -21,7 +20,6 @@ defineProps<{
   additional?: string
   description?: string
   caption?: string
-  icon?: string[]
 }>()
 </script>
 

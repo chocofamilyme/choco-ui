@@ -34,7 +34,6 @@ export const Full = Template.bind({})
 Full.args = {
   description: 'Description',
   label: 'Label',
-  icon: ['fas', 'location'],
   caption: 'Caption',
   additional: 'additional'
 }

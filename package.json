@@ -21,15 +21,12 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "lint-staged": "lint-staged",
-    "storybook": "node -r esm ./node_modules/.bin/start-storybook -p 6006",
+    "storybook": "./node_modules/.bin/start-storybook -p 6006",
     "build-storybook": "node -r esm ./node_modules/.bin/build-storybook",
     "prepare": "husky install"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.1.1",
-    "@fortawesome/free-regular-svg-icons": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "phosphor-vue": "^4.4.0",
     "vue": "^3.2.33"
   },
   "devDependencies": {
