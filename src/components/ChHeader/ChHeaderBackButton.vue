@@ -1,11 +1,14 @@
 <template>
-  <button type="button" class="ch-header__default-button" @click="$emit('onBackButtonClick')">
+  <ChHeaderButton>
     <img src="@/assets/images/icons/arrow-left.svg" width="24" height="24" alt="" />
-  </button>
+  </ChHeaderButton>
 </template>
 
 <script lang="ts">
+import ChHeaderButton from './ChHeaderButton.vue'
+
 export default {
-  name: 'ChHeader.BackButton'
+  name: 'ChHeader.BackButton',
+  components: { ChHeaderButton }
 }
 </script>

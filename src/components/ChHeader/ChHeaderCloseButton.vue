@@ -1,20 +1,14 @@
 <template>
-  <button
-    type="button"
-    class="ch-header__default-button ch-header__close-btn"
-    @click="$emit('onCloseButtonClick')"
-  >
+  <ChHeaderButton>
     <img src="@/assets/images/icons/close.svg" width="24" height="24" alt="" />
-  </button>
+  </ChHeaderButton>
 </template>
 
 <script lang="ts">
+import ChHeaderButton from './ChHeaderButton.vue'
+
 export default {
-  name: 'ChHeader.CloseButton'
+  name: 'ChHeader.CloseButton',
+  components: { ChHeaderButton }
 }
 </script>
-
-<style lang="sass" scoped>
-.ch-header__close-btn
-  margin-left: auto
-</style>
