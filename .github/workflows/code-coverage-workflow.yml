@@ -11,7 +11,7 @@ jobs:
           node-version: 14
           cache: 'npm'
       - name: Install
-        run: npm i
+        run: npm i --force
       - name: Run
         run: npm run test:unit
   Linters:
@@ -24,6 +24,6 @@ jobs:
           node-version: 14
           cache: 'npm'
       - name: Install
-        run: npm i
+        run: npm i --force
       - name: Run
         run: npm run typecheck && npm run lint

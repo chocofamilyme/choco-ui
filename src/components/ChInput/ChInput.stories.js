@@ -73,33 +73,6 @@ WithOuterLabel.args = {
   label: 'Input'
 }
 
-export const WithAppendSlot = Template.bind({})
-WithAppendSlot.args = {
-  label: 'Input',
-  slots: {
-    append: `<fa-icon :icon="['fas', 'user']" />`
-  }
-}
-
-export const ClearableWithAppendSlot = Template.bind({})
-ClearableWithAppendSlot.args = {
-  checked: true,
-  label: 'Input',
-  clearable: true,
-  value: 'Value',
-  slots: {
-    append: `<fa-icon :icon="['fas', 'user']" />`
-  }
-}
-
-export const WithPrependSlot = Template.bind({})
-WithPrependSlot.args = {
-  label: 'Input',
-  slots: {
-    prepend: `<fa-icon :icon="['fas', 'location']" />`
-  }
-}
-
 export const WithAfterText = Template.bind({})
 WithAfterText.args = {
   label: 'Input',
