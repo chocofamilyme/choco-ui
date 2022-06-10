@@ -4,27 +4,6 @@
       <h3 class="ch-slider__label">{{ title }}</h3>
     </div>
     <div class="ch-slider__body" ref="sliderBody"></div>
-    <div class="ch-slider__controls">
-      <div class="ch-slider__rail" ref="rail"></div>
-      <template v-if="isRangeMode">
-        <div
-          class="ch-slider__thumb"
-          v-for="thumbValue in value"
-          :key="thumbValue"
-          :data-value="thumbValue"
-          @mousedown.prevent="onThumbMouseDown"
-          @touchstart.prevent="onThumbMouseDown"
-        />
-        <div class="ch-slider__track" v-if="track" ref="track" />
-      </template>
-      <div
-        class="ch-slider__thumb"
-        :data-value="value"
-        v-else
-        @mousedown.prevent="onThumbMouseDown"
-        @touchstart.prevent="onThumbMouseDown"
-      />
-    </div>
     <div class="ch-slider__bottom-bar">
       <p class="ch-slider__info-text">{{ infoText }}</p>
     </div>
