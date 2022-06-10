@@ -37,9 +37,10 @@ const props = defineProps({
 })
 
 const { modelValue, min, max, step } = toRefs(props)
-const sliderBody = ref<null | HTMLElement>(null)
+const sliderBody = ref({})
 
 onMounted(() => {
+  // @ts-ignore
   noUiSlider.create(sliderBody.value, {
     start: [4000, 8000],
     range: {
