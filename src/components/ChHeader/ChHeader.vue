@@ -3,9 +3,9 @@
     <div class="ch-header__left-action">
       <slot name="leftAction" />
     </div>
-    <h2 class="ch-header__title">
+    <div class="ch-header__content">
       <slot />
-    </h2>
+    </div>
     <div class="ch-header__right-action">
       <slot name="rightAction" />
     </div>
@@ -24,11 +24,8 @@
     flex-shrink: 0
     width: 58px
 
-  &__title
-    font-size: 18px
-    font-weight: 800
+  &__content
     flex-grow: 1
-    text-align: center
 </style>
 
 <style lang="sass">

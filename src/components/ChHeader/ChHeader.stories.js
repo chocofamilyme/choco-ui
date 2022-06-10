@@ -7,6 +7,11 @@ export default {
   component: ChHeader
 }
 
+const headerContent = `
+  <h2 style="font-size: 18px; font-weight: bold; text-align: center">
+    Header
+  </h2>
+`
 const components = { ChHeader, ChHeaderBackButton, ChHeaderCloseButton }
 const getWrapperTemplate = innerTemplate => `
   <div 
@@ -29,7 +34,7 @@ const DefaultTemplate = () => ({
       <template #leftAction>
         <ChHeaderBackButton />
       </template>
-      Header
+      ${headerContent}
       <template #rightAction>
         <ChHeaderCloseButton />
       </template>
@@ -41,7 +46,7 @@ const OnlyRightActionTemplate = () => ({
   components,
   template: getWrapperTemplate(`
     <ChHeader> 
-      Header
+      ${headerContent}
       <template #rightAction>
         <ChHeaderCloseButton />
       </template>
@@ -56,7 +61,7 @@ const OnlyLeftActionTemplate = () => ({
       <template #leftAction>
         <ChHeaderBackButton />
       </template>
-      Header
+      ${headerContent}
     </ChHeader>
   `)
 })
@@ -65,7 +70,7 @@ const WithoutActionsTemplate = () => ({
   components,
   template: getWrapperTemplate(`
     <ChHeader>
-      Header
+      ${headerContent}
     </ChHeader>
   `)
 })
@@ -77,7 +82,7 @@ const WithCustomActionsTemplate = () => ({
       <template #leftAction>
         <button>Custom Button</button>
       </template>
-      Some title
+        ${headerContent}
       <template #rightAction>
         <fa-icon :icon="['fas', 'location']" />
       </template>
