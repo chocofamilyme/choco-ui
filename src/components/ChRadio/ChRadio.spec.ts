@@ -4,7 +4,10 @@ import ChRadio from './ChRadio.vue'
 
 describe('ChRadio', () => {
   it('renders properly', () => {
-    const wrapper = mount(ChRadio, { slots: { default: 'Hello Vitest' } })
+    const wrapper = mount(ChRadio, {
+      props: { name: 'Hello Vitest' },
+      slots: { default: 'Hello Vitest' }
+    })
     expect(wrapper.text()).toContain('Hello Vitest')
   })
 })
