@@ -1,4 +1,4 @@
-import { describe, it, expect, afterAll, afterEach } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import ChSpinner from './ChSpinner.vue'
 
