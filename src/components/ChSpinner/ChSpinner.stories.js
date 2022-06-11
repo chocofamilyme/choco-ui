@@ -15,7 +15,7 @@ export default {
 const Template = args => ({
   components: { ChSpinner },
   setup: () => ({ args }),
-  template: '<ch-spinner v-bind="args">{{ args.text }}</ch-spinner>'
+  template: '<ch-spinner v-bind="args"></ch-spinner>'
 })
 
 export const Base = Template.bind({})
