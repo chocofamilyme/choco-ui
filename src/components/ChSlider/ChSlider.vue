@@ -20,6 +20,7 @@ const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: [Number, Array],
   title: String,
+  infoText: String,
   showRanges: {
     type: Boolean,
     default: () => false
