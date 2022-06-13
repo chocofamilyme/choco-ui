@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref, onMounted } from 'vue'
+import { toRefs, ref, onMounted } from 'vue'
 import noUiSlider from 'nouislider'
 import 'nouislider/dist/nouislider.css'
 
@@ -20,43 +20,34 @@ const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: [Number, Array],
   title: String,
-  step: Number,
-  track: {
+  showRanges: {
     type: Boolean,
-    default: false
+    default: () => false
   },
-  infoText: String,
-  min: {
-    type: Number,
-    default: 0
-  },
-  max: {
-    type: Number,
-    default: 100
+  configs: {
+    type: Object,
+    default() {
+      return {
+        start: [0],
+        range: {
+          min: [0],
+          max: [10]
+        }
+      }
+    }
   }
 })
 
-const { modelValue, min, max, step } = toRefs(props)
+const { modelValue } = toRefs(props)
 const sliderBody = ref({})
 
 onMounted(() => {
   // @ts-ignore
-  noUiSlider.create(sliderBody.value, {
-    start: [4000, 8000],
-    range: {
-      min: [2000],
-      max: [10000]
-    }
+  noUiSlider.create(sliderBody.value, props.configs)
+  // @ts-ignore
+  sliderBody.value.noUiSlider.on('update', function (values: any) {
+    emit('update:modelValue', values)
   })
-})
-
-const value = computed({
-  get() {
-    return modelValue?.value
-  },
-  set(value) {
-    emit('update:modelValue', value)
-  }
 })
 </script>
 
@@ -83,8 +74,9 @@ const value = computed({
 
   .noUi-connects
     background: var(--color-primary-grey)
-    height: 2px
+    height: 4px
     width: 100%
+    border-radius: 0
 
   &__track
     position: absolute
@@ -93,6 +85,9 @@ const value = computed({
     background: var(--color-primary-dark)
     height: 4px
     width: 100%
+
+  .noUi-connect
+    background: #000
 
   .noUi-handle
     width: 36px
