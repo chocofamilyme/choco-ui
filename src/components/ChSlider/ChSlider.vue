@@ -11,12 +11,12 @@
 </template>
 
 <script setup lang="ts">
-// @ts-nocheck
 import { ref, onMounted } from 'vue'
 import noUiSlider from 'nouislider'
+import type { PropType } from 'vue'
+import type { SliderConfig } from '@/components/ChSlider/config.types'
 
 const emit = defineEmits(['update:modelValue'])
-
 const props = defineProps({
   modelValue: Object,
   title: String,
@@ -26,7 +26,7 @@ const props = defineProps({
     default: false
   },
   configs: {
-    type: Object,
+    type: Object as PropType<SliderConfig>,
     default() {
       return {
         start: [0],
@@ -42,11 +42,13 @@ const props = defineProps({
 const sliderBody = ref({})
 
 onMounted(() => {
+  // @ts-ignore
   noUiSlider.create(sliderBody.value, {
     cssPrefix: 'ch-slider__',
     ...props.configs
   })
 
+  // @ts-ignore
   sliderBody.value.noUiSlider.on('end', function (values: any) {
     emit('update:modelValue', values)
   })
@@ -205,6 +207,9 @@ onMounted(() => {
     top: 100%
     left: 0
     width: 100%
+
+  &__tooltip
+    margin-top: 1.2rem
 
   &__value-horizontal
     -webkit-transform: translate(-50%, 50%)
