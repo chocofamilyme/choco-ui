@@ -11,19 +11,19 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs, ref, onMounted } from 'vue'
+// @ts-nocheck
+import { ref, onMounted } from 'vue'
 import noUiSlider from 'nouislider'
-import 'nouislider/dist/nouislider.css'
 
 const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
-  modelValue: [Number, Array],
+  modelValue: Object,
   title: String,
   infoText: String,
   showRanges: {
     type: Boolean,
-    default: () => false
+    default: false
   },
   configs: {
     type: Object,
@@ -39,14 +39,15 @@ const props = defineProps({
   }
 })
 
-const { modelValue } = toRefs(props)
 const sliderBody = ref({})
 
 onMounted(() => {
-  // @ts-ignore
-  noUiSlider.create(sliderBody.value, props.configs)
-  // @ts-ignore
-  sliderBody.value.noUiSlider.on('update', function (values: any) {
+  noUiSlider.create(sliderBody.value, {
+    cssPrefix: 'ch-slider__',
+    ...props.configs
+  })
+
+  sliderBody.value.noUiSlider.on('end', function (values: any) {
     emit('update:modelValue', values)
   })
 })
@@ -67,17 +68,27 @@ onMounted(() => {
     position: relative
     padding: 18px 0
 
-  .noUi-target
-    background: inherit
-    border-radius: 0
-    border: 0
-    box-shadow: none
+  &__target, &__target *
+    -webkit-touch-callout: none
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    -webkit-user-select: none
+    -ms-touch-action: none
+    touch-action: none
+    -ms-user-select: none
+    -moz-user-select: none
+    user-select: none
+    -moz-box-sizing: border-box
+    box-sizing: border-box
 
-  .noUi-connects
-    background: var(--color-primary-grey)
-    height: 4px
+  &__base, &__connects
     width: 100%
-    border-radius: 0
+    height: 100%
+    position: relative
+    z-index: 1
+
+  &__connects
+    background: var(--color-primary-grey)
+    height: 2px
 
   &__track
     position: absolute
@@ -86,24 +97,120 @@ onMounted(() => {
     background: var(--color-primary-dark)
     height: 4px
     width: 100%
+    width: 100%
+    overflow: hidden
+    z-index: 0
 
-  .noUi-connect
+  &__connect, &__origin
+    will-change: transform
+    position: absolute
+    z-index: 1
+    top: 0
+    right: 0
+    height: 100%
+    width: 100%
+    -ms-transform-origin: 0 0
+    -webkit-transform-origin: 0 0
+    -webkit-transform-style: preserve-3d
+    transform-origin: 0 0
+    transform-style: flat
+
+  &__connect
     background: #000
+    height: 4px
+    top: -1px
 
-  .noUi-handle
+  &__handle
+    right: -17px
+    background: #FFF
     width: 36px
     height: 36px
     border: 10px solid var(--color-light)
     background: var(--color-primary-dark)
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 92px 92px rgba(0, 0, 0, 0.05), 0px 3px 38.4354px rgba(0, 0, 0, 0.0334858), 0px -3px 20.5494px rgba(0, 0, 0, 0.06), 0px 5.79369px 11.5198px rgba(0, 0, 0, 0.0189792), 0px 2.40368px 6.11809px rgba(0, 0, 0, 0.0132742), 0px 0.705169px 2.54588px rgba(0, 0, 0, 0.00743532)
     border-radius: 50%
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
     position: absolute
-    // transition: left 0.1s
     top: 50%
     will-change: left
     transform: translateY(-50%)
     cursor: pointer
 
-    &:before, &:after
-      display: none
+  &__txt-dir-rtl.ch-slider__horizontal .ch-slider__origin
+    left: 0
+    right: auto
+
+  &__horizontal .ch-slider__origin
+    height: 0
+
+  &__touch-area
+    height: 100%
+    width: 100%
+
+  &__state-tap &-connect, &__state-tap &-origin
+    -webkit-transition: transform 0.3s
+    transition: transform 0.3s
+
+  &__state-drag *
+    cursor: inherit !important
+
+  &__horizontal
+    height: 18px
+
+  &__draggable
+    cursor: ew-resize
+
+  &__active
+    box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #DDD, 0 3px 6px -3px #BBB
+
+  [disabled] &__connect
+    background: #B8B8B8
+
+  [disabled].ch-slider__target,
+  [disabled].ch-slider__handle,
+  [disabled] &__handle
+    cursor: not-allowed
+
+  &__pips, &__pips *
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+  &__pips
+    position: absolute
+    color: #999
+
+  &__value
+    position: absolute
+    white-space: nowrap
+    text-align: center
+
+  &__value-sub
+    color: #ccc
+    font-size: 10px
+
+  &__marker
+    position: absolute
+    background: #CCC
+
+  &__marker-sub
+    background: #AAA
+
+  &__marker-large
+    background: #AAA
+
+  &__pips-horizontal
+    padding: 10px 0
+    height: 80px
+    top: 100%
+    left: 0
+    width: 100%
+
+  &__value-horizontal
+    -webkit-transform: translate(-50%, 50%)
+    transform: translate(-50%, 50%)
+
+  &__rtl &-value-horizontal
+    -webkit-transform: translate(50%, 50%)
+    transform: translate(50%, 50%)
 </style>

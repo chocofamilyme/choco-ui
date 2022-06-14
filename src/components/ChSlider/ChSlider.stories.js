@@ -17,7 +17,7 @@ const Template = args => ({
     const modelValue = ref(args.configs.start)
 
     watch(modelValue, newValue => {
-      console.log({ newValue })
+      console.log({ ...newValue })
     })
 
     return { args, modelValue }
