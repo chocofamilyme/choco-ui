@@ -8,16 +8,12 @@ export default {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: '@storybook/vue3',
   core: { builder: '@storybook/builder-vite' },
-  viteFinal: (config, { configType }) => {
+  viteFinal: (config) => {
     config.resolve = {
       alias: [
         { find: 'vue', replacement: 'vue/dist/vue.esm-bundler.js' },
         { find: '@', replacement: viteConfig.resolve.alias['@'] }
       ]
-    }
-
-    if (configType === 'PRODUCTION') {
-      config.base = '/choco-ui/';
     }
 
     return config

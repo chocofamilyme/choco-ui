@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   build-and-deploy-main:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -14,7 +14,19 @@ jobs:
           cache: 'npm'
       - name: Install
         run: npm i
-      - name: Install and Build
-        run: npx -p @storybook/storybook-deployer storybook-to-ghpages -- --ci
+      - name: Build storybook
+        run: npm run build-storybook
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: './storybook-static'
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
