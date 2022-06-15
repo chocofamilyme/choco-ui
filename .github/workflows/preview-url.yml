@@ -1,9 +1,6 @@
 name: Build and Deploy to Netlify
 on:
   pull_request:
-  push:
-    branches-ignore:
-      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-18.04
