@@ -16,10 +16,12 @@ export default {
       ]
     }
 
+    config.css = viteConfig.css
+
     if (configType === 'PRODUCTION') {
-      config.base = '/choco-ui/';
+      config.base = '/choco-ui/'
     }
 
     return config
-  },
+  }
 }
