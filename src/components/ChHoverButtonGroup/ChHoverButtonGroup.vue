@@ -16,6 +16,7 @@
   grid-auto-columns: minmax(0, 1fr)
   align-items: stretch
   justify-content: center
+  box-sizing: border-box
   min-height: 3.25rem
   padding: 0.75rem 1rem
   background-color: var(--ch-hover-button-group-background-color, #fff)
