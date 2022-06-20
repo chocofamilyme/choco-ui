@@ -163,6 +163,7 @@ const hide = () => controller?.hide(props.name)
     border-top-left-radius: 12px
     border-top-right-radius: 12px
     transition: 300ms cubic-bezier(0, 0, 0.2, 1)
+    touch-action: pan-y
 
   &__handle-bar-container
     width: 100%
