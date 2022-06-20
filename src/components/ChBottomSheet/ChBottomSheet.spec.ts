@@ -44,7 +44,7 @@ let modalBottomSheetController: ModalBottomSheetController | null = null
 const modalParams = { ...BottomSheetHeader.params, ...BottomSheetContent.params }
 
 describe('ChBottomSheet', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     modalBottomSheetController = useModalBottomSheetController()
     modalBottomSheetController?.show('example-bottom-sheet', modalParams)
     bottomSheet = mount(ChBottomSheet, {
@@ -61,6 +61,7 @@ describe('ChBottomSheet', () => {
         }
       }
     })
+    await bottomSheet?.vm.$nextTick() // Need to wait until next tick to bottom sheet to appear
   })
 
   afterEach(() => {
@@ -69,12 +70,10 @@ describe('ChBottomSheet', () => {
   })
 
   it('should show bottom sheet', async () => {
-    await bottomSheet?.vm.$nextTick()
     expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(true)
   })
 
   it('should hide bottom sheet', async () => {
-    await bottomSheet?.vm.$nextTick()
     expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(true)
 
     modalBottomSheetController?.hide('example-bottom-sheet')
@@ -83,7 +82,6 @@ describe('ChBottomSheet', () => {
   })
 
   it('should display bottom sheet header slot content', async () => {
-    await bottomSheet?.vm.$nextTick()
     const bottomSheetHeader = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-header')
     expect(bottomSheetHeader.exists()).toBe(true)
     expect(bottomSheetHeader.element.innerHTML).toBe(BottomSheetHeader.getParsedTemplate())
@@ -100,7 +98,6 @@ describe('ChBottomSheet', () => {
   })
 
   it('should display bottom sheet content', async () => {
-    await bottomSheet?.vm.$nextTick()
     const bottomSheetContent = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-content')
     expect(bottomSheetContent.exists()).toBe(true)
     expect(bottomSheetContent.element.innerHTML).toBe(BottomSheetContent.getParsedTemplate())
