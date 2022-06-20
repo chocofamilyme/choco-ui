@@ -1,7 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
 
 import { useModalBottomSheetController } from '@/composable/use-modal-bottom-sheet-controller'
+import type { ModalBottomSheetController } from '@/composable/use-modal-bottom-sheet-controller'
 import { findByTestId } from '@/__test__/utils'
 import ChBottomSheet from './ChBottomSheet.vue'
 
@@ -37,14 +39,14 @@ const BottomSheetContent = {
   }
 }
 
-let bottomSheet = null
-let modalBottomSheetController = null
+let bottomSheet: VueWrapper | null = null
+let modalBottomSheetController: ModalBottomSheetController | null = null
 const modalParams = { ...BottomSheetHeader.params, ...BottomSheetContent.params }
 
 describe('ChBottomSheet', () => {
   beforeEach(() => {
     modalBottomSheetController = useModalBottomSheetController()
-    modalBottomSheetController.show('example-bottom-sheet', { ...modalParams })
+    modalBottomSheetController?.show('example-bottom-sheet', modalParams)
     bottomSheet = mount(ChBottomSheet, {
       props: {
         name: 'example-bottom-sheet'
@@ -67,50 +69,50 @@ describe('ChBottomSheet', () => {
   })
 
   it('should show bottom sheet', async () => {
-    await bottomSheet.vm.$nextTick()
-    expect(findByTestId(bottomSheet, 'bottom-sheet-container').exists()).toBe(true)
+    await bottomSheet?.vm.$nextTick()
+    expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(true)
   })
 
   it('should hide bottom sheet', async () => {
-    await bottomSheet.vm.$nextTick()
-    expect(findByTestId(bottomSheet, 'bottom-sheet-container').exists()).toBe(true)
+    await bottomSheet?.vm.$nextTick()
+    expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(true)
 
-    modalBottomSheetController.hide('example-bottom-sheet')
-    await bottomSheet.vm.$nextTick()
-    expect(findByTestId(bottomSheet, 'bottom-sheet-container').exists()).toBe(false)
+    modalBottomSheetController?.hide('example-bottom-sheet')
+    await bottomSheet?.vm.$nextTick()
+    expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(false)
   })
 
   it('should display bottom sheet header slot content', async () => {
-    await bottomSheet.vm.$nextTick()
-    const bottomSheetHeader = findByTestId(bottomSheet, 'bottom-sheet-header')
+    await bottomSheet?.vm.$nextTick()
+    const bottomSheetHeader = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-header')
     expect(bottomSheetHeader.exists()).toBe(true)
     expect(bottomSheetHeader.element.innerHTML).toBe(BottomSheetHeader.getParsedTemplate())
   })
 
   it("should hide bottom sheet on header slot's hide method call", async () => {
     const bottomSheetHeaderCloseButton = findByTestId(
-      bottomSheet,
+      bottomSheet as VueWrapper,
       BottomSheetHeader.params.headerButtonDataTestId
     )
 
     await bottomSheetHeaderCloseButton.trigger('click')
-    expect(findByTestId(bottomSheet, 'bottom-sheet-container').exists()).toBe(false)
+    expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(false)
   })
 
   it('should display bottom sheet content', async () => {
-    await bottomSheet.vm.$nextTick()
-    const bottomSheetContent = findByTestId(bottomSheet, 'bottom-sheet-content')
+    await bottomSheet?.vm.$nextTick()
+    const bottomSheetContent = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-content')
     expect(bottomSheetContent.exists()).toBe(true)
     expect(bottomSheetContent.element.innerHTML).toBe(BottomSheetContent.getParsedTemplate())
   })
 
   it("should hide bottom sheet on default slot's hide method call", async () => {
     const bottomSheetContentCloseButton = findByTestId(
-      bottomSheet,
+      bottomSheet as VueWrapper,
       BottomSheetContent.params.contentButtonDataTestId
     )
 
     await bottomSheetContentCloseButton.trigger('click')
-    expect(findByTestId(bottomSheet, 'bottom-sheet-container').exists()).toBe(false)
+    expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(false)
   })
 })
