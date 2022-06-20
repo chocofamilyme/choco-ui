@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { ref, inject, onBeforeUnmount } from 'vue'
 import type { Ref } from 'vue'
-import type { ModalBottomSheetController } from '@/composable/use-modal-bottom-sheet-controller'
+import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 
 const props = defineProps<{
   name: string

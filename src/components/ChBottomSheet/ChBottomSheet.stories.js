@@ -1,4 +1,4 @@
-import { useModalBottomSheetController } from '@/composable/use-modal-bottom-sheet-controller'
+import { useModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 import ChBottomSheet from './ChBottomSheet.vue'
 
 const exampleBottomSheetName = 'example-bottom-sheet-name'

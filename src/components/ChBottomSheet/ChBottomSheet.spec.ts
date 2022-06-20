@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 
-import { useModalBottomSheetController } from '@/composable/use-modal-bottom-sheet-controller'
-import type { ModalBottomSheetController } from '@/composable/use-modal-bottom-sheet-controller'
+import { useModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
+import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 import { findByTestId } from '@/__test__/utils'
 import ChBottomSheet from './ChBottomSheet.vue'
 
