@@ -11,6 +11,9 @@ module.exports = {
     'plugin:storybook/recommended'
   ],
   env: {
+    browser: true,
+    amd: true,
+    node: true,
     'vue/setup-compiler-macros': true
   }
 }

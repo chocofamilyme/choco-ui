@@ -14,3 +14,4 @@ export {
   ChHeaderBackButton,
   ChHeaderCloseButton
 } from './components/ChHeader'
+export { default as ChSpinner } from './components/ChSpinner'
