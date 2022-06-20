@@ -144,6 +144,7 @@ const hide = () => controller?.hide(props.name)
     bottom: 0
     z-index: 10
     background-color: rgba(var(--color-primary-dark)/0.15)
+    backdrop-filter: blur(9px) // Not fully supported. Browsers that do not support it simple display gray bg without blur
 
 .bottom-sheet
   position: absolute
