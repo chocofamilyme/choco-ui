@@ -6,26 +6,24 @@ export type ModalBottomSheet = {
   params: Record<string, unknown>
 }
 
+type ModalBottomSheetParameters = Record<string, unknown>
+
 export type ModalBottomSheetController = {
-  show: (
-    name: string,
-    { captureEscape, ...params }?: { captureEscape?: boolean | undefined }
-  ) => void
+  show: (name: string, params: ModalBottomSheetParameters) => void
   isVisible: (name: string) => boolean
-  getParams: (name: string) => Record<string, unknown>
+  getParams: (name: string) => ModalBottomSheetParameters
   hide: (name: string) => void
   state: Readonly<Ref<ModalBottomSheet[]>>
 }
 
 export function useModalBottomSheetController() {
   const state = ref<ModalBottomSheet[]>([])
-  const escapeHandler = (e: KeyboardEvent) => e.key === 'Escape' && hideLast()
 
   function isVisible(name: string) {
     return state.value.some(modal => modal.activeName === name)
   }
 
-  function show(name: string, { captureEscape = true, ...params } = {}) {
+  function show(name: string, params: ModalBottomSheetParameters) {
     if (isVisible(name)) {
       return
     }
@@ -34,10 +32,6 @@ export function useModalBottomSheetController() {
       activeName: name,
       params: params as ModalBottomSheet
     })
-
-    if (captureEscape) {
-      document.addEventListener('keydown', escapeHandler)
-    }
   }
 
   function getParams(name: string) {
@@ -47,19 +41,6 @@ export function useModalBottomSheetController() {
 
   function hide(name: string) {
     state.value = state.value.filter(modal => modal.activeName !== name)
-    clearEventListenerForEmptystate()
-  }
-
-  function hideLast() {
-    state.value.pop()
-
-    clearEventListenerForEmptystate()
-  }
-
-  function clearEventListenerForEmptystate() {
-    if (state.value.length === 0) {
-      document.removeEventListener('keydown', escapeHandler)
-    }
   }
 
   return {
