@@ -10,3 +10,4 @@ export { default as ChToggleButtonGroup } from './components/ChToggleButtonGroup
 export { default as ChTooltip } from './components/ChTooltip'
 export { default as ChBottomSheet } from './components/ChBottomSheet'
 export { useModalBottomSheetController } from './composable/use-modal-bottom-sheet-controller'
+export { default as ChSpinner } from './components/ChSpinner'
