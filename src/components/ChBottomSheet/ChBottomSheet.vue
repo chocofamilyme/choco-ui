@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { ref, inject, onBeforeUnmount } from 'vue'
 import type { Ref } from 'vue'
-import type { ModalBottomSheetController } from '@/composable/use-modal-bottom-sheet-controller'
+import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 
 const props = defineProps<{
   name: string
@@ -144,6 +144,7 @@ const hide = () => controller?.hide(props.name)
     bottom: 0
     z-index: 10
     background-color: rgba(var(--color-primary-dark)/0.15)
+    backdrop-filter: blur(9px) // Not fully supported. Browsers that do not support it simple display gray bg without blur
 
 .bottom-sheet
   position: absolute
