@@ -1,4 +1,4 @@
-export { default as ChButton } from './components/ChButton/'
+export { default as ChButton } from './components/ChButton'
 export { default as ChCheckbox } from './components/ChCheckbox'
 export { default as ChInput } from './components/ChInput'
 export { default as ChRadio } from './components/ChRadio'
@@ -14,4 +14,8 @@ export {
   ChHeaderBackButton,
   ChHeaderCloseButton
 } from './components/ChHeader'
+export { default as ChToast } from './components/ChToast'
+export { default as ChBottomSheet } from './components/ChBottomSheet'
+export { useModalBottomSheetController } from './composable/modal-bottom-sheet-controller'
 export { default as ChSpinner } from './components/ChSpinner'
+export { ChHoverButtonGroup, ChHoverButton } from './components/ChHoverButtonGroup'
