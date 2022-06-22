@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="ChHeader/README"/>
+
+# ChHeader
+
+Composite компонент, т.е некоторые элементы могут быть использованы только в рамках ChHeader. В компонент входят ChHeader.vue, ChHeaderBackButton.vue и ChHeaderCloseButton.vue
+
+В ChHeader есть 3 слота:
+- default (центральный блок, который ожидает строку как содержимое)
+- leftAction (блок с левого края компонента. Выбрасывает событие `onBackButtonClick` при клике)
+- rightAction (блок с правого края компонента. Выбрасывает событие `onCloseButtonClick` при клике)
+
+
+## Usage
+
+```html
+<template>
+  <ChHeader>
+    <template #leftAction>
+      <ChHeaderBackButton @onBackButtonClick="() => {}" />
+    </template>
+    Header title
+    <template #rightAction>
+      <ChHeaderCloseButton @onCloseButtonClick="() => {}" />
+    </template>
+  </ChHeader>
+</template>
+
+<script>
+  import { ChHeader, ChHeaderBackButton, ChHeaderCloseButton } from '@choco-ui'
+</script>
+```
