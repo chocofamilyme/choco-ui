@@ -1,10 +1,14 @@
 <template>
   <div class="ch-slider">
     <div class="ch-slider__top-bar" v-if="title">
-      <h3 class="ch-slider__label">{{ title }}</h3>
+      <h3 class="ch-slider__title">{{ title }}</h3>
     </div>
     <div class="ch-slider__body" ref="sliderBody"></div>
     <div class="ch-slider__bottom-bar">
+      <div class="ch-slider__labels" v-if="configs.labels">
+        <div>{{ configs.labels.begin }}</div>
+        <div>{{ configs.labels.end }}</div>
+      </div>
       <p class="ch-slider__info-text">{{ infoText }}</p>
     </div>
   </div>
@@ -61,10 +65,11 @@ onMounted(() => {
     margin-bottom: 8px
 
   &__bottom-bar
-    display: flex
-    align-items: center
-    justify-content: space-between
     margin-top: 8px
+
+  &__labels
+    display: flex
+    justify-content: space-between
 
   &__controls, &__body
     position: relative
@@ -98,7 +103,6 @@ onMounted(() => {
     transform: translateY(-50%)
     background: var(--color-primary-dark)
     height: 4px
-    width: 100%
     width: 100%
     overflow: hidden
     z-index: 0
@@ -162,9 +166,6 @@ onMounted(() => {
 
   &__draggable
     cursor: ew-resize
-
-  &__active
-    box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #DDD, 0 3px 6px -3px #BBB
 
   [disabled] &__connect
     background: #B8B8B8

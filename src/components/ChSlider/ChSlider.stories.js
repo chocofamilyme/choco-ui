@@ -38,6 +38,23 @@ Empty.args = {
   }
 }
 
+export const WithLabels = Template.bind({})
+WithLabels.args = {
+  title: 'Стоимость товара',
+  configs: {
+    start: [100, 500],
+    range: {
+      min: [100],
+      max: [500]
+    },
+    connect: [false, true, false],
+    labels: {
+      begin: '100тг',
+      end: '500тг'
+    }
+  }
+}
+
 // export const Disabled = Template.bind({})
 // Disabled.args = {
 //   disabled: true,

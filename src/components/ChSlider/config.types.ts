@@ -16,4 +16,8 @@ export type SliderConfig = {
   limit?: number
   orientation: Orientation
   animate?: boolean
+  labels?: {
+    begin?: string
+    end?: string
+  }
 }
