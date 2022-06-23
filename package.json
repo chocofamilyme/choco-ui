@@ -7,12 +7,13 @@
   "main": "./dist/choco-ui.umd.js",
   "module": "./dist/choco-ui.es.js",
   "typings": "./dist/index.d.ts",
+  "style": "./dist/index.css",
   "exports": {
     ".": {
       "import": "./dist/choco-ui.es.js",
       "require": "./dist/choco-ui.es.js"
     },
-    "./styles": "./dist/index.css"
+    "./styles": "./dist/style.css"
   },
   "scripts": {
     "prepublishOnly": "npm run lint && npm run test:unit && npm run build",
