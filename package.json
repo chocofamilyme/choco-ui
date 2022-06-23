@@ -11,7 +11,8 @@
     ".": {
       "import": "./dist/choco-ui.es.js",
       "require": "./dist/choco-ui.es.js"
-    }
+    },
+    "./styles": "./dist/index.css"
   },
   "scripts": {
     "prepublishOnly": "npm run build",
