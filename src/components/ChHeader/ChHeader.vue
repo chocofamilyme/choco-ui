@@ -12,6 +12,12 @@
   </header>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'ChHeader'
+}
+</script>
+
 <style lang="sass" scoped>
 .ch-header
   display: flex
