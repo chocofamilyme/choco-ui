@@ -102,6 +102,14 @@ const onSheetTouchEnd = () => {
 const hide = () => controller?.hide(props.name)
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChBottomSheet'
+})
+</script>
+
 <style lang="sass" scoped>
 .bottom-sheet-slide-up
   &-enter-active,

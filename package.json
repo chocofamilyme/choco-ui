@@ -6,15 +6,19 @@
   ],
   "main": "./dist/choco-ui.umd.js",
   "module": "./dist/choco-ui.es.js",
+  "typings": "./dist/index.d.ts",
+  "style": "./dist/index.css",
   "exports": {
     ".": {
       "import": "./dist/choco-ui.es.js",
       "require": "./dist/choco-ui.es.js"
-    }
+    },
+    "./styles": "./dist/style.css"
   },
   "scripts": {
+    "prepublishOnly": "npm run lint && npm run test:unit && npm run build",
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --declaration --emitDeclarationOnly && vite build",
     "preview": "vite preview --port 5050",
     "test:unit": "vitest run --environment jsdom",
     "test:watch": "vitest --environment jsdom",
@@ -29,8 +33,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/vue-fontawesome": "^3.0.0-5",
-    "vue": "^3.2.33"
+    "@fortawesome/vue-fontawesome": "^3.0.0-5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -60,7 +63,9 @@
     "sass": "^1.51.0",
     "typescript": "~4.6.3",
     "vite": "^2.9.5",
+    "vite-plugin-dts": "^1.2.0",
     "vitest": "^0.9.3",
+    "vue": "^3.2.37",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.34.7"
   }

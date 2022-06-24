@@ -26,6 +26,14 @@ defineProps<{
 }>()
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChSwitch'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-switch
 

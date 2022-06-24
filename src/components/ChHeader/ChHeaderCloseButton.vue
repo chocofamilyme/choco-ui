@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import ChHeaderButton from './ChHeaderButton.vue'
 
-export default {
+export default defineComponent({
   name: 'ChHeader.CloseButton',
   components: { ChHeaderButton }
-}
+})
 </script>
