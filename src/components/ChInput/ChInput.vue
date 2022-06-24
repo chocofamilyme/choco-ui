@@ -105,6 +105,14 @@ function textAreaAdjust() {
 }
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChInput'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-input
 

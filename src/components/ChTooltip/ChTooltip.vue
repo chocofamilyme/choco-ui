@@ -88,6 +88,14 @@ function onClick() {
 }
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChTooltip'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-tooltip
   position: relative

@@ -4,6 +4,14 @@
   </div>
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChHoverButtonGroup'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-hover-button-group
   $ch-hover-button-group-gap: 0.75rem

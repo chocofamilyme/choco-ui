@@ -13,12 +13,16 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'ChHeader'
-}
+})
 </script>
 
 <style lang="sass" scoped>
+$actions-width: 3.625rem
+
 .ch-header
   display: flex
   align-items: center
@@ -28,7 +32,7 @@ export default {
 
   &__left-action, &__right-action
     flex-shrink: 0
-    width: 3.625rem
+    width: $actions-width
 
   &__right-action
     display: flex
@@ -36,4 +40,5 @@ export default {
 
   &__content
     flex-grow: 1
+    width: calc(100% - 2 * $actions-width)
 </style>

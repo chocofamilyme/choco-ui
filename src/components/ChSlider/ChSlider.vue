@@ -150,6 +150,14 @@ document.addEventListener('mouseup', onThumbMouseUp)
 document.addEventListener('touchend', onThumbMouseUp)
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChSlider'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-slider
 

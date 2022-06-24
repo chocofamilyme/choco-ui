@@ -28,6 +28,14 @@ defineProps({
 })
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChSpinner'
+})
+</script>
+
 <style lang="sass" scoped>
 @keyframes spinner
   0%
