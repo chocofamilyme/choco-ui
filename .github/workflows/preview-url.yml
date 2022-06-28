@@ -14,6 +14,8 @@ jobs:
         run: npm i
       - name: Build storybook
         run: npm run build-storybook
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
@@ -24,7 +26,7 @@ jobs:
           enable-pull-request-comment: true
           enable-commit-comment: true
           overwrites-pull-request-comment: true
-          alias: ${{ github.head_ref }}
+          alias: ${{ env.GITHUB_HEAD_REF_SLUG }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
