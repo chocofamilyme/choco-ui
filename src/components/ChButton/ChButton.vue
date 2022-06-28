@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 type SizeType = 'md' | 'sm' | 'xs'
-type ShapeType = 'circle' | 'flexible'
+type ShapeType = 'circle'
 
 defineProps<{
   size?: SizeType
@@ -62,7 +62,6 @@ export default defineComponent({
   border-radius: 16px
   border: none
   padding: 16px
-  width: 180px
   cursor: pointer
 
   &__prepend
@@ -106,9 +105,6 @@ export default defineComponent({
     font-weight: 400
     font-size: 16px
     line-height: 18px
-
-  &_shape_flexible
-    width: auto
 
   &_shape_circle
     padding: 8px
