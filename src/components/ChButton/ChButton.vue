@@ -48,6 +48,8 @@ export default defineComponent({
 
 <style lang="sass" scoped>
 .ch-button
+  --ch-button-border-width: 1px
+
   font-style: normal
   font-weight: 900
   font-size: 24px
@@ -79,7 +81,7 @@ export default defineComponent({
     color: var(--color-primary-text)
 
   &_bordered
-    border: 1px solid var(--color-secondary-dark)
+    border: var(--ch-button-border-width, 1px) solid var(--color-secondary-dark)
     background: transparent
     color: var(--color-primary-text)
 
