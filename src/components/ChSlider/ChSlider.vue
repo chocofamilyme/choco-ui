@@ -59,6 +59,14 @@ onMounted(() => {
 })
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChSlider'
+})
+</script>
+
 <style lang="sass">
 .ch-slider
   &__top-bar

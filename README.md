@@ -68,7 +68,35 @@ npm run lint
 
 ```html
 <script>
-import { ChButton, ChInput } from 'choco-ui';
-import 'choco-ui/dist/style.css';
+import { ChButton, ChInput } from 'choco-ui'; // Import needed components
+import 'choco-ui/styles'; // Import styles for components
 </script>
+```
+
+Styles can be imported separately in `.css` files and then imported to entry file
+
+```css
+/* css/main.css */
+@import 'choco-ui/styles';
+
+:root {
+    /* Custom styles */
+    ...
+}
+```
+
+```js
+// index.js, main.js or any other app entry file
+import { createApp, h, resolveComponent  } from 'vue';
+import '@css/main.css';
+
+const App = {
+  name: 'App',
+  render: () => h('h1', 'Hello, vue app')
+};
+
+const app = createApp(App);
+
+app.mount("#app");
+
 ```

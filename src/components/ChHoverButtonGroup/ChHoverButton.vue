@@ -4,6 +4,14 @@
   </button>
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChHoverButton'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-hover-button
   display: flex

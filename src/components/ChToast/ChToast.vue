@@ -20,6 +20,14 @@ const props = defineProps({
 const toastClasses = computed(() => (props.variant === 'regular' ? '--regular' : '--wide'))
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChToast'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-toast
   border-radius: 1em

@@ -38,6 +38,14 @@ defineProps<{
 }>()
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChButton'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-button
   font-style: normal

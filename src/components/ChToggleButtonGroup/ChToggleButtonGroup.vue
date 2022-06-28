@@ -43,6 +43,14 @@ function getActiveOption(option: IOption | string, index: number) {
 }
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChToggleButtonGroup'
+})
+</script>
+
 <style lang="sass" scoped>
 .ch-toggle-button-group
   background: var(--color-secondary-grey)
