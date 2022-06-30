@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 type SizeType = 'md' | 'sm' | 'xs'
-type ShapeType = 'circle' | 'flexible'
+type ShapeType = 'circle'
 
 defineProps<{
   size?: SizeType
@@ -48,6 +48,8 @@ export default defineComponent({
 
 <style lang="sass" scoped>
 .ch-button
+  --ch-button-border-width: 1px
+
   font-style: normal
   font-weight: 900
   font-size: 24px
@@ -62,7 +64,6 @@ export default defineComponent({
   border-radius: 16px
   border: none
   padding: 16px
-  width: 180px
   cursor: pointer
 
   &__prepend
@@ -80,7 +81,7 @@ export default defineComponent({
     color: var(--color-primary-text)
 
   &_bordered
-    border: 1px solid var(--color-secondary-dark)
+    border: var(--ch-button-border-width, 1px) solid var(--color-secondary-dark)
     background: transparent
     color: var(--color-primary-text)
 
@@ -106,9 +107,6 @@ export default defineComponent({
     font-weight: 400
     font-size: 16px
     line-height: 18px
-
-  &_shape_flexible
-    width: auto
 
   &_shape_circle
     padding: 8px
