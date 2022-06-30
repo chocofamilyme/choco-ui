@@ -33,7 +33,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/vue-fontawesome": "^3.0.0-5"
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "nouislider": "^15.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",

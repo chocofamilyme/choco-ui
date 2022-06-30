@@ -1,153 +1,62 @@
 <template>
   <div class="ch-slider">
     <div class="ch-slider__top-bar" v-if="title">
-      <h3 class="ch-slider__label">{{ title }}</h3>
+      <h3 class="ch-slider__title">{{ title }}</h3>
     </div>
-    <div class="ch-slider__controls">
-      <div class="ch-slider__rail" ref="rail"></div>
-      <template v-if="isRangeMode">
-        <div
-          class="ch-slider__thumb"
-          v-for="thumbValue in value"
-          :key="thumbValue"
-          :data-value="thumbValue"
-          @mousedown.prevent="onThumbMouseDown"
-          @touchstart.prevent="onThumbMouseDown"
-        />
-        <div class="ch-slider__track" v-if="track" ref="track" />
-      </template>
-      <div
-        class="ch-slider__thumb"
-        :data-value="value"
-        v-else
-        @mousedown.prevent="onThumbMouseDown"
-        @touchstart.prevent="onThumbMouseDown"
-      />
-    </div>
+    <div class="ch-slider__body" ref="sliderBody"></div>
     <div class="ch-slider__bottom-bar">
+      <div class="ch-slider__labels" v-if="configs.labels">
+        <div>{{ configs.labels.begin }}</div>
+        <div>{{ configs.labels.end }}</div>
+      </div>
       <p class="ch-slider__info-text">{{ infoText }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import noUiSlider from 'nouislider'
+import type { PropType } from 'vue'
+import type { SliderConfig } from '@/components/ChSlider/config.types'
 
 const emit = defineEmits(['update:modelValue'])
-
 const props = defineProps({
-  modelValue: [Number, Array],
+  modelValue: Object,
   title: String,
-  step: Number,
-  track: {
+  infoText: String,
+  showRanges: {
     type: Boolean,
     default: false
   },
-  infoText: String,
-  min: {
-    type: Number,
-    default: 0
-  },
-  max: {
-    type: Number,
-    default: 100
+  configs: {
+    type: Object as PropType<SliderConfig>,
+    default() {
+      return {
+        start: [0],
+        range: {
+          min: [0],
+          max: [10]
+        }
+      }
+    }
   }
 })
 
-const { modelValue, min, max, step } = toRefs(props)
+const sliderBody = ref({})
 
-const value = computed({
-  get() {
-    return modelValue?.value
-  },
-  set(value) {
-    emit('update:modelValue', value)
-  }
+onMounted(() => {
+  // @ts-ignore
+  noUiSlider.create(sliderBody.value, {
+    cssPrefix: 'ch-slider__',
+    ...props.configs
+  })
+
+  // @ts-ignore
+  sliderBody.value.noUiSlider.on('end', function (values: unknown) {
+    emit('update:modelValue', values)
+  })
 })
-
-const isRangeMode = computed(() => Array.isArray(value.value) && value.value.length > 1)
-let needForRAF = true
-let thumbDragStart = false
-const rail = ref<null | HTMLElement>(null)
-const track = ref<null | HTMLElement>(null)
-const currentThumb = ref<null | HTMLElement>(null)
-const thumbWidth = ref(0)
-
-function onThumbMouseDown(e: MouseEvent | TouchEvent) {
-  const target = e.target as HTMLInputElement
-  const { width: targetWidth } = target.getBoundingClientRect()
-
-  thumbDragStart = true
-  thumbWidth.value = targetWidth
-  currentThumb.value = target
-}
-
-let oldCursorXPos = 0
-const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints
-
-function onThumbMouseMove(e: MouseEvent | TouchEvent) {
-  function update(touch?: Touch) {
-    if (!thumbDragStart && !needForRAF) return
-    const { left: leftOffset = 0, width: railWidth = 0 } = rail.value
-      ? rail.value.getBoundingClientRect()
-      : {}
-
-    const maxCursorPos = railWidth - thumbWidth.value
-
-    const cursorStep = Math.round(
-      step?.value
-        ? step.value <= max.value
-          ? 100 * (step.value / max.value)
-          : 100 * (max.value / max.value)
-        : (max.value / maxCursorPos) * 100
-    )
-
-    const clientX = isTouch ? touch?.clientX || 0 : (e as MouseEvent).clientX
-    const thumbHalfWidth = thumbWidth.value / 2
-    const leftPosition = ((clientX - leftOffset - thumbHalfWidth) / maxCursorPos) * 100
-    const minCursorPos = 100 * (min.value / max.value)
-    const cursorXPos = -Math.round(minCursorPos - leftPosition)
-    const cursorXPosDiff = Math.abs(cursorXPos - oldCursorXPos)
-
-    needForRAF = false
-
-    console.log({ cursorXPosDiff, oldCursorXPos, cursorStep, cursorXPos })
-    if (cursorXPosDiff > cursorStep) {
-      oldCursorXPos = cursorXPos
-
-      const allowableLeftPosition =
-        cursorXPos >= maxCursorPos
-          ? maxCursorPos
-          : cursorXPos <= minCursorPos
-          ? minCursorPos
-          : cursorXPos
-
-      requestAnimationFrame(() => {
-        if (currentThumb.value) currentThumb.value.style.left = `${allowableLeftPosition}%`
-      })
-    }
-  }
-
-  if (isTouch) {
-    var touches = (e as TouchEvent).changedTouches
-
-    for (var i = 0; i < touches.length; i++) {
-      update(touches[i])
-    }
-  } else {
-    update()
-  }
-}
-
-function onThumbMouseUp() {
-  thumbDragStart = false
-  thumbWidth.value = 0
-}
-
-document.addEventListener('mousemove', onThumbMouseMove)
-document.addEventListener('touchmove', onThumbMouseMove)
-document.addEventListener('mouseup', onThumbMouseUp)
-document.addEventListener('touchend', onThumbMouseUp)
 </script>
 
 <script lang="ts">
@@ -158,26 +67,49 @@ export default defineComponent({
 })
 </script>
 
-<style lang="sass" scoped>
-.ch-slider
+<style lang="sass">
+$handleWidth: 36px
 
+.ch-slider
   &__top-bar
     margin-bottom: 8px
 
   &__bottom-bar
-    display: flex
-    align-items: center
-    justify-content: space-between
     margin-top: 8px
 
-  &__controls
+  &__labels
+    display: flex
+    justify-content: space-between
+
+  &__controls, &__body
     position: relative
     padding: 18px 0
 
-  &__rail
+  &__target
+    padding-left: 18px
+    padding-right: 18px
+
+  &__target, &__target *
+    -webkit-touch-callout: none
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    -webkit-user-select: none
+    -ms-touch-action: none
+    touch-action: none
+    -ms-user-select: none
+    -moz-user-select: none
+    user-select: none
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+  &__base, &__connects
+    width: 100%
+    height: 100%
+    position: relative
+    z-index: 1
+
+  &__connects
     background: var(--color-primary-grey)
     height: 2px
-    width: 100%
 
   &__track
     position: absolute
@@ -186,18 +118,119 @@ export default defineComponent({
     background: var(--color-primary-dark)
     height: 4px
     width: 100%
+    overflow: hidden
+    z-index: 0
 
-  &__thumb
+  &__connect, &__origin
+    will-change: transform
+    position: absolute
+    z-index: 1
+    top: 0
+    right: 0
+    height: 100%
+    width: 100%
+    -ms-transform-origin: 0 0
+    -webkit-transform-origin: 0 0
+    -webkit-transform-style: preserve-3d
+    transform-origin: 0 0
+    transform-style: flat
+
+  &__connect
+    background: #000
+    height: 4px
+    top: -1px
+
+  &__handle
+    right: -18px
     width: 36px
     height: 36px
+    background: #FFF
     border: 10px solid var(--color-light)
     background: var(--color-primary-dark)
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 92px 92px rgba(0, 0, 0, 0.05), 0px 3px 38.4354px rgba(0, 0, 0, 0.0334858), 0px -3px 20.5494px rgba(0, 0, 0, 0.06), 0px 5.79369px 11.5198px rgba(0, 0, 0, 0.0189792), 0px 2.40368px 6.11809px rgba(0, 0, 0, 0.0132742), 0px 0.705169px 2.54588px rgba(0, 0, 0, 0.00743532)
     border-radius: 50%
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
     position: absolute
-    // transition: left 0.1s
     top: 50%
     will-change: left
     transform: translateY(-50%)
     cursor: pointer
+
+  &__txt-dir-rtl.ch-slider__horizontal .ch-slider__origin
+    left: 0
+    right: auto
+
+  &__horizontal .ch-slider__origin
+    height: 0
+
+  &__touch-area
+    height: 100%
+    width: 100%
+
+  &__state-tap &-connect, &__state-tap &-origin
+    -webkit-transition: transform 0.3s
+    transition: transform 0.3s
+
+  &__state-drag *
+    cursor: inherit !important
+
+  &__horizontal
+    height: 18px
+
+  &__draggable
+    cursor: ew-resize
+
+  [disabled] &__connect
+    background: #B8B8B8
+
+  [disabled].ch-slider__target,
+  [disabled].ch-slider__handle,
+  [disabled] &__handle
+    cursor: not-allowed
+
+  &__pips, &__pips *
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+  &__pips
+    position: absolute
+    color: #999
+
+  &__value
+    position: absolute
+    white-space: nowrap
+    text-align: center
+
+  &__value-sub
+    color: #ccc
+    font-size: 10px
+
+  &__marker
+    position: absolute
+    background: #CCC
+
+  &__marker-sub
+    background: #AAA
+
+  &__marker-large
+    background: #AAA
+
+  &__pips-horizontal
+    padding: 10px 0
+    height: 80px
+    top: 100%
+    left: 0
+    width: 100%
+
+  &__tooltip
+    margin-top: 1.2rem
+
+  &__value-horizontal
+    -webkit-transform: translate(-50%, 50%)
+    transform: translate(-50%, 50%)
+
+  &__rtl &-value-horizontal
+    -webkit-transform: translate(50%, 50%)
+    transform: translate(50%, 50%)
 </style>
