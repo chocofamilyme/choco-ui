@@ -85,6 +85,10 @@ $handleWidth: 36px
     position: relative
     padding: 18px 0
 
+  &__target
+    padding-left: 18px
+    padding-right: 18px
+
   &__target, &__target *
     -webkit-touch-callout: none
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
@@ -137,9 +141,10 @@ $handleWidth: 36px
     top: -1px
 
   &__handle
+    right: -18px
+    width: 36px
+    height: 36px
     background: #FFF
-    width: $handleWidth
-    height: $handleWidth
     border: 10px solid var(--color-light)
     background: var(--color-primary-dark)
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 92px 92px rgba(0, 0, 0, 0.05), 0px 3px 38.4354px rgba(0, 0, 0, 0.0334858), 0px -3px 20.5494px rgba(0, 0, 0, 0.06), 0px 5.79369px 11.5198px rgba(0, 0, 0, 0.0189792), 0px 2.40368px 6.11809px rgba(0, 0, 0, 0.0132742), 0px 0.705169px 2.54588px rgba(0, 0, 0, 0.00743532)
@@ -151,12 +156,6 @@ $handleWidth: 36px
     will-change: left
     transform: translateY(-50%)
     cursor: pointer
-
-  &__handle-lower
-    right: -$handleWidth
-
-  &__handle-upper
-    right: 0
 
   &__txt-dir-rtl.ch-slider__horizontal .ch-slider__origin
     left: 0
