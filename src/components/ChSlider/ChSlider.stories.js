@@ -55,15 +55,20 @@ WithLabels.args = {
   }
 }
 
-// export const Disabled = Template.bind({})
-// Disabled.args = {
-//   disabled: true,
-//   checked: true,
-//   label: 'Switch'
-// }
-
-// export const Checked = Template.bind({})
-// Checked.args = {
-//   checked: true,
-//   label: 'Switch'
-// }
+export const WithHandlesMargin = Template.bind({})
+WithHandlesMargin.args = {
+  title: 'С расстоянием между слайдерами',
+  configs: {
+    start: [0, 24],
+    range: {
+      min: [0],
+      max: [24]
+    },
+    margin: 1,
+    connect: [false, true, false],
+    labels: {
+      begin: '00:00',
+      end: '24:00'
+    }
+  }
+}
