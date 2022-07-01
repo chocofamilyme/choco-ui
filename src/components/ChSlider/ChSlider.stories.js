@@ -6,12 +6,11 @@ export default {
   component: ChSlider,
   argTypes: {
     title: { control: 'text' },
-    infoText: { control: 'text' },
     configs: { control: 'object' }
   }
 }
 
-const Template = args => ({
+const Template = (args, { parameters }) => ({
   components: { ChSlider },
   setup() {
     const modelValue = ref(args.configs.start)
@@ -20,9 +19,18 @@ const Template = args => ({
       console.log({ ...newValue })
     })
 
-    return { args, modelValue }
+    return { args, parameters, modelValue }
   },
-  template: '<ch-slider v-bind="args" v-model="modelValue" />'
+  template: `
+    <ChSlider v-bind="args" v-model="modelValue">
+      <template v-if="parameters.withLabels" #labels="{ labels }">
+        <div style="display: flex; justify-content: space-between">
+          <span>{{ labels[0] }}</span>
+          <span>{{ labels[1] }}</span>
+        </div>
+      </template>
+    </ChSlider>
+  `
 })
 
 export const Empty = Template.bind({})
@@ -47,12 +55,11 @@ WithLabels.args = {
       min: [100],
       max: [500]
     },
-    connect: [false, true, false],
-    labels: {
-      begin: '100тг',
-      end: '500тг'
-    }
+    connect: [false, true, false]
   }
+}
+WithLabels.parameters = {
+  withLabels: true
 }
 
 export const WithHandlesMargin = Template.bind({})
@@ -60,15 +67,15 @@ WithHandlesMargin.args = {
   title: 'С расстоянием между слайдерами',
   configs: {
     start: [0, 24],
+    step: 1,
     range: {
       min: [0],
       max: [24]
     },
-    margin: 1,
-    connect: [false, true, false],
-    labels: {
-      begin: '00:00',
-      end: '24:00'
-    }
+    margin: 2,
+    connect: [false, true, false]
   }
+}
+WithHandlesMargin.parameters = {
+  withLabels: true
 }
