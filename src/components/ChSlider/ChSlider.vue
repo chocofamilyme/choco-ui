@@ -129,7 +129,7 @@ $handleWidth: 36px
     transform-style: flat
 
   &__connect
-    background: #000
+    background: var(--color-primary-dark)
     height: 4px
     top: -1px
 
