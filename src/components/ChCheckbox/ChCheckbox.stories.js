@@ -6,7 +6,7 @@ export default {
   argTypes: {
     checked: { control: 'boolean', defaultValue: false },
     disabled: { control: 'boolean', defaultValue: false },
-    onChange: {}
+    change: {}
   }
 }
 

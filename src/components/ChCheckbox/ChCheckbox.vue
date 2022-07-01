@@ -21,8 +21,6 @@ defineProps<{
   reversed?: boolean
   label?: string
 }>()
-
-defineEmits(['onChange'])
 </script>
 
 <script lang="ts">
