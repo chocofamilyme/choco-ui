@@ -5,7 +5,7 @@
       :disabled="disabled"
       type="checkbox"
       class="ch-checkbox__input"
-      @change="$emit('onChange')"
+      data-test-id="checkbox-input"
     />
     <span class="ch-checkbox__checkbox" />
     <slot>
