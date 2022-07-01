@@ -7,8 +7,8 @@
       type="checkbox"
       class="ch-checkbox__input"
     />
-    <label :for="id" class="ch-checkbox__label">
-      <p class="ch-checkbox__label-text">{{ label }}</p>
+    <label :for="id" class="ch-checkbox__label" :class="label ? '--with-label' : ''">
+      <p v-if="label" class="ch-checkbox__label-text">{{ label }}</p>
       <slot />
     </label>
   </div>
@@ -71,8 +71,10 @@ export default defineComponent({
     height: 30px
     border: 1px solid var(--color-secondary-dark)
     border-radius: 8px
-    margin-right: 8px
     transition: background-color 0.2s
+
+  &__label.--with-label::before
+    margin-right: 8px
 
   &__label::after
     content: ''
