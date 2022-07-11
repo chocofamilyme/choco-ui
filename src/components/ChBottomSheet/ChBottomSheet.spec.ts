@@ -60,8 +60,8 @@ describe('ChBottomSheet', () => {
           modalBottomSheetController
         }
       }
-    })
-    await bottomSheet?.vm.$nextTick() // Need to wait until next tick to bottom sheet to appear
+    }) as VueWrapper
+    await bottomSheet.vm.$nextTick() // Need to wait until next tick to bottom sheet to appear
   })
 
   afterEach(() => {
@@ -79,6 +79,12 @@ describe('ChBottomSheet', () => {
     modalBottomSheetController?.hide('example-bottom-sheet')
     await bottomSheet?.vm.$nextTick()
     expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(false)
+  })
+
+  it('should emit "onClose" event when bottom sheet is hidden', async () => {
+    modalBottomSheetController?.hide('example-bottom-sheet')
+    await bottomSheet?.vm.$nextTick()
+    expect(bottomSheet?.emitted('onClose')).toBeTruthy()
   })
 
   it('should display bottom sheet header slot content', async () => {
