@@ -13,6 +13,7 @@
       ></div>
       <div class="bottom-sheet">
         <div
+          ref="bottomSheetRef"
           :style="{ transform: `translateY(${bottomSheetState.sheetShift}px)` }"
           class="bottom-sheet__content"
           role="dialog"
@@ -56,6 +57,7 @@ const props = defineProps<{
 const emit = defineEmits(['onClose'])
 
 const controller = inject<ModalBottomSheetController>('modalBottomSheetController')
+const bottomSheetRef = ref()
 const contentRef = ref()
 const bottomSheetState = ref({
   blackoutTouchStarted: false,
@@ -93,7 +95,12 @@ const onSheetTouchMove = (e: TouchEvent) => {
 }
 
 const onSheetTouchEnd = () => {
-  if (bottomSheetState.value.sheetTouchStarted && bottomSheetState.value.sheetShift >= 100) {
+  const bottomSheetHeight = (bottomSheetRef.value as HTMLElement).offsetHeight
+  const closingLimit = bottomSheetHeight < 200 ? bottomSheetHeight * 0.3 : 100
+  if (
+    bottomSheetState.value.sheetTouchStarted &&
+    bottomSheetState.value.sheetShift >= closingLimit
+  ) {
     hide()
   }
 
