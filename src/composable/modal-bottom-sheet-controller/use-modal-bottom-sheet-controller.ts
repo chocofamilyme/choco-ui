@@ -1,5 +1,5 @@
 import { ref, readonly } from 'vue'
-import type { Ref, DeepReadonly } from 'vue'
+import type { Ref } from 'vue'
 
 export type ModalBottomSheet = {
   activeName: string
@@ -8,15 +8,9 @@ export type ModalBottomSheet = {
 
 type ModalBottomSheetParameters = Record<string, unknown>
 
-export type ModalBottomSheetController = {
-  show: (name: string, params?: ModalBottomSheetParameters) => void
-  isVisible: (name: string) => boolean
-  getParams: (name: string) => ModalBottomSheetParameters
-  hide: (name: string) => void
-  state: DeepReadonly<Ref<ModalBottomSheet[]>>
-}
+export type ModalBottomSheetController = ReturnType<typeof useModalBottomSheetController>
 
-export function useModalBottomSheetController(): ModalBottomSheetController {
+export function useModalBottomSheetController() {
   const state = ref<ModalBottomSheet[]>([])
 
   function isVisible(name: string) {
