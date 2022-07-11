@@ -9,7 +9,7 @@
         class="bottom-sheet-container__blackout"
         @touchstart="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
-        @click="controller?.hide(props.name)"
+        @click="hide"
       ></div>
       <div class="bottom-sheet">
         <div
@@ -21,7 +21,7 @@
           @touchmove="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
-          <div class="bottom-sheet__handle-bar-container" @click="controller?.hide(props.name)">
+          <div class="bottom-sheet__handle-bar-container" @click="hide">
             <span class="bottom-sheet__handle-bar"></span>
           </div>
           <div data-test-id="bottom-sheet-header">
@@ -53,6 +53,8 @@ const props = defineProps<{
   name: string
 }>()
 
+const emit = defineEmits(['onClose'])
+
 const controller = inject<ModalBottomSheetController>('modalBottomSheetController')
 const contentRef = ref()
 const bottomSheetState = ref({
@@ -63,7 +65,7 @@ const bottomSheetState = ref({
 })
 
 onBeforeUnmount(() => {
-  controller?.hide(props.name)
+  hide()
 })
 
 const onBlackoutTouchStart = () => (bottomSheetState.value.blackoutTouchStarted = true)
@@ -71,7 +73,7 @@ const onBlackoutTouchStart = () => (bottomSheetState.value.blackoutTouchStarted 
 const onBlackoutTouchEnd = () => {
   if (bottomSheetState.value.blackoutTouchStarted) {
     bottomSheetState.value.blackoutTouchStarted = false
-    controller?.hide(props.name)
+    hide()
   }
 }
 
@@ -92,14 +94,17 @@ const onSheetTouchMove = (e: TouchEvent) => {
 
 const onSheetTouchEnd = () => {
   if (bottomSheetState.value.sheetTouchStarted && bottomSheetState.value.sheetShift >= 100) {
-    controller?.hide(props.name)
+    hide()
   }
 
   bottomSheetState.value.sheetTouchStarted = false
   bottomSheetState.value.sheetShift = 0
 }
 
-const hide = () => controller?.hide(props.name)
+const hide = () => {
+  controller?.hide(props.name)
+  emit('onClose')
+}
 </script>
 
 <script lang="ts">
