@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, onBeforeUnmount } from 'vue'
+import { ref, inject, watch, onBeforeUnmount } from 'vue'
 import type { Ref } from 'vue'
 import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 
@@ -66,9 +66,16 @@ const bottomSheetState = ref({
   sheetShift: 0
 })
 
-onBeforeUnmount(() => {
-  hide()
-})
+if (controller) {
+  watch(controller.state, (_, prevState) => {
+    const wasActive = prevState.find(elem => elem.activeName === props.name)
+    if (!controller.isVisible(props.name) && wasActive) {
+      emit('onClose')
+    }
+  })
+}
+
+onBeforeUnmount(() => hide())
 
 const onBlackoutTouchStart = () => (bottomSheetState.value.blackoutTouchStarted = true)
 
@@ -108,10 +115,7 @@ const onSheetTouchEnd = () => {
   bottomSheetState.value.sheetShift = 0
 }
 
-const hide = () => {
-  controller?.hide(props.name)
-  emit('onClose')
-}
+const hide = () => controller?.hide(props.name)
 </script>
 
 <script lang="ts">
