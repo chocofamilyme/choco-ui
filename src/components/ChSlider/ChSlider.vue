@@ -5,11 +5,7 @@
     </div>
     <div class="ch-slider__body" ref="sliderBody"></div>
     <div class="ch-slider__bottom-bar">
-      <div class="ch-slider__labels" v-if="configs.labels">
-        <div>{{ configs.labels.begin }}</div>
-        <div>{{ configs.labels.end }}</div>
-      </div>
-      <p class="ch-slider__info-text">{{ infoText }}</p>
+      <slot name="labels" v-bind="{ labels: sliderLabels }" />
     </div>
   </div>
 </template>
@@ -17,20 +13,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import noUiSlider from 'nouislider'
+import type { Options, target } from 'nouislider'
 import type { PropType } from 'vue'
-import type { SliderConfig } from '@/components/ChSlider/config.types'
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['change:modelValue', 'update:modelValue'])
 const props = defineProps({
-  modelValue: Object,
-  title: String,
-  infoText: String,
-  showRanges: {
-    type: Boolean,
-    default: false
+  title: {
+    type: String,
+    default: ''
   },
   configs: {
-    type: Object as PropType<SliderConfig>,
+    type: Object as PropType<Options>,
     default() {
       return {
         start: [0],
@@ -43,17 +36,21 @@ const props = defineProps({
   }
 })
 
-const sliderBody = ref({})
+const sliderBody = ref<target>({} as target)
+const sliderLabels = ref<(number | string)[]>([])
 
 onMounted(() => {
-  // @ts-ignore
   noUiSlider.create(sliderBody.value, {
     cssPrefix: 'ch-slider__',
     ...props.configs
   })
 
-  // @ts-ignore
-  sliderBody.value.noUiSlider.on('end', function (values: unknown) {
+  sliderBody.value.noUiSlider?.on('update', function (values) {
+    sliderLabels.value = values
+    emit('change:modelValue', values)
+  })
+
+  sliderBody.value.noUiSlider?.on('end', function (values) {
     emit('update:modelValue', values)
   })
 })
@@ -76,10 +73,6 @@ $handleWidth: 36px
 
   &__bottom-bar
     margin-top: 8px
-
-  &__labels
-    display: flex
-    justify-content: space-between
 
   &__controls, &__body
     position: relative
@@ -136,7 +129,7 @@ $handleWidth: 36px
     transform-style: flat
 
   &__connect
-    background: #000
+    background: var(--color-primary-dark)
     height: 4px
     top: -1px
 

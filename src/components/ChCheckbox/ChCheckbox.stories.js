@@ -6,7 +6,7 @@ export default {
   argTypes: {
     checked: { control: 'boolean', defaultValue: false },
     disabled: { control: 'boolean', defaultValue: false },
-    onClick: {}
+    change: {}
   }
 }
 
@@ -34,4 +34,11 @@ export const Checked = Template.bind({})
 Checked.args = {
   checked: true,
   label: 'Checkbox'
+}
+
+export const Reversed = Template.bind({})
+Reversed.args = {
+  checked: true,
+  reversed: true,
+  label: 'Reversed checkbox'
 }
