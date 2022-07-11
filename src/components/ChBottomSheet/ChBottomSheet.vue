@@ -146,7 +146,6 @@ export default defineComponent({
 
 .bottom-sheet-container
   --color-primary-dark: 15 15 17
-  --choco-ui-bottom-sheet-bg-color: #fff
 
   z-index: 1000
   position: fixed
@@ -179,7 +178,7 @@ export default defineComponent({
     width: 100%
     display: flex
     flex-direction: column
-    background-color: var(--choco-ui-bottom-sheet-bg-color)
+    background-color: var(--choco-ui-bottom-sheet-bg-color, #fff)
     overflow: hidden
     border-top-left-radius: 12px
     border-top-right-radius: 12px
