@@ -13,7 +13,7 @@ export type ModalBottomSheetController = ReturnType<typeof useModalBottomSheetCo
 export function useModalBottomSheetController() {
   const state = ref<ModalBottomSheet[]>([])
 
-  function isVisible(name: string) {
+  function isVisible(name: string): boolean {
     return state.value.some(modal => modal.activeName === name)
   }
 
@@ -28,7 +28,7 @@ export function useModalBottomSheetController() {
     })
   }
 
-  function getParams(name: string) {
+  function getParams(name: string): Record<string, unknown> {
     const modal = state.value.find(modal => modal.activeName === name)
     return modal ? modal.params : {}
   }
