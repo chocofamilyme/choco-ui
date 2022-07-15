@@ -38,15 +38,16 @@ const BottomSheetContent = {
   }
 }
 
+const bottomSheetName = 'example-bottom-sheet'
 let bottomSheet: VueWrapper | null = null
 const modalParams = { ...BottomSheetHeader.params, ...BottomSheetContent.params }
 
 describe('ChBottomSheet', () => {
   beforeEach(async () => {
-    ChBottomSheetPlugin.controller.show('example-bottom-sheet', modalParams)
+    ChBottomSheetPlugin.controller.show(bottomSheetName, modalParams)
     bottomSheet = mount(ChBottomSheet, {
       props: {
-        name: 'example-bottom-sheet'
+        name: bottomSheetName
       },
       slots: {
         header: BottomSheetHeader.template,
@@ -72,13 +73,13 @@ describe('ChBottomSheet', () => {
   it('should hide bottom sheet', async () => {
     expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(true)
 
-    ChBottomSheetPlugin.controller.hide('example-bottom-sheet')
+    ChBottomSheetPlugin.controller.hide(bottomSheetName)
     await bottomSheet?.vm.$nextTick()
     expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(false)
   })
 
   it('should emit "onClose" event when bottom sheet is hidden', async () => {
-    ChBottomSheetPlugin.controller.hide('example-bottom-sheet')
+    ChBottomSheetPlugin.controller.hide(bottomSheetName)
     await bottomSheet?.vm.$nextTick()
     expect(bottomSheet?.emitted('onClose')).toBeTruthy()
   })
