@@ -4,22 +4,15 @@ import { Meta } from '@storybook/addon-docs';
 
 # ChBottomSheet
 
-Вся логика открытия и закрытия реализована через `useModalBottomSheetController`.
-Компонент ожидает объект `modalBottomSheetController` типа `ModalBottomSheetController` в `inject`
+Вся логика открытия и закрытия реализована через `useModalBottomSheetController`
 
-Для использования нужно сделать provide `modalBottomSheetController` на верхнем уровне
+Для использования нужно подключить плагин `ChBottomSheetPlugin`
 
 ```js
 // App.vue
-import { useModalBottomSheetController } from '@choco-ui';
+import { ChBottomSheetPlugin } from '@choco-ui';
 
-new Vue({
-  provide: {
-    modalBottomSheetController: useModalBottomSheetController()
-  },
-  router,
-  render: h => h(App)
-}).$mount('#app');
+app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller' }) // Это ключ, по которому происходит provide объекта типа ModalBottomSheetController
 ```
 
 ```html
@@ -37,7 +30,7 @@ new Vue({
   import { ChBottomSheet } from '@choco-ui';
 
   export default {
-    inject: ['modalBottomSheetController'],
+    inject: { controller: 'bottom-sheet-controller' }, // Ключ, который указали при использовании плагина
     components: {
       ChBottomSheet
     }
@@ -64,3 +57,28 @@ Composable для управления состоянием модальных �
 | isVisible     | Function             | Метод для проверки активно ли выбранное модальное окно                                                                       |
 | getParams     | Function             | Метод для получения параметров модального окна по имени                                                                      |
 | state         | ModalBottomSheet[]   | Массив со всеми модальными окнами                                                                                            |
+
+# ChBottomSheetPlugin
+
+Плагин для использования ChBottomSheet
+
+```js
+app.use(ChBottomSheetPlugin, options)
+```
+
+### Options
+
+```js
+{
+  controllerInjectionKey: string // Ключ, по которому в приложение будет сделан provide контроллера типа ModalBottomSheetController
+                                 // По этому же ключу происходит inject контроллера
+}
+```
+
+### controller instance
+
+У объекта `ChBottomSheetPlugin` есть поле controller, по которому можно получить объект типа `ModalBottomSheetController`
+
+```js
+ChBottomSheetPlugin.controller.show('some-bottom-sheet') // Вариант для крайних случаев. Предпочтительнее использовать контроллер из inject
+```

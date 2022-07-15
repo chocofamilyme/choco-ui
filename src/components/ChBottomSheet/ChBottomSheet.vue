@@ -9,10 +9,11 @@
         class="bottom-sheet-container__blackout"
         @touchstart="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
-        @click="controller?.hide(props.name)"
+        @click="hide"
       ></div>
       <div class="bottom-sheet">
         <div
+          ref="bottomSheetRef"
           :style="{ transform: `translateY(${bottomSheetState.sheetShift}px)` }"
           class="bottom-sheet__content"
           role="dialog"
@@ -21,7 +22,7 @@
           @touchmove="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
-          <div class="bottom-sheet__handle-bar-container" @click="controller?.hide(props.name)">
+          <div class="bottom-sheet__handle-bar-container" @click="hide">
             <span class="bottom-sheet__handle-bar"></span>
           </div>
           <div data-test-id="bottom-sheet-header">
@@ -45,15 +46,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, onBeforeUnmount } from 'vue'
+import { ref, inject, watch, onBeforeUnmount } from 'vue'
 import type { Ref } from 'vue'
+
+import { injectionKey } from './plugin/injection-key.config'
 import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 
 const props = defineProps<{
   name: string
 }>()
 
-const controller = inject<ModalBottomSheetController>('modalBottomSheetController')
+const emit = defineEmits(['onClose'])
+
+const controllerInjectionKey = inject<string>(injectionKey) as string
+const controller = inject<ModalBottomSheetController>(controllerInjectionKey)
+const bottomSheetRef = ref()
 const contentRef = ref()
 const bottomSheetState = ref({
   blackoutTouchStarted: false,
@@ -62,16 +69,23 @@ const bottomSheetState = ref({
   sheetShift: 0
 })
 
-onBeforeUnmount(() => {
-  controller?.hide(props.name)
-})
+if (controller) {
+  watch(controller.state, (_, prevState) => {
+    const wasActive = prevState.find(elem => elem.activeName === props.name)
+    if (!controller.isVisible(props.name) && wasActive) {
+      emit('onClose')
+    }
+  })
+}
+
+onBeforeUnmount(() => hide())
 
 const onBlackoutTouchStart = () => (bottomSheetState.value.blackoutTouchStarted = true)
 
 const onBlackoutTouchEnd = () => {
   if (bottomSheetState.value.blackoutTouchStarted) {
     bottomSheetState.value.blackoutTouchStarted = false
-    controller?.hide(props.name)
+    hide()
   }
 }
 
@@ -91,8 +105,13 @@ const onSheetTouchMove = (e: TouchEvent) => {
 }
 
 const onSheetTouchEnd = () => {
-  if (bottomSheetState.value.sheetTouchStarted && bottomSheetState.value.sheetShift >= 100) {
-    controller?.hide(props.name)
+  const bottomSheetHeight = (bottomSheetRef.value as HTMLElement).offsetHeight
+  const closingLimit = bottomSheetHeight < 200 ? bottomSheetHeight * 0.3 : 100
+  if (
+    bottomSheetState.value.sheetTouchStarted &&
+    bottomSheetState.value.sheetShift >= closingLimit
+  ) {
+    hide()
   }
 
   bottomSheetState.value.sheetTouchStarted = false
@@ -134,7 +153,6 @@ export default defineComponent({
 
 .bottom-sheet-container
   --color-primary-dark: 15 15 17
-  --choco-ui-bottom-sheet-bg-color: #fff
 
   z-index: 1000
   position: fixed
@@ -167,7 +185,7 @@ export default defineComponent({
     width: 100%
     display: flex
     flex-direction: column
-    background-color: var(--choco-ui-bottom-sheet-bg-color)
+    background-color: var(--choco-ui-bottom-sheet-bg-color, #fff)
     overflow: hidden
     border-top-left-radius: 12px
     border-top-right-radius: 12px

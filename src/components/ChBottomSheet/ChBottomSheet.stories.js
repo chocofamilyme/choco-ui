@@ -1,8 +1,6 @@
-import { useModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 import ChBottomSheet from './ChBottomSheet.vue'
 
 const exampleBottomSheetName = 'example-bottom-sheet-name'
-const modalBottomSheetController = useModalBottomSheetController()
 
 export default {
   title: 'ChBottomSheet',
@@ -14,15 +12,13 @@ export default {
 
 const Template = (args, { parameters }) => ({
   components: { ChBottomSheet },
-  provide: {
-    modalBottomSheetController
-  },
+  inject: { controller: 'bottom-sheet-controller' },
   setup() {
     return { args, parameters }
   },
   methods: {
     showBottomSheet() {
-      modalBottomSheetController.show(exampleBottomSheetName, parameters.params)
+      this.controller.show(exampleBottomSheetName, parameters.params)
     }
   },
   template: `
