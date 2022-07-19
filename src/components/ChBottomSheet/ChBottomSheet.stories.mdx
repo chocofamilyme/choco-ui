@@ -19,7 +19,7 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
 <!-- ComponentWithBottomSheet.vue -->
 <template>
   <div>
-    <button @click="modalBottomSheetController.show('example-bottom-sheet', { foo: 'bar'})">Открыть UiBottomSheet</button>
+    <button @click="modalBottomSheetController.show('example-bottom-sheet', { foo: 'bar'})">Открыть ChBottomSheet</button>
     <ChBottomSheet name="example-bottom-sheet" v-slot="{ params }">
       Hello {{ params.foo }}
     </ChBottomSheet>
