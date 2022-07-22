@@ -83,6 +83,7 @@ export default defineComponent({ name: 'ChModal' })
   box-sizing: border-box
   background-color: rgba(15 15 17/0.15)
   backdrop-filter: blur(9px) // Not fully supported. Browsers that do not support it simple display gray bg without blur
+  -webkit-backdrop-filter: blur(9px)
   z-index: 1000
   transition: 300ms cubic-bezier(0, 0, 0.2, 1)
 
