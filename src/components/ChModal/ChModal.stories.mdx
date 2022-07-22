@@ -20,7 +20,7 @@ app.use(ChModalPlugin, { controllerInjectionKey: 'modal-controller' }) // Это
 <template>
   <div>
     <button @click="modalBottomSheetController.show('example-modal-sheet', { foo: 'bar'})">Открыть Modal</button>
-    <ChModal name="example-nodal-sheet" v-slot="{ params }">
+    <ChModal name="example-modal-sheet" v-slot="{ params }">
       Hello {{ params.foo }}
     </ChModal>
   </div>
@@ -37,6 +37,13 @@ app.use(ChModalPlugin, { controllerInjectionKey: 'modal-controller' }) // Это
   }
 </script>
 ```
+
+### Props
+| Название      | Тип                  | Описание                                                                                                                                |
+|---------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| name          | String               | Requried. Название модального окна. Это поле должно быть уникальным                                                                     |
+| persistent    | Boolean              | Optional. Флаг для состояния когда модальное окно не может быть закрыто при клике снаружи, а только программно, через вызов метода hide |
+
 
 # useModalBottomSheetController
 
