@@ -58,11 +58,15 @@ import { defineComponent } from 'vue'
 export default defineComponent({ name: 'ChModal' })
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .ch-modal-fade
   &-enter-active,
   &-leave-active
-    transition-property: opacity
+    transition: 500ms cubic-bezier(0, 0, 0.2, 1)
+
+  &-enter-to,
+  &-leave-from
+    opacity: 1
 
   &-enter-from,
   &-leave-to
@@ -85,7 +89,6 @@ export default defineComponent({ name: 'ChModal' })
   backdrop-filter: blur(9px) // Not fully supported. Browsers that do not support it simple display gray bg without blur
   -webkit-backdrop-filter: blur(9px)
   z-index: 1000
-  transition: 300ms cubic-bezier(0, 0, 0.2, 1)
 
   &__container
     position: relative
