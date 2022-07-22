@@ -16,6 +16,7 @@ export {
 } from './components/ChHeader'
 export { default as ChToast } from './components/ChToast'
 export { default as ChBottomSheet, ChBottomSheetPlugin } from './components/ChBottomSheet'
+export { ChModal, ChModalPlugin } from './components/ChModal'
 export { useModalBottomSheetController } from './composable/modal-bottom-sheet-controller'
 export type { ModalBottomSheetController } from './composable/modal-bottom-sheet-controller'
 export { default as ChSpinner } from './components/ChSpinner'
