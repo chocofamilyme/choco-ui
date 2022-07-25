@@ -1,46 +1,49 @@
 import { Meta } from '@storybook/addon-docs';
 
-<Meta title="ChBottomSheet/README" component/>
+<Meta title="ChModal/README" />
 
-# ChBottomSheet
+# ChModal
 
 Вся логика открытия и закрытия реализована через `useModalBottomSheetController`
 
-Для использования нужно подключить плагин `ChBottomSheetPlugin`
+Для использования нужно подключить плагин `ChModalPlugin`
 
 ```js
 // App.vue
-import { ChBottomSheetPlugin } from '@choco-ui';
+import { ChModalPlugin } from '@choco-ui';
 
-app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller' }) // Это ключ, по которому происходит provide объекта типа ModalBottomSheetController
+app.use(ChModalPlugin, { controllerInjectionKey: 'modal-controller' }) // Это ключ, по которому происходит provide объекта типа ModalBottomSheetController
 ```
 
 ```html
-<!-- ComponentWithBottomSheet.vue -->
+<!-- ComponentWithModal.vue -->
 <template>
   <div>
-    <button @click="modalBottomSheetController.show('example-bottom-sheet', { foo: 'bar'})">Открыть ChBottomSheet</button>
-    <ChBottomSheet name="example-bottom-sheet" v-slot="{ params }">
+    <button @click="modalBottomSheetController.show('example-modal-sheet', { foo: 'bar'})">Открыть Modal</button>
+    <ChModal name="example-modal-sheet" v-slot="{ params }">
       Hello {{ params.foo }}
-    </ChBottomSheet>
+    </ChModal>
   </div>
 <template>
 
 <script>
-  import { ChBottomSheet } from '@choco-ui';
+  import { ChModal } from '@choco-ui';
 
   export default {
-    inject: { controller: 'bottom-sheet-controller' }, // Ключ, который указали при использовании плагина
+    inject: { controller: 'modal-controller' }, // Ключ, который указали при использовании плагина
     components: {
-      ChBottomSheet
+      ChModal
     }
   }
 </script>
 ```
 
-## Drag&Move
+### Props
+| Название      | Тип                  | Описание                                                                                                                                |
+|---------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| name          | String               | Requried. Название модального окна. Это поле должно быть уникальным                                                                     |
+| persistent    | Boolean              | Optional. Флаг для состояния когда модальное окно не может быть закрыто при клике снаружи, а только программно, через вызов метода hide |
 
-Добавлено поведение `Drag&Move` как в нативном bottom sheet (шторке). Работает только на устройствах, которые поддерживают `TouchEvent`. В десктоп браузере с эмулятором мобильного устройста не работает. Нужно проверять на реальном устройстве
 
 # useModalBottomSheetController
 
@@ -68,12 +71,12 @@ controller.show('example-modal', { someParam: 'hello' }); // Открывает 
 const params = controller.getParams('example-modal'); // Возвращает объект с параметрами, которые передали при открытии модального окна
 ```
 
-# ChBottomSheetPlugin
+# ChModalPlugin
 
-Плагин для использования ChBottomSheet
+Плагин для использования ChModal
 
 ```js
-app.use(ChBottomSheetPlugin, options)
+app.use(ChModalPlugin, options)
 ```
 
 ### Options
@@ -87,8 +90,8 @@ app.use(ChBottomSheetPlugin, options)
 
 ### controller instance
 
-У объекта `ChBottomSheetPlugin` есть поле controller, по которому можно получить объект типа `ModalBottomSheetController`
+У объекта `ChModalPlugin` есть поле controller, по которому можно получить объект типа `ModalBottomSheetController`
 
 ```js
-ChBottomSheetPlugin.controller.show('some-bottom-sheet') // Вариант для крайних случаев. Предпочтительнее использовать контроллер из inject
+ChModalPlugin.controller.show('some-modal') // Вариант для крайних случаев. Предпочтительнее использовать контроллер из inject
 ```

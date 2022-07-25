@@ -1,20 +1,21 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { ChBottomSheetPlugin } from './index'
+import { getPlugin } from './index'
 
 const controllerInjectionKey = 'test-ch-bottom-sheet-plugin'
+const plugin = getPlugin('injection-key')
 
 const getWrapper = (options?: { controllerInjectionKey: string }) =>
   mount(
     { template: '<span>Test</span>' },
     {
       global: {
-        plugins: [[ChBottomSheetPlugin, options]]
+        plugins: [[plugin, options]]
       }
     }
   )
 
-describe('ChBottomSheetPlugin', () => {
+describe('useModalBottomSheet plugin', () => {
   it('should provide instance of ModalBottomSheetController when plugin is installed', () => {
     const wrapper = getWrapper({ controllerInjectionKey })
     expect(wrapper.vm.$.appContext.provides[controllerInjectionKey]).toBeTruthy()
