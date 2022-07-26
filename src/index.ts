@@ -21,3 +21,4 @@ export { useModalBottomSheetController } from './composable/modal-bottom-sheet-c
 export type { ModalBottomSheetController } from './composable/modal-bottom-sheet-controller'
 export { default as ChSpinner } from './components/ChSpinner'
 export { ChHoverButtonGroup, ChHoverButton } from './components/ChHoverButtonGroup'
+export { ChCarousel, ChCarouselCardItem, ChCarouselBullets } from './components/ChCarousel'
