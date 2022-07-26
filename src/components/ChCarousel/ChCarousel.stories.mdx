@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="ChCarousel/README" />
+
+# ChCarousel
+
+Компонент использует [@glidejs/glide](https://glidejs.com/) для реализации логики карусели/слайдера
+
+## Использование
+
+```html
+<template>
+  <ChCarousel>
+    <ChCarouselCardItem>
+      <template #left>Left content</template>
+      <span>Right content</span>
+    </ChCarouselCardItem>
+    <ChCarouselCardItem>
+      <template #left>Left content</template>
+      <span>Right content</span>
+    </ChCarouselCardItem>
+    <template #bullets="{ numberOfBullets }">
+      <ChCarouselBullets :number-of-bullets="numberOfBullets" />
+    </template>
+  </ChCarousel>
+</template>
+
+<script setup>
+import { ChCarousel, ChCarouselCardItem, ChCarouselBullets } from 'choco-ui'
+</script>
+```
+
+## Компоненты
+
+### ChCarousel
+
+Компонент - контейнер для элементов карусели
+
+#### Props
+| Название          | Тип                                                | Описание                                                                       |
+|-------------------|----------------------------------------------------|--------------------------------------------------------------------------------|
+| carouselConfig    | [Glide.Options](https://glidejs.com/docs/options/) | Конфиг для карусели                                                            |
+
+#### Slots
+| Слот          | Описание                                                                                                                                                                                                                     |
+|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| default       | Слот для отображения элементов в карусели. Элементы должны быть обернуты в компонент ChCarouselCardItem                                                                                                                      |
+| bullets       | Слот для отображения точек-навигации в карусели. Через слот можно получить `numberOfBullets` - количество точек-навигации. Для отображения есть компонент ChCarouselBullets                                                  |
+
+### ChCarouselCardItem
+
+Компонент - элемент слайдера
+
+#### Slots
+| Слот          | Описание                                                                       |
+|---------------|--------------------------------------------------------------------------------|
+| default       | Слот для отображения правого контента                                          |
+| left          | Слот для отображения левого контента                                           |
+
+### ChCarouselBullets
+
+Компонент - контейнер с точками-навигации
+
+#### Props
+| Название          | Тип            | Описание                                                                       |
+|-------------------|--------------- |--------------------------------------------------------------------------------|
+| numberOfBullets   | number         | Количество точек для отображения                                               |
