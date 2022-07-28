@@ -65,6 +65,7 @@ export default defineComponent({
   border: none
   padding: 16px
   cursor: pointer
+  transition: 0.3s
 
   &__prepend
     margin-right: 10px
