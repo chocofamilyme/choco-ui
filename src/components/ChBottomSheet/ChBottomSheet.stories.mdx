@@ -10,7 +10,7 @@ import { Meta } from '@storybook/addon-docs';
 
 ```js
 // App.vue
-import { ChBottomSheetPlugin } from '@choco-ui';
+import { ChBottomSheetPlugin } from 'choco-ui';
 
 app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller' }) // Это ключ, по которому происходит provide объекта типа ModalBottomSheetController
 ```
@@ -20,14 +20,18 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
 <template>
   <div>
     <button @click="modalBottomSheetController.show('example-bottom-sheet', { foo: 'bar'})">Открыть ChBottomSheet</button>
-    <ChBottomSheet name="example-bottom-sheet" v-slot="{ params }">
+    <ChBottomSheet 
+      v-slot="{ params }"
+      name="example-bottom-sheet"
+      @onShow="() => {}"
+    >
       Hello {{ params.foo }}
     </ChBottomSheet>
   </div>
 <template>
 
 <script>
-  import { ChBottomSheet } from '@choco-ui';
+  import { ChBottomSheet } from 'choco-ui';
 
   export default {
     inject: { controller: 'bottom-sheet-controller' }, // Ключ, который указали при использовании плагина
@@ -37,6 +41,19 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
   }
 </script>
 ```
+
+### Props
+| Название      | Тип                  | Описание                                                             |
+|---------------|----------------------|----------------------------------------------------------------------|
+| name          | String               | Requried. Название bottom sheet. Это поле должно быть уникальным     |
+
+
+### Emits
+
+| Название      | Возвращаемое значение | Описание                                                            |
+|---------------|-----------------------|---------------------------------------------------------------------|
+| onClose       | Void                  | Срабатывает когда bottom sheet закрывается                          |
+
 
 ## Drag&Move
 
