@@ -60,8 +60,8 @@ const Template = (_, { parameters }) => ({
             </ChCarouselCardItem>
           </template>
         </template>
-        <template v-if="parameters.withBullets" #bullets="{ numberOfBullets }">
-          <ChCarouselBullets :number-of-bullets="numberOfBullets" />
+        <template v-if="parameters.withBullets" #bullets>
+          <ChCarouselBullets />
         </template>
       </ChCarousel>
     </div>

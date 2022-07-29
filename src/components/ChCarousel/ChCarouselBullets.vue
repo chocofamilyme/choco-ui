@@ -1,10 +1,11 @@
 <template>
   <div class="glide__bullets ch-carousel__bullets-container" data-glide-el="controls[nav]">
     <button
-      v-for="i in numberOfBullets"
+      v-for="i in numberOfSlides"
       :key="i"
       class="glide__bullet ch-carousel__bullet"
       :data-glide-dir="`=${i - 1}`"
+      :aria-current="isActive(i)"
     >
       <span class="ch-carousel__bullet-dot"></span>
     </button>
@@ -12,12 +13,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  numberOfBullets: {
-    type: Number,
-    default: 0
-  }
-})
+import { inject } from 'vue'
+import type Glide from '@glidejs/glide'
+
+const glider = inject<Glide.Properties>('glider')
+const numberOfSlides = inject<number[]>('numberOfSlides') || 0
+const isActive = (idx: number) => idx === glider?.index
 </script>
 
 <script lang="ts">
@@ -36,7 +37,7 @@ export default defineComponent({
     margin-top: 8px
 
     & > .ch-carousel__bullet:not(:first-of-type)
-      margin-left: 0.5rem
+      margin-left: 0.375rem
 
   &__bullet
     display: flex

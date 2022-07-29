@@ -5,18 +5,19 @@
     role="region"
     aria-label="carousel"
     aria-live="polite"
+    aria-atomic="true"
   >
     <div class="glide__track" data-glide-el="track">
-      <div class="glide__slides" ref="trackRef">
+      <div class="glide__slides" ref="trackRef" role="group">
         <slot />
       </div>
     </div>
-    <slot name="bullets" v-bind="{ numberOfBullets }" />
+    <slot name="bullets" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, provide, nextTick } from 'vue'
 import Glide from '@glidejs/glide'
 import '@glidejs/glide/dist/css/glide.core.min.css'
 
@@ -32,12 +33,16 @@ const props = defineProps({
 
 const carouselRef = ref()
 const trackRef = ref()
-const numberOfBullets = ref(0)
+const numberOfSlides = ref(0)
+const glider = ref<Glide.Properties>()
+
+provide('glider', glider)
+provide('numberOfSlides', numberOfSlides)
 
 onMounted(() => {
-  numberOfBullets.value = trackRef.value.children.length
+  numberOfSlides.value = trackRef.value.children.length
   nextTick(() => {
-    new Glide(carouselRef.value, props.carouselConfig).mount() // Need to wait next tick for bullets to render before Glide initialization
+    glider.value = new Glide(carouselRef.value, props.carouselConfig).mount() // Need to wait next tick for bullets to render before Glide initialization
   })
 })
 </script>
