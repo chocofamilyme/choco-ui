@@ -21,6 +21,8 @@ import { ref, onMounted, provide, nextTick } from 'vue'
 import Glide from '@glidejs/glide'
 import '@glidejs/glide/dist/css/glide.core.min.css'
 
+import { carouselConfig } from './config'
+
 const props = defineProps({
   carouselConfig: {
     type: Object as () => Glide.Options,
@@ -36,8 +38,8 @@ const trackRef = ref()
 const numberOfSlides = ref(0)
 const glider = ref<Glide.Properties>()
 
-provide('glider', glider)
-provide('numberOfSlides', numberOfSlides)
+provide(carouselConfig.gliderInjectionKey, glider)
+provide(carouselConfig.numberOfSlidesInjectionKey, numberOfSlides)
 
 onMounted(() => {
   numberOfSlides.value = trackRef.value.children.length
