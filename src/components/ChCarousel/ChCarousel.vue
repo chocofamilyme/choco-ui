@@ -1,5 +1,11 @@
 <template>
-  <div class="glide ch-carousel" ref="carouselRef">
+  <div
+    ref="carouselRef"
+    class="glide ch-carousel"
+    role="region"
+    aria-label="carousel"
+    aria-live="polite"
+  >
     <div class="glide__track" data-glide-el="track">
       <div class="glide__slides" ref="trackRef">
         <slot />
