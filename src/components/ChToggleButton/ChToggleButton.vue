@@ -1,23 +1,34 @@
 <template>
-  <div :class="['ch-toggle-button', { 'ch-toggle-button_active': active }]">
+  <button
+    :class="['ch-toggle-button', { 'ch-toggle-button_active': isActive() }]"
+    @click="onClick(id)"
+  >
     <slot v-if="$slots.default" />
-    <template v-else>
-      <p class="ch-toggle-button__text">{{ label }}</p>
-      <fa-icon
-        class="ch-toggle-button__icon ch-toggle-button__icon_right"
-        v-if="icon"
-        :icon="icon"
-      />
-    </template>
-  </div>
+  </button>
 </template>
 
 <script lang="ts" setup>
-defineProps<{
-  active?: boolean
-  label: string
-  icon?: string[]
+import { inject } from 'vue'
+
+const props = defineProps<{
+  id: string
 }>()
+
+const onSelect = inject<(id: string) => void>('onSelect')
+const checkIsActive = inject<(id: string) => boolean>('isActive')
+
+function onClick(id: string) {
+  if (onSelect) {
+    onSelect(id)
+  }
+}
+
+function isActive() {
+  if (checkIsActive) {
+    return checkIsActive(props.id)
+  }
+  return false
+}
 </script>
 
 <script lang="ts">
@@ -43,6 +54,8 @@ export default defineComponent({
   text-align: center
   letter-spacing: 0.005em
   cursor: pointer
+  width: 100%
+  border: none
 
   &_active
     background: var(--color-light)
