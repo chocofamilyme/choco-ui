@@ -38,4 +38,9 @@ describe('ChSlider', () => {
     expect(parseInt(lowerLabel.text())).toBe(RANGE.min[0])
     expect(parseInt(upperLabel.text())).toBe(RANGE.max[0])
   })
+
+  it('should expose sliderAPI object', () => {
+    const wrapper = shallowMount(ChSlider)
+    expect(wrapper.vm.sliderAPI).toBeTruthy()
+  })
 })

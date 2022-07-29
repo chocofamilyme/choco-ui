@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import noUiSlider from 'nouislider'
-import type { Options, target } from 'nouislider'
+import type { Options, target, API } from 'nouislider'
 import type { PropType } from 'vue'
 
 const emit = defineEmits(['change:modelValue', 'update:modelValue'])
@@ -38,21 +38,26 @@ const props = defineProps({
 
 const sliderBody = ref<target>({} as target)
 const sliderLabels = ref<(number | string)[]>([])
+const sliderAPI = ref<API>()
 
 onMounted(() => {
-  noUiSlider.create(sliderBody.value, {
+  sliderAPI.value = noUiSlider.create(sliderBody.value, {
     cssPrefix: 'ch-slider__',
     ...props.configs
   })
 
-  sliderBody.value.noUiSlider?.on('update', function (values) {
+  sliderAPI.value.on('update', function (values) {
     sliderLabels.value = values
     emit('change:modelValue', values)
   })
 
-  sliderBody.value.noUiSlider?.on('end', function (values) {
+  sliderAPI.value.on('end', function (values) {
     emit('update:modelValue', values)
   })
+})
+
+defineExpose({
+  sliderAPI
 })
 </script>
 
