@@ -19,8 +19,8 @@ import { Meta } from '@storybook/addon-docs';
       <template #left>Left content</template>
       <span>Right content</span>
     </ChCarouselCardItem>
-    <template #bullets="{ numberOfBullets }">
-      <ChCarouselBullets :number-of-bullets="numberOfBullets" />
+    <template #bullets>
+      <ChCarouselBullets />
     </template>
   </ChCarousel>
 </template>
@@ -45,7 +45,7 @@ import { ChCarousel, ChCarouselCardItem, ChCarouselBullets } from 'choco-ui'
 | Слот          | Описание                                                                                                                                                                                                                     |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | default       | Слот для отображения элементов в карусели. Элементы должны быть обернуты в компонент ChCarouselCardItem                                                                                                                      |
-| bullets       | Слот для отображения точек-навигации в карусели. Через слот можно получить `numberOfBullets` - количество точек-навигации. Для отображения есть компонент ChCarouselBullets                                                  |
+| bullets       | Слот для отображения точек-навигации в карусели. Для отображения есть компонент ChCarouselBullets                                                  |
 
 ### ChCarouselCardItem
 
@@ -60,8 +60,3 @@ import { ChCarousel, ChCarouselCardItem, ChCarouselBullets } from 'choco-ui'
 ### ChCarouselBullets
 
 Компонент - контейнер с точками-навигации
-
-#### Props
-| Название          | Тип            | Описание                                                                       |
-|-------------------|--------------- |--------------------------------------------------------------------------------|
-| numberOfBullets   | number         | Количество точек для отображения                                               |
