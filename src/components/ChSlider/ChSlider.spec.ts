@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
+
 import { findByTestId } from '@/__test__/utils'
 import ChSlider from './ChSlider.vue'
-
 import type { VueWrapper } from '@vue/test-utils'
 import type { Options } from 'nouislider'
 
@@ -39,8 +39,36 @@ describe('ChSlider', () => {
     expect(parseInt(upperLabel.text())).toBe(RANGE.max[0])
   })
 
-  it('should expose sliderAPI object', () => {
+  it('should expose sliderAPI object of type noUiSlider.API', () => {
     const wrapper = shallowMount(ChSlider)
     expect(wrapper.vm.sliderAPI).toBeTruthy()
+    expect(wrapper.vm.sliderAPI).toMatchInlineSnapshot(
+      {
+        target: expect.any(HTMLElement),
+        options: expect.any(Object)
+      },
+      `
+        {
+          "__moveHandles": [Function],
+          "destroy": [Function],
+          "get": [Function],
+          "getOrigins": [Function],
+          "getPositions": [Function],
+          "getTooltips": [Function],
+          "off": [Function],
+          "on": [Function],
+          "options": Any<Object>,
+          "pips": [Function],
+          "removePips": [Function],
+          "removeTooltips": [Function],
+          "reset": [Function],
+          "set": [Function],
+          "setHandle": [Function],
+          "steps": [Function],
+          "target": Any<HTMLElement>,
+          "updateOptions": [Function],
+        }
+      `
+    )
   })
 })
