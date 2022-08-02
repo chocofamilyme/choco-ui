@@ -23,7 +23,7 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
     <ChBottomSheet 
       v-slot="{ params }"
       name="example-bottom-sheet"
-      @onShow="() => {}"
+      @onClose="() => {}"
     >
       Hello {{ params.foo }}
     </ChBottomSheet>
