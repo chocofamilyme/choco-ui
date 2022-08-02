@@ -10,7 +10,7 @@ import { Meta } from '@storybook/addon-docs';
 
 ```js
 // App.vue
-import { ChModalPlugin } from '@choco-ui';
+import { ChModalPlugin } from 'choco-ui';
 
 app.use(ChModalPlugin, { controllerInjectionKey: 'modal-controller' }) // Это ключ, по которому происходит provide объекта типа ModalBottomSheetController
 ```
@@ -27,7 +27,7 @@ app.use(ChModalPlugin, { controllerInjectionKey: 'modal-controller' }) // Это
 <template>
 
 <script>
-  import { ChModal } from '@choco-ui';
+  import { ChModal } from 'choco-ui';
 
   export default {
     inject: { controller: 'modal-controller' }, // Ключ, который указали при использовании плагина

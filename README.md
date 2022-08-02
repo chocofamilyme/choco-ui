@@ -2,6 +2,12 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+## Istallation
+
+```
+npm i choco-ui
+```
+
 ## Правила разработки
 
 [Описаны здесь](./CONTRIBUTING.md)
