@@ -1,45 +1,23 @@
 <template>
   <div class="ch-toggle-button-group">
-    <ch-toggle-button
-      v-for="(option, i) in options"
-      @click="handleBtnClick(i)"
-      :key="i"
-      :active="getActiveOption(option, i)"
-      :label="typeof option === 'string' ? option : option.label"
-      :icon="typeof option === 'string' ? undefined : option.icon"
-    />
+    <slot />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import ChToggleButton from '../ChToggleButton'
+import { provide, ref } from 'vue'
 
-interface IOption {
-  label: string
-  icon: string[]
-  active?: boolean
-}
+provide('onSelect', handleBtnClick)
+provide('isActive', isActive)
 
-defineProps<{
-  options: string[] | IOption[]
-}>()
+const currentActive = ref('')
 
-const currentActive = ref(0)
-
-function handleBtnClick(index: number) {
+function handleBtnClick(index: string) {
   currentActive.value = index
 }
 
-let firstMount = true
-
-function getActiveOption(option: IOption | string, index: number) {
-  if (typeof option !== 'string' && option.active === true && firstMount) {
-    currentActive.value = index
-    firstMount = false
-  }
-
-  return currentActive.value === index
+function isActive(id: string) {
+  return currentActive.value === id
 }
 </script>
 
