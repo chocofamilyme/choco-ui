@@ -1,6 +1,7 @@
 <template>
   <button
     :class="['ch-toggle-button', { 'ch-toggle-button_active': isActive() }]"
+    type="button"
     @click="onClick(id)"
   >
     <slot v-if="$slots.default" />
