@@ -29,6 +29,7 @@ describe('ChAlert', () => {
     const wrapper = getWrapper()
     wrapper.vm.show()
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(findByTestId(wrapper, 'alert-content').exists()).toBe(true)
   })
 
@@ -39,6 +40,7 @@ describe('ChAlert', () => {
 
     wrapper.vm.hide()
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(findByTestId(wrapper, 'alert-content').exists()).toBe(false)
   })
 
@@ -50,6 +52,7 @@ describe('ChAlert', () => {
     vi.runAllTimers()
 
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(findByTestId(wrapper, 'alert-content').exists()).toBe(false)
   })
 
@@ -61,6 +64,7 @@ describe('ChAlert', () => {
     vi.runAllTimers()
 
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(findByTestId(wrapper, 'alert-content').exists()).toBe(true)
   })
 
@@ -71,6 +75,7 @@ describe('ChAlert', () => {
 
     wrapper.vm.hide()
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(findByTestId(wrapper, 'alert-content').exists()).toBe(false)
   })
 
