@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { ref, readonly, onBeforeUnmount } from 'vue'
 
+defineEmits([]) // Workaround to a types generating problem https://github.com/qmhc/vite-plugin-dts/issues/98
 const props = defineProps({
   duration: {
     type: Number,
