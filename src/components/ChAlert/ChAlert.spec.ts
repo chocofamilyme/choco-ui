@@ -79,6 +79,13 @@ describe('ChAlert', () => {
     expect(findByTestId(wrapper, 'alert-content').exists()).toBe(false)
   })
 
+  it('should display deafult slot content', async () => {
+    const wrapper = getWrapper()
+    wrapper.vm.show()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toContain(alertMainContent)
+  })
+
   it('should have icon slot', async () => {
     const wrapper = getWrapper()
     wrapper.vm.show()
