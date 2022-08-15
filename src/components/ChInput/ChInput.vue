@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ch-input', { 'ch-input_has-error': errors, 'ch-input_disabled': disabled }]">
+  <div :class="['ch-input', { 'ch-input_has-error': hasError, 'ch-input_disabled': disabled }]">
     <label :for="id" class="ch-input__outer-label" v-if="outerLabel">{{ outerLabel }}</label>
     <div class="ch-input__field">
       <div class="ch-input__label-wrapper">
@@ -47,8 +47,8 @@
       </template>
       <p class="ch-input__after-text" v-else>{{ afterText }}</p>
     </div>
-    <div class="ch-input__error-list" v-if="errors">
-      <div class="ch-input__after-text ch-input__after-text_color_error">error</div>
+    <div class="ch-input__error-list ch-input__after-text ch-input__after-text_color_error">
+      <slot name="errorMessage" />
     </div>
   </div>
 </template>
@@ -68,7 +68,11 @@ const props = defineProps({
   },
   placeholder: String,
   outerLabel: String,
-  afterText: [String, Array]
+  afterText: [String, Array],
+  hasError: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const { clearable, modelValue, type } = toRefs(props)
@@ -85,7 +89,6 @@ const value = computed({
 
 const input = ref()
 const id = uuid()
-const errors = false
 const isClearable = computed(() => clearable.value && Boolean(value?.value))
 
 function onInput(e: Event) {
