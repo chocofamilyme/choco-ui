@@ -1,0 +1,75 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="ChAlert/README" />
+
+# ChAlert
+
+Компонент для отображения алертов
+
+## Usage
+
+```html
+<template>
+  <ChAlert ref="alertRef" duration="5000" persistent>
+    <p>Alert content</p>
+    <template #icon>
+      <ChAlertIcon>Icon</ChAlertIcon>
+    </template>
+    <template #footer>
+      <ChAlertButton>Button</ChAlertButton>
+    </template>
+  </ChAlert>
+</template>
+
+<script>
+  import { ref } from 'vue'
+  import { ChAlert, ChAlertIcon, ChAlertButton } from 'choco-ui'
+
+  const alertRef = ref()
+
+  alertRef.show() // Shows alert
+  alertRef.hide() // Hides alert
+</script>
+```
+
+### Props
+
+| Название      | Тип             | Default value   | Описание                                                                                                            |
+|---------------|-----------------|-----------------|---------------------------------------------------------------------------------------------------------------------|
+| duration      | Number          | 5000            | Время, после которого алерт должен автоматически закрываться. В миллисекундах                                       |
+| persistent    | Boolean         | false           | Если true, то алерт не исчезнет по истечению `duration`. В этом случае закрыть его можно только вызвав метод `hide` |
+
+### Methods
+
+ChAlert предоставляет public методы `show`, `hide` и переменную `isVisible` для отображения/скрытия алерта.
+
+Для того, чтобы использовать эти public api нужно добавить `ref` на `ChAlert`
+
+```html
+<template>
+  <ChAlert ref="alertRef"></ChAlert>
+</template>
+
+<script>
+  import { ref } from 'vue'
+  import { ChAlert } from 'choco-ui'
+
+  const alertRef = ref()
+
+  alertRef.show() // Shows alert
+  alertRef.hide() // Hides alert
+</script>
+```
+| Название      | Тип                 | Описание                                                                |
+|---------------|---------------------|-------------------------------------------------------------------------|
+| show          | Function            | Метод для отображения алерта                                            |
+| hide          | Function            | Метод для закрытия    алерта                                            |
+| isVisible     | Readonly<`Boolean`> | Возвращает открыт ли алерт или нет                                      |
+
+### Slots
+
+| Название      | Описание                                                                                       |
+|---------------|------------------------------------------------------------------------------------------------|
+| default       | Главный контент алерта                                                                         |
+| icon          | Слот для иконки алерта. Для иконки лучше использовать ChAlertIcon компонент                    |
+| footer        | Слот для контента в footer алерта. Для иконки лучше использовать ChAlertButton компонент       |
