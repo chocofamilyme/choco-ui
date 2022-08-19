@@ -31,7 +31,12 @@
               v-bind="{ hide, params: controller?.getParams(props.name) || {} }"
             ></slot>
           </div>
-          <div ref="contentRef" class="bottom-sheet__body" data-test-id="bottom-sheet-content">
+          <div
+            ref="contentRef"
+            class="bottom-sheet__body"
+            data-test-id="bottom-sheet-content"
+            :data-preserve-scroll="name"
+          >
             <slot
               v-bind="{
                 hide,
