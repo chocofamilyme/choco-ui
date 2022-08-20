@@ -107,6 +107,25 @@ describe('ChModal', () => {
       await modalCloseButton.trigger('click')
       expect(findByTestId(modal as VueWrapper, 'modal-container').exists()).toBe(false)
     })
+
+    it('should unlock body when bottom sheet is hidden', async () => {
+      ChModalPlugin.controller.hide(modalName)
+      await modal?.vm.$nextTick()
+      const bodyHtmlElement = document.querySelector('body')
+      expect(bodyHtmlElement?.style.overflow).toBe('')
+    })
+
+    it('should not lock body when bottom sheet is shown with param shouldLockScroll = false', async () => {
+      ChModalPlugin.controller.hide(modalName)
+      ChModalPlugin.controller.show(modalName, {
+        ...ModalHeader.params,
+        ...ModalContent.params,
+        shouldLockScroll: false
+      })
+      await modal?.vm.$nextTick()
+      const bodyHtmlElement = document.querySelector('body')
+      expect(bodyHtmlElement?.style.overflow).toBe('')
+    })
   })
 
   describe('persistent modal', () => {
