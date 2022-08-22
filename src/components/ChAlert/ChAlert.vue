@@ -2,7 +2,7 @@
   <Transition name="slide-up">
     <div v-if="isVisible" class="ch-alert" data-test-id="alert-content">
       <div class="ch-alert__content">
-        <div>
+        <div role="alert" aria-live="polite">
           <slot />
         </div>
         <slot name="icon" />
