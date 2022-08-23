@@ -12,6 +12,6 @@ describe('ChTabbarItem', () => {
 
   it('should not display badge if badgeAmount prop is not provided', () => {
     const wrapper = shallowMount(ChTabbarItem)
-    expect(findByTestId(wrapper, 'tabbar-badge').exists()).toBe(false)
+    expect(findByTestId(wrapper, 'tabbar-badge').isVisible()).toBe(false)
   })
 })
