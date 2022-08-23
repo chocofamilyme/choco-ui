@@ -21,6 +21,7 @@ const Template = (args, { parameters }) => ({
           v-for="i in args.numberOfItems"
           :is-active="i === 1"
           :badge-amount="i === 3 ? 3 : 0"
+          alt="tab"
         >
           <fa-icon :icon="['fas', 'user']" />
         </ChTabbarItem>

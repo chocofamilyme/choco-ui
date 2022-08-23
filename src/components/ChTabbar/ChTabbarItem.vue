@@ -5,6 +5,7 @@
     :class="{ '--active': isActive }"
     role="tab"
     :aria-selected="isActive"
+    :aria-label="alt"
   >
     <span v-show="badgeAmount" class="ch-tabbar-item__badge" data-test-id="tabbar-badge">
       {{ badgeAmount }}
@@ -17,6 +18,7 @@
 
 <script setup lang="ts">
 defineProps<{
+  alt: string
   isActive?: boolean
   badgeAmount?: number | string
 }>()

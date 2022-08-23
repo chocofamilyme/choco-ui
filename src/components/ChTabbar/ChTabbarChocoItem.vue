@@ -1,5 +1,5 @@
 <template>
-  <ChTabbarItem is-active>
+  <ChTabbarItem is-active alt="Вернуться на главную страницу Choco">
     <picture>
       <source type="image/webp" srcset="@/assets/images/icons/choco-icon.webp" />
       <img
