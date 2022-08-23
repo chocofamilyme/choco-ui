@@ -2,7 +2,6 @@
   <ChTabbarItem is-active>
     <picture>
       <source type="image/webp" srcset="@/assets/images/icons/choco-icon.webp" />
-      <source type="image/png" srcset="@/assets/images/icons/choco-icon.png" />
       <img
         src="@/assets/images/icons/choco-icon.png"
         width="36"
