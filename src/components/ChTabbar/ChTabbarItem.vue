@@ -1,6 +1,12 @@
 <template>
-  <button type="button" class="ch-tabbar-item" :class="{ '--active': isActive }">
-    <span v-if="badgeAmount" class="ch-tabbar-item__badge" data-test-id="tabbar-badge">
+  <button
+    type="button"
+    class="ch-tabbar-item"
+    :class="{ '--active': isActive }"
+    role="tab"
+    :aria-selected="isActive"
+  >
+    <span v-show="badgeAmount" class="ch-tabbar-item__badge" data-test-id="tabbar-badge">
       {{ badgeAmount }}
     </span>
     <span class="ch-tabbar-item__content">
@@ -56,6 +62,7 @@ export default defineComponent({
     color: var(--color-light, #fff)
     font-size: 0.875rem
     font-weight: 900
+    line-height: .1rem
     z-index: 20
 
   &.--active

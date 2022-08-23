@@ -1,5 +1,5 @@
 <template>
-  <div class="ch-tabbar">
+  <div class="ch-tabbar" role="tablist">
     <slot />
   </div>
 </template>
