@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="ToggleButtonGroup/README" component/>
+
+# CHToggleButtonGroup
+
+Компонент-контейнер для группы кнопок
+
+## Использование
+```html
+<!-- ComponentWithBottomSheet.vue -->
+<template>
+  <div>
+    <ChToggleButtonGroup :currentId="currentId">
+      <ChToggleButton 
+        name="toggle-button" 
+        id="1" 
+        @change="currentId = '1'"
+      />
+      <ChToggleButton 
+        name="toggle-button" 
+        id="2" 
+        @change="currentId = '2'"
+      />
+    </ChHoverButtonGroup>
+  </div>
+<template>
+
+<script>
+  import { ChToggleButtonGroup, ChToggleButton } from 'choco-ui';
+
+  export default {
+    components: {
+      ChToggleButtonGroup,
+      ChToggleButton
+    },
+    data() {
+      return {
+        currentId: '1'
+      }
+    }
+  }
+</script>
+```
+
+# CHToggleButton
+
+Компонент-контейнер для группы кнопок
+#### Props
+| Название          | Тип                                                | Описание                                                                       |
+|-------------------|----------------------------------------------------|--------------------------------------------------------------------------------|
+| name              | String                                             | ToggleButton работает по принципу input type radio                             |
+| id                | String                                             | по id определяется состояние кнопки                                            |
+
+
+# CHToggleButtonGroup
+#### Props
+| Название          | Тип                                                | Описание                                                                       |
+|-------------------|----------------------------------------------------|--------------------------------------------------------------------------------|
+| id                | String                                             | Текущий id выбранной кнопки, меняя его меняете состояние кнопки                |
+#### Slots
+| Слот          | Описание                                                                                                                                                                                                                     |
+|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| default       | Слот для отображения группы кнопок, передайте в слот столько сколько нужно кнопок                                                                                                              |
