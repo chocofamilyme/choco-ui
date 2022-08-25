@@ -15,9 +15,9 @@ const Template = args => ({
     return { args }
   },
   template: `
-    <ch-toggle-button-group current-id="1">
-      <ch-toggle-button v-bind="args" id="1" name="toggle-button">1</ch-toggle-button>
-    </ch-toggle-button-group>
+    <ChToggleButtonGroup current-id="1">
+      <ChToggleButton v-bind="args" id="1" name="toggle-button">1</ChToggleButton>
+    </ChToggleButtonGroup>
   `
 })
 

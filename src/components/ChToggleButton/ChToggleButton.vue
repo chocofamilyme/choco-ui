@@ -1,12 +1,6 @@
 <template>
   <label class="ch-toggle-button__label">
-    <input
-      class="ch-toggle-button__input"
-      type="radio"
-      :name="name"
-      v-bind="$attrs"
-      ref="toggle-button"
-    />
+    <input class="ch-toggle-button__input" type="radio" :name="name" v-bind="$attrs" />
     <span :class="['ch-toggle-button', { 'ch-toggle-button_active': checkIsActive() }]">
       <slot v-if="$slots.default" />
     </span>
