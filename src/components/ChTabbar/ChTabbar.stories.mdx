@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="ChTabbar/README" />
+
+# ChTabbar
+
+Компонент для отображения блока с элементами навигации приложения
+
+## Components 
+
+Компонент состоит из контейнера `ChTabbar` и элементов навигации `ChTabbarItem`. Так же есть компонент с иконкой `Choco` - `ChTabbarChocoItem`
+
+### ChTabbarItem
+
+Компонент для отображения элемента навигации
+
+#### Props
+| Название      | Тип              | Default     |Описание                                                                                                  |
+|---------------|------------------|-------------|----------------------------------------------------------------------------------------------------------|
+| alt           | String           | ''          | Required. Описание контента ChTabbarItem                                                                 |
+| isActive      | Boolean          | false       | Активен ли элемент. Активные элементы отображаются без opacity. У неактивных элементов opacity: 0.5      |
+| badgeAmount   | Number / String  | undefined   | Число уведомлений для отображения в правом верхнем углу. Если значение falsy, то элемент не отображается |
+
+## Usage
+
+```html
+<template>
+  <ChTabbar>
+    <ChTabbarItem>
+      <img src="example-icon.png" />
+    </ChTabbarItem>
+    <ChTabbarItem is-active>
+      Some text
+    </ChTabbarItem>
+    <ChTabbarItem :badge-amount="3">
+      <img src="example-icon.png" />
+    </ChTabbarItem>
+    <ChTabbarChocoItem />
+  </ChTabbar>
+</template>
+
+<script setup lang="ts">
+import { ChTabbar, ChTabbarItem, ChTabbarChocoItem } from 'choco-ui'
+</script>
+```

@@ -58,7 +58,7 @@ export default defineComponent({
     display: block
   &_active
     background: var(--color-light)
-    box-shadow: 0px 92px 92px rgba(0, 0, 0, 0.05), 0px 3px 38.4354px rgba(0, 0, 0, 0.0334858), 0px -3px 20.5494px rgba(0, 0, 0, 0.06), 0px 5.79369px 11.5198px rgba(0, 0, 0, 0.0189792), 0px 2.40368px 6.11809px rgba(0, 0, 0, 0.0132742), 0px 0.705169px 2.54588px rgba(0, 0, 0, 0.00743532)
+    box-shadow: $main-shadow
 
   &__icon_left
     margin-right: 8px
