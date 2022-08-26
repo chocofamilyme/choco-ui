@@ -31,7 +31,12 @@
               v-bind="{ hide, params: controller?.getParams(props.name) || {} }"
             ></slot>
           </div>
-          <div ref="contentRef" class="bottom-sheet__body" data-test-id="bottom-sheet-content">
+          <div
+            ref="contentRef"
+            class="bottom-sheet__body"
+            data-test-id="bottom-sheet-content"
+            :data-preserve-scroll="name"
+          >
             <slot
               v-bind="{
                 hide,
@@ -106,7 +111,7 @@ const onSheetTouchMove = (e: TouchEvent) => {
 
 const onSheetTouchEnd = () => {
   const bottomSheetHeight = (bottomSheetRef.value as HTMLElement).offsetHeight
-  const closingLimit = bottomSheetHeight < 200 ? bottomSheetHeight * 0.3 : 100
+  const closingLimit = bottomSheetHeight * 0.4
   if (
     bottomSheetState.value.sheetTouchStarted &&
     bottomSheetState.value.sheetShift >= closingLimit

@@ -22,7 +22,7 @@ const Template = (args, { parameters }) => ({
     }
   },
   template: `
-    <div>
+    <div :style="parameters.isScrollable ? 'height: 2000px; overflow-y: auto;' : ''">
       <button @click="showBottomSheet">
         Open ChBottomSheet
       </button>
@@ -34,7 +34,7 @@ const Template = (args, { parameters }) => ({
           </header> 
         </template>
         <template v-slot="{ params }">
-          <p class="p-4">
+          <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Inventore asperiores illum ab accusamus quas distinctio fuga,
             quis vero aut, incidunt nesciunt unde ea provident officiis
@@ -47,7 +47,8 @@ const Template = (args, { parameters }) => ({
             <p>{{ params.someParams }}</p>
             <p>{{ params.number }}</p>
             <p>{{ params.object.foo }}</p>
-        </div>
+          </div>
+          <div v-if="parameters.isScrollable" style="margin-top: 1000px;">Bottom</div>
         </template>
       </ChBottomSheet>
     </div>
@@ -69,4 +70,9 @@ WithParams.parameters = {
 export const WithHeader = Template.bind({})
 WithHeader.parameters = {
   withHeader: true
+}
+
+export const Scrollable = Template.bind({})
+Scrollable.parameters = {
+  isScrollable: true
 }

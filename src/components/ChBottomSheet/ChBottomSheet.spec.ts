@@ -115,4 +115,28 @@ describe('ChBottomSheet', () => {
     await bottomSheetContentCloseButton.trigger('click')
     expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(false)
   })
+
+  it('should lock body when bottom sheet is shown', async () => {
+    const bodyHtmlElement = document.querySelector('body')
+    expect(bodyHtmlElement?.style.overflow).toBe('hidden')
+  })
+
+  it('should unlock body when bottom sheet is hidden', async () => {
+    ChBottomSheetPlugin.controller.hide(bottomSheetName)
+    await bottomSheet?.vm.$nextTick()
+    const bodyHtmlElement = document.querySelector('body')
+    expect(bodyHtmlElement?.style.overflow).toBe('')
+  })
+
+  it('should not lock body when bottom sheet is shown with param shouldLockScroll = false', async () => {
+    ChBottomSheetPlugin.controller.hide(bottomSheetName)
+    ChBottomSheetPlugin.controller.show(bottomSheetName, {
+      ...BottomSheetHeader.params,
+      ...BottomSheetContent.params,
+      shouldLockScroll: false
+    })
+    await bottomSheet?.vm.$nextTick()
+    const bodyHtmlElement = document.querySelector('body')
+    expect(bodyHtmlElement?.style.overflow).toBe('')
+  })
 })
