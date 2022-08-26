@@ -1,11 +1,10 @@
 <template>
-  <button
-    :class="['ch-toggle-button', { 'ch-toggle-button_active': isActive() }]"
-    type="button"
-    @click="onClick(id)"
-  >
-    <slot v-if="$slots.default" />
-  </button>
+  <label class="ch-toggle-button__label">
+    <input class="ch-toggle-button__input" type="radio" :name="name" v-bind="$attrs" />
+    <span :class="['ch-toggle-button', { 'ch-toggle-button_active': checkIsActive() }]">
+      <slot v-if="$slots.default" />
+    </span>
+  </label>
 </template>
 
 <script lang="ts" setup>
@@ -13,21 +12,16 @@ import { inject } from 'vue'
 
 const props = defineProps<{
   id: string
+  name: string
 }>()
 
-const onSelect = inject<(id: string) => void>('onSelect')
-const checkIsActive = inject<(id: string) => boolean>('isActive')
+const isActive = inject<(id: string) => boolean>('isActive')
 
-function onClick(id: string) {
-  if (onSelect) {
-    onSelect(id)
+function checkIsActive() {
+  if (isActive) {
+    return isActive(props.id)
   }
-}
 
-function isActive() {
-  if (checkIsActive) {
-    return checkIsActive(props.id)
-  }
   return false
 }
 </script>
@@ -58,12 +52,13 @@ export default defineComponent({
   width: 100%
   border: none
 
+  &__input
+    display: none
+  &__label
+    display: block
   &_active
     background: var(--color-light)
     box-shadow: $main-shadow
-
-  &:not(:first-child)
-    margin-left: 8px
 
   &__icon_left
     margin-right: 8px
