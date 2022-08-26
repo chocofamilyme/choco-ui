@@ -5,19 +5,16 @@
 </template>
 
 <script lang="ts" setup>
-import { provide, ref } from 'vue'
+import { provide } from 'vue'
 
-provide('onSelect', handleBtnClick)
 provide('isActive', isActive)
 
-const currentActive = ref('')
-
-function handleBtnClick(index: string) {
-  currentActive.value = index
-}
+const props = defineProps<{
+  currentId: string
+}>()
 
 function isActive(id: string) {
-  return currentActive.value === id
+  return props.currentId === id
 }
 </script>
 
