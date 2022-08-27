@@ -61,7 +61,7 @@ const props = defineProps<{
   name: string
 }>()
 
-const emit = defineEmits(['onClose'])
+const emit = defineEmits(['onClose', 'onShow'])
 
 const controllerInjectionKey = inject<string>(injectionKey) as string
 const controller = inject<ModalBottomSheetController>(controllerInjectionKey)
@@ -79,6 +79,9 @@ if (controller) {
     const wasActive = prevState.find(elem => elem.activeName === props.name)
     if (!controller.isVisible(props.name) && wasActive) {
       emit('onClose')
+    }
+    if (controller?.isVisible(props.name) && !wasActive) {
+      emit('onShow')
     }
   })
 }
