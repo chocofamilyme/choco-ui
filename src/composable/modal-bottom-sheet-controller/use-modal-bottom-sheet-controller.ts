@@ -28,10 +28,12 @@ export function useModalBottomSheetController() {
       return
     }
 
-    state.value.push({
+    const newItem = {
       activeName: name,
       params: params as ModalBottomSheet
-    })
+    }
+
+    state.value = [newItem, ...state.value]
 
     if (shouldLockScroll) {
       nextTick(() => lockScroll(name))

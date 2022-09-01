@@ -78,6 +78,15 @@ describe('ChBottomSheet', () => {
     expect(findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-container').exists()).toBe(false)
   })
 
+  it('should emit "onOpen" event when bottom sheet is show', async () => {
+    ChBottomSheetPlugin.controller.hide(bottomSheetName)
+    await bottomSheet?.vm.$nextTick()
+
+    ChBottomSheetPlugin.controller.show(bottomSheetName)
+    await bottomSheet?.vm.$nextTick()
+    expect(bottomSheet?.emitted('onOpen')).toBeTruthy()
+  })
+
   it('should emit "onClose" event when bottom sheet is hidden', async () => {
     ChBottomSheetPlugin.controller.hide(bottomSheetName)
     await bottomSheet?.vm.$nextTick()

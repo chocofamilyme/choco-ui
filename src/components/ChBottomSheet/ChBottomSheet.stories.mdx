@@ -24,6 +24,7 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
       v-slot="{ params }"
       name="example-bottom-sheet"
       @onClose="() => {}"
+      @onOpen="() => {}"
     >
       Hello {{ params.foo }}
     </ChBottomSheet>
@@ -53,7 +54,7 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
 | Название      | Возвращаемое значение | Описание                                                            |
 |---------------|-----------------------|---------------------------------------------------------------------|
 | onClose       | Void                  | Срабатывает когда bottom sheet закрывается                          |
-
+| onOpen        | Void                  | Срабатывает когда bottom sheet открывается                          |
 
 ## Drag&Move
 
