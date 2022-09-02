@@ -9,7 +9,17 @@
       @update:modelValue="emit('onInput', $event)"
       @focus="onFocus"
       @blur="onBlur"
-    />
+    >
+      <template #prepend v-if="Boolean($slots.prepend)">
+        <slot name="prepend" />
+      </template>
+      <template #append v-if="Boolean($slots.append)">
+        <slot name="append" />
+      </template>
+      <template #clearButton v-if="Boolean($slots.clearButton)">
+        <slot name="clearButton" />
+      </template>
+    </ChInput>
     <Transition name="сancel-button-leave">
       <ChButton
         v-if="isVisibleCancelButton"
