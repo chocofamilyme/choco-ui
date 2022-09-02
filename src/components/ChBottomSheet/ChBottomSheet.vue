@@ -7,6 +7,7 @@
     >
       <div
         class="bottom-sheet-container__blackout"
+        data-test-id="bottom-sheet-blackout"
         @touchstart="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
         @click="hide"
@@ -18,11 +19,16 @@
           class="bottom-sheet__content"
           role="dialog"
           aria-modal="true"
+          data-test-id="bottom-sheet"
           @touchstart="onSheetTouchStart"
           @touchmove="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
-          <div class="bottom-sheet__handle-bar-container" @click="onHandleBarClick">
+          <div
+            class="bottom-sheet__handle-bar-container"
+            data-test-id="bottom-sheet-handle-bar"
+            @click="onHandleBarClick"
+          >
             <span class="bottom-sheet__handle-bar"></span>
           </div>
           <div data-test-id="bottom-sheet-header">

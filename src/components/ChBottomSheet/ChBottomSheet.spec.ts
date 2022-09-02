@@ -47,7 +47,8 @@ describe('ChBottomSheet', () => {
     ChBottomSheetPlugin.controller.show(bottomSheetName, modalParams)
     bottomSheet = mount(ChBottomSheet, {
       props: {
-        name: bottomSheetName
+        name: bottomSheetName,
+        persistent: false
       },
       slots: {
         header: BottomSheetHeader.template,
@@ -82,6 +83,26 @@ describe('ChBottomSheet', () => {
     ChBottomSheetPlugin.controller.hide(bottomSheetName)
     await bottomSheet?.vm.$nextTick()
     expect(bottomSheet?.emitted('onClose')).toBeTruthy()
+  })
+
+  it('should ignore blackout click if has persistent', async () => {
+    bottomSheet?.setProps({ name: bottomSheetName, persistent: true })
+    await bottomSheet?.vm.$nextTick()
+    findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-blackout').trigger('click')
+    expect(bottomSheet?.emitted('onClose')).toBeFalsy()
+  })
+
+  it('should emit "onSheetTouchEnd" event when the sheet touch is interrupted', () => {
+    const bottomSheetInstance = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet')
+    bottomSheetInstance.trigger('touchstart')
+    bottomSheetInstance.trigger('touchmove')
+    bottomSheetInstance.trigger('touchend')
+    expect(bottomSheet?.emitted('onSheetTouchEnd')).toBeTruthy()
+  })
+
+  it('should emit "onHandleBarClick" event when handle bar clicked', () => {
+    findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-handle-bar').trigger('click')
+    expect(bottomSheet?.emitted('onHandleBarClick')).toBeTruthy()
   })
 
   it('should display bottom sheet header slot content', async () => {
