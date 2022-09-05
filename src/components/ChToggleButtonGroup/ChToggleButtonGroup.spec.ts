@@ -7,6 +7,9 @@ describe('ChToggleButtonGroup', () => {
     const wrapper = mount(ChToggleButtonGroup, {
       slots: {
         default: 'Label 2'
+      },
+      props: {
+        currentId: '1'
       }
     })
     expect(wrapper.html()).toContain('Label 2')

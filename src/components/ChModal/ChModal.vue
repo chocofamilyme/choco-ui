@@ -10,7 +10,7 @@
       <div class="ch-modal__container" data-test-id="modal-container">
         <slot name="right-action" v-bind="{ hide, params }" />
         <slot name="header" v-bind="{ hide, params }" />
-        <div class="ch-modal__body">
+        <div class="ch-modal__body" :data-preserve-scroll="name">
           <slot v-bind="{ hide, params }" />
         </div>
       </div>

@@ -23,7 +23,7 @@ const Template = (args, { parameters }) => ({
     }
   },
   template: `
-    <div>
+    <div :style="parameters.isScrollable ? 'height: 2000px;' : ''">
       <button @click="showModal">
         Open ChModal
       </button>

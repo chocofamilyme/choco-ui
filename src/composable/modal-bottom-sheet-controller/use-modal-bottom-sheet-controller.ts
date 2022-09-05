@@ -1,12 +1,15 @@
-import { ref, readonly } from 'vue'
+import { ref, readonly, nextTick } from 'vue'
 import type { Ref } from 'vue'
+import { lockScroll, unlockScroll } from './utils/scroll-lock'
 
 export type ModalBottomSheet = {
   activeName: string
   params: Record<string, unknown>
 }
 
-type ModalBottomSheetParameters = Record<string, unknown>
+type ModalBottomSheetParameters = Record<string, unknown> & {
+  shouldLockScroll?: boolean
+}
 
 export type ModalBottomSheetController = ReturnType<typeof useModalBottomSheetController>
 
@@ -17,15 +20,24 @@ export function useModalBottomSheetController() {
     return state.value.some(modal => modal.activeName === name)
   }
 
-  function show(name: string, params?: ModalBottomSheetParameters) {
+  function show(
+    name: string,
+    { shouldLockScroll = true, ...params }: ModalBottomSheetParameters = {}
+  ) {
     if (isVisible(name)) {
       return
     }
 
-    state.value.push({
+    const newItem = {
       activeName: name,
       params: params as ModalBottomSheet
-    })
+    }
+
+    state.value = [newItem, ...state.value]
+
+    if (shouldLockScroll) {
+      nextTick(() => lockScroll(name))
+    }
   }
 
   function getParams(name: string): Record<string, unknown> {
@@ -34,6 +46,7 @@ export function useModalBottomSheetController() {
   }
 
   function hide(name: string) {
+    unlockScroll(name)
     state.value = state.value.filter(modal => modal.activeName !== name)
   }
 

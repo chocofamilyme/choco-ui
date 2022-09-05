@@ -37,7 +37,12 @@
               v-bind="{ hide, params: controller?.getParams(props.name) || {} }"
             ></slot>
           </div>
-          <div ref="contentRef" class="bottom-sheet__body" data-test-id="bottom-sheet-content">
+          <div
+            ref="contentRef"
+            class="bottom-sheet__body"
+            data-test-id="bottom-sheet-content"
+            :data-preserve-scroll="name"
+          >
             <slot
               v-bind="{
                 hide,
@@ -63,7 +68,7 @@ const props = defineProps<{
   persistent?: boolean
 }>()
 
-const emit = defineEmits(['onClose', 'onSheetTouchEnd', 'onHandleBarClick'])
+const emit = defineEmits(['onClose', 'onOpen', 'onSheetTouchEnd', 'onHandleBarClick'])
 
 const controllerInjectionKey = inject<string>(injectionKey) as string
 const controller = inject<ModalBottomSheetController>(controllerInjectionKey)
@@ -81,6 +86,9 @@ if (controller) {
     const wasActive = prevState.find(elem => elem.activeName === props.name)
     if (!controller.isVisible(props.name) && wasActive) {
       emit('onClose')
+    }
+    if (controller?.isVisible(props.name) && !wasActive) {
+      emit('onOpen')
     }
   })
 }
@@ -118,7 +126,7 @@ const onSheetTouchMove = (e: TouchEvent) => {
 
 const onSheetTouchEnd = () => {
   const bottomSheetHeight = (bottomSheetRef.value as HTMLElement).offsetHeight
-  const closingLimit = bottomSheetHeight < 200 ? bottomSheetHeight * 0.3 : 100
+  const closingLimit = bottomSheetHeight * 0.4
   if (
     bottomSheetState.value.sheetTouchStarted &&
     bottomSheetState.value.sheetShift >= closingLimit

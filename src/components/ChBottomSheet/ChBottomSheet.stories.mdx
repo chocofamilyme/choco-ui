@@ -24,6 +24,7 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
       v-slot="{ params }"
       name="example-bottom-sheet"
       @onClose="() => {}"
+      @onOpen="() => {}"
     >
       Hello {{ params.foo }}
     </ChBottomSheet>
@@ -56,7 +57,7 @@ app.use(ChBottomSheetPlugin, { controllerInjectionKey: 'bottom-sheet-controller'
 | onClose         | Void                  | Срабатывает когда bottom sheet закрывается                          |
 | onSheetTouchEnd | Void                  | Срабатывает когда user заканчивает перетаскивать шторку             |
 | onHandleBarClick| Void                  | Срабатывает когда user касается bar-a(черточка над шторкой)         |
-
+| onOpen          | Void                  | Срабатывает когда bottom sheet открывается                          |
 
 ## Drag&Move
 
@@ -76,7 +77,19 @@ Composable для управления состоянием модальных �
 | hide          | Function             | Void               | Метод для закрытия модального окна по имени                                                                                  |
 | isVisible     | Function             | Boolean            | Метод для проверки активно ли выбранное модальное окно                                                                       |
 | getParams     | Function             | Object / undefined | Метод для получения параметров модального окна по имени                                                                      |
-| state         | ModalBottomSheet[]   | ------------------ | Массив со всеми модальными окнами                                                                                            |
+| state         | ModalBottomSheet[]   |                    | Массив со всеми модальными окнами                                                                                            |
+
+#### show
+
+| Параметры        | Тип     | Default     | Описание                                                                                                                     |
+|------------------|---------|-------------|------------------------------------------------------|
+| shouldLockScroll | Boolean | true        | Нужно ли блокировать body scroll при открытии шторки |
+
+```js
+modalController.show('bottom-sheet-name', { someParam: true }) // Locks body scroll by default
+modalController.show('bottom-sheet-name', { someParam: true, shouldLockScroll: false }) // Do not lock body scroll
+```
+
 
 ### Examples
 

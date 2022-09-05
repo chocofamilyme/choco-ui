@@ -61,6 +61,18 @@ Composable для управления состоянием модальных �
 | getParams     | Function             | Object / undefined | Метод для получения параметров модального окна по имени                                                                      |
 | state         | ModalBottomSheet[]   | ------------------ | Массив со всеми модальными окнами                                                                                            |
 
+
+#### show
+
+| Параметры        | Тип     | Default     | Описание                                                                                                                     |
+|------------------|---------|-------------|------------------------------------------------------|
+| shouldLockScroll | Boolean | true        | Нужно ли блокировать body scroll при открытии шторки |
+
+```js
+modalController.show('bottom-sheet-name', { someParam: true }) // Locks body scroll by default
+modalController.show('bottom-sheet-name', { someParam: true, shouldLockScroll: false }) // Do not lock body scroll
+```
+
 ### Examples
 
 ```js

@@ -7,6 +7,10 @@ describe('ChToggleButton', () => {
     const wrapper = mount(ChToggleButton, {
       slots: {
         default: 'Hello Vitest'
+      },
+      props: {
+        name: 'toggle-button',
+        id: '1'
       }
     })
     expect(wrapper.text()).toContain('Hello Vitest')
