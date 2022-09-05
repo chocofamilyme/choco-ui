@@ -7,6 +7,7 @@
     >
       <div
         class="bottom-sheet-container__blackout"
+        data-test-id="bottom-sheet-blackout"
         @touchstart="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
         @click="hide"
@@ -18,11 +19,16 @@
           class="bottom-sheet__content"
           role="dialog"
           aria-modal="true"
+          data-test-id="bottom-sheet"
           @touchstart="onSheetTouchStart"
           @touchmove="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
-          <div class="bottom-sheet__handle-bar-container" @click="hide">
+          <div
+            class="bottom-sheet__handle-bar-container"
+            data-test-id="bottom-sheet-handle-bar"
+            @click="onHandleBarClick"
+          >
             <span class="bottom-sheet__handle-bar"></span>
           </div>
           <div data-test-id="bottom-sheet-header">
@@ -59,9 +65,10 @@ import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet
 
 const props = defineProps<{
   name: string
+  persistent?: boolean
 }>()
 
-const emit = defineEmits(['onClose', 'onOpen'])
+const emit = defineEmits(['onClose', 'onOpen', 'onSheetTouchEnd', 'onHandleBarClick'])
 
 const controllerInjectionKey = inject<string>(injectionKey) as string
 const controller = inject<ModalBottomSheetController>(controllerInjectionKey)
@@ -86,7 +93,7 @@ if (controller) {
   })
 }
 
-onBeforeUnmount(() => hide())
+onBeforeUnmount(() => controller?.hide(props.name))
 
 const onBlackoutTouchStart = () => (bottomSheetState.value.blackoutTouchStarted = true)
 
@@ -95,6 +102,11 @@ const onBlackoutTouchEnd = () => {
     bottomSheetState.value.blackoutTouchStarted = false
     hide()
   }
+}
+
+const onHandleBarClick = () => {
+  emit('onHandleBarClick')
+  hide()
 }
 
 const extractTouch = (e: TouchEvent) => e.changedTouches[0].clientY
@@ -119,6 +131,7 @@ const onSheetTouchEnd = () => {
     bottomSheetState.value.sheetTouchStarted &&
     bottomSheetState.value.sheetShift >= closingLimit
   ) {
+    emit('onSheetTouchEnd')
     hide()
   }
 
@@ -126,7 +139,11 @@ const onSheetTouchEnd = () => {
   bottomSheetState.value.sheetShift = 0
 }
 
-const hide = () => controller?.hide(props.name)
+const hide = () => {
+  if (!props.persistent) {
+    controller?.hide(props.name)
+  }
+}
 </script>
 
 <script lang="ts">

@@ -72,6 +72,11 @@ WithHeader.parameters = {
   withHeader: true
 }
 
+export const WithPersistent = Template.bind({})
+WithPersistent.args = {
+  persistent: true
+}
+
 export const Scrollable = Template.bind({})
 Scrollable.parameters = {
   isScrollable: true
