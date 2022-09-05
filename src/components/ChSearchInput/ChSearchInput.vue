@@ -37,15 +37,27 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ChInput, ChButton } from '../../'
+import { ChInput, ChButton } from '../../index'
 
 const props = defineProps({
-  modelValue: String,
-  placeholder: String,
-  hasShadow: Boolean
+  modelValue: {
+    type: String,
+    default: ''
+  },
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  hasShadow: {
+    type: Boolean,
+    default: false
+  }
 })
 
-const emit = defineEmits(['onInput', 'onCancel'])
+const emit = defineEmits<{
+  (e: 'onInput', value: string): void
+  (e: 'onCancel'): void
+}>()
 const isVisibleCancelButton = ref(false)
 
 function onFocus() {
