@@ -26,6 +26,7 @@
         type="button"
         size="xs"
         simple
+        data-test-id="сancel-button"
         class="ch-search-input__button"
         @click="onCancel"
       >

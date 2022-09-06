@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
+
+import { findByTestId } from '@/__test__/utils'
 import ChSearchInput from './ChSearchInput.vue'
 
 let SearchInput: VueWrapper | null = null
@@ -31,19 +33,19 @@ describe('ChSearchInput', () => {
   })
 
   it('should show cancel button, when focus on input', async () => {
-    expect(SearchInput?.find('.ch-search-input__button').exists()).toBe(false)
+    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(false)
 
     SearchInput?.find('input[type="text"]').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
-    expect(SearchInput?.find('.ch-search-input__button').exists()).toBe(true)
+    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(true)
   })
 
   it('should emit "onCancel" event, when click to cancel button', async () => {
     SearchInput?.find('input[type="text"]').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
-    SearchInput?.find('.ch-search-input__button').trigger('click')
+    findByTestId(SearchInput as VueWrapper, 'сancel-button').trigger('click')
 
     await SearchInput?.vm.$nextTick()
     expect(SearchInput?.emitted().onCancel).toBeTruthy()
@@ -53,11 +55,11 @@ describe('ChSearchInput', () => {
     SearchInput?.find('input[type="text"]').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
-    expect(SearchInput?.find('.ch-search-input__button').exists()).toBe(true)
-    SearchInput?.find('.ch-search-input__button').trigger('click')
+    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(true)
+    findByTestId(SearchInput as VueWrapper, 'сancel-button').trigger('click')
 
     await SearchInput?.vm.$nextTick()
-    expect(SearchInput?.find('.ch-search-input__button').exists()).toBe(false)
+    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(false)
   })
 
   it('should render all slots', async () => {
