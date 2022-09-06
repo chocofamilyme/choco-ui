@@ -5,7 +5,6 @@
       :placeholder="placeholder"
       clearable
       class="ch-search-input__input"
-      :class="{ 'ch-search-input__input_with-shadow': hasShadow }"
       @update:modelValue="emit('onInput', $event)"
       @focus="onFocus"
       @blur="onBlur"
@@ -48,10 +47,6 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: ''
-  },
-  hasShadow: {
-    type: Boolean,
-    default: false
   }
 })
 
@@ -93,9 +88,7 @@ export default defineComponent({
     align-items: center
     flex-grow: 1
     border-radius: 16px
-
-    &_with-shadow
-      box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.08), -1px -1px 10px rgba(0, 0, 0, 0.08)
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.08), -1px -1px 10px rgba(0, 0, 0, 0.08)
 
   &__button
     padding: 0

@@ -12,8 +12,7 @@ describe('ChSearchInput', () => {
     SearchInput = mount(ChSearchInput, {
       props: {
         modelValue: 'Value',
-        placeholder: 'Поиск',
-        hasShadow: true
+        placeholder: 'Поиск'
       },
       slots: {
         prepend: `<template #prepend>prepend</template>`,

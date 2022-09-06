@@ -6,8 +6,7 @@ export default {
   component: ChSearchInput,
   argTypes: {
     modelValue: { control: 'text' },
-    placeholder: { control: 'text' },
-    hasShadow: { control: 'boolean' }
+    placeholder: { control: 'text' }
   },
   parameters: {
     controls: {
@@ -48,15 +47,13 @@ const Template = ({ slots = {}, value = '', ...args }) => ({
 
 export const Empty = Template.bind({})
 Empty.args = {
-  value: 'empty',
-  hasShadow: true
+  value: 'empty'
 }
 
 export const Clearable = Template.bind({})
 Clearable.args = {
   value: '',
   placeholder: 'Найти что-угодно',
-  hasShadow: true,
   slots: {
     prepend: `<fa-icon :icon="['fas', 'search']" />`,
     clearButton: `<fa-icon :icon="['fas', 'xmark']" />`
@@ -67,7 +64,6 @@ export const AllSlots = Template.bind({})
 AllSlots.args = {
   value: '',
   placeholder: 'Найти что-угодно',
-  hasShadow: true,
   slots: {
     prepend: `<fa-icon :icon="['fas', 'search']" />`,
     clearButton: `<fa-icon :icon="['fas', 'xmark']" />`,
