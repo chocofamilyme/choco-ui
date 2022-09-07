@@ -20,6 +20,8 @@
             ref="input"
             :value="value"
             @input="onInput"
+            @focus="emit('focus')"
+            @blur="emit('blur')"
             :disabled="disabled"
             :placeholder="placeholder"
             :class="[
@@ -33,7 +35,10 @@
         </div>
       </div>
       <div class="ch-input__clear-btn" v-if="isClearable" @click="onClear">
-        <fa-icon :icon="['fas', 'xmark']" />
+        <template v-if="Boolean($slots.clearButton)">
+          <slot name="clearButton" />
+        </template>
+        <fa-icon v-else :icon="['fas', 'xmark']" />
       </div>
       <div class="ch-input__append" v-if="Boolean($slots.append)">
         <slot name="append" />
@@ -76,7 +81,7 @@ const props = defineProps({
 })
 
 const { clearable, modelValue, type } = toRefs(props)
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
 
 const value = computed({
   get() {

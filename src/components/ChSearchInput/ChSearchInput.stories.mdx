@@ -1,0 +1,75 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="ChSearchInput/README" component/>
+
+# ChSearchInput
+
+```html
+<template>
+  <div>
+    <ChSearchInput 
+      :model-value="value" 
+      placeholder="Поиск"
+      style="--color-secondary-grey: white;" 
+      @onInput="onInput"
+      @onCancel="onCancel"
+    >
+      <template #prepend>
+        <fa-icon :icon="['fas', 'search']" />
+      </template>
+      <template #append>
+        <fa-icon :icon="['fas', 'location']" />
+      </template>
+      <template #clearButton>
+        <fa-icon :icon="['fas', 'xmark']" />
+      </template>
+    </ChSearchInput>
+  </div>
+<template>
+
+<script>
+  import { ChSearchInput } from 'choco-ui'
+
+  export default {
+    components: {
+      ChSearchInput
+    },
+    data() {
+      return { value: '' }
+    },
+    methods: {
+      onInput(e) {
+        value.value = e
+      },
+      onCancel() {
+        value.value = ''
+      }
+    }
+  }
+</script>
+```
+
+### Props
+| Название      | Тип                  | Описание                                                             |
+|---------------|----------------------|----------------------------------------------------------------------|
+| modelValue    | String               | Значенние поля                                                       |
+| placeholder   | String               | Placeholder                                                          |
+
+### Emits
+
+| Название      | Возвращаемое значение | Описание                                                                                   |
+|---------------|-----------------------|--------------------------------------------------------------------------------------------|
+| onInput       | String                | Срабатывает когда пользователь вводит данные, возвращает новое значение для modelValue     |
+| onCancel      | Void                  | Срабатывает когда пользователь кликает на кнопку отменить                                  |
+
+
+#### Slots
+
+| Название          | Описание                                                                                                                     |
+|-------------------|-------------------------------------------------------------------------|
+| prepend           | Слот перед вводом, например иконка поиска                               |
+| append            | Слот после ввода                                                        |
+| clearButton       | Слот для иконки кнопки удаления, по умолчанию будет крестик из fa-icon  |
+
+
+

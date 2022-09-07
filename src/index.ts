@@ -1,6 +1,7 @@
 export { default as ChButton } from './components/ChButton'
 export { default as ChCheckbox } from './components/ChCheckbox'
 export { default as ChInput } from './components/ChInput'
+export { default as ChSearchInput } from './components/ChSearchInput'
 export { default as ChRadio } from './components/ChRadio'
 export { default as ChSlider } from './components/ChSlider'
 export { default as ChSwitch } from './components/ChSwitch'
