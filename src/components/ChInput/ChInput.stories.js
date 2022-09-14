@@ -8,6 +8,7 @@ export default {
     disabled: { control: 'boolean' },
     clearable: { control: 'boolean' },
     modelValue: { control: 'text' },
+    autofocus: { control: 'boolean' },
     label: { control: 'text' },
     type: {
       options: ['input', 'password', 'textarea'],
