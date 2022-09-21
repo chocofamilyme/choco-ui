@@ -39,7 +39,7 @@
 import { ref } from 'vue'
 import { ChInput, ChButton } from '../../index'
 
-const props = defineProps({
+defineProps({
   modelValue: {
     type: String,
     default: ''
@@ -60,9 +60,7 @@ function onFocus() {
   isVisibleCancelButton.value = true
 }
 function onBlur() {
-  if (props.modelValue === '') {
-    isVisibleCancelButton.value = false
-  }
+  isVisibleCancelButton.value = false
 }
 function onCancel() {
   isVisibleCancelButton.value = false
@@ -85,6 +83,7 @@ export default defineComponent({
   &__input
     height: 100%
     display: flex
+    overflow: hidden
     align-items: center
     flex-grow: 1
     border-radius: 16px
