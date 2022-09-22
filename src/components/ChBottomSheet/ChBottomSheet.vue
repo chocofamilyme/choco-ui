@@ -93,7 +93,7 @@ if (controller) {
   })
 }
 
-onBeforeUnmount(() => controller?.hide(props.name))
+onBeforeUnmount(() => controller?.onDestroy(props.name))
 
 const onBlackoutTouchStart = () => (bottomSheetState.value.blackoutTouchStarted = true)
 

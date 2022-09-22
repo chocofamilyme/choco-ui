@@ -1,6 +1,6 @@
 import { ref, readonly, nextTick } from 'vue'
 import type { Ref } from 'vue'
-import { lockScroll, unlockScroll } from './utils/scroll-lock'
+import { lockScroll, unlockScroll, clearAllLocks } from './utils/scroll-lock'
 
 export type ModalBottomSheet = {
   activeName: string
@@ -50,11 +50,17 @@ export function useModalBottomSheetController() {
     state.value = state.value.filter(modal => modal.activeName !== name)
   }
 
+  function onDestroy(name: string) {
+    clearAllLocks()
+    state.value = state.value.filter(modal => modal.activeName !== name)
+  }
+
   return {
     show,
     isVisible,
     getParams,
     hide,
+    onDestroy,
     state: readonly<Ref<ModalBottomSheet[]>>(state)
   }
 }
