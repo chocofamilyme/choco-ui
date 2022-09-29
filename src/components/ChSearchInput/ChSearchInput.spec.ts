@@ -23,7 +23,7 @@ describe('ChSearchInput', () => {
   })
 
   it('should emit "onInput" event with right value, when change value in input', async () => {
-    SearchInput?.find('input[type="text"]').setValue('my value')
+    SearchInput?.find('input[type="input"]').setValue('my value')
 
     await SearchInput?.vm.$nextTick()
     expect(SearchInput?.emitted().onInput).toBeTruthy()
@@ -34,14 +34,14 @@ describe('ChSearchInput', () => {
   it('should show cancel button, when focus on input', async () => {
     expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(false)
 
-    SearchInput?.find('input[type="text"]').trigger('focus')
+    SearchInput?.find('input[type="input"]').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
     expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(true)
   })
 
   it('should emit "onCancel" event, when click to cancel button', async () => {
-    SearchInput?.find('input[type="text"]').trigger('focus')
+    SearchInput?.find('input[type="input"]').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
     findByTestId(SearchInput as VueWrapper, 'сancel-button').trigger('click')
@@ -51,7 +51,7 @@ describe('ChSearchInput', () => {
   })
 
   it('should hide cancel button, when click to cancel button', async () => {
-    SearchInput?.find('input[type="text"]').trigger('focus')
+    SearchInput?.find('input[type="input"]').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
     expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(true)

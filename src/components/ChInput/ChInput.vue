@@ -14,8 +14,8 @@
             <slot name="prepend" />
           </div>
           <component
-            :is="type === 'password' ? 'input' : type"
-            :type="type === 'password' ? 'password' : 'text'"
+            :is="'input'"
+            :type="type"
             :id="id"
             ref="input"
             :value="value"
