@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref } from 'vue'
+import { computed, toRefs, ref, onMounted } from 'vue'
 import uuid from '@/utils/uuid'
 
 const props = defineProps({
@@ -75,6 +75,10 @@ const props = defineProps({
   outerLabel: String,
   afterText: [String, Array],
   hasError: {
+    type: Boolean,
+    default: false
+  },
+  autofocus: {
     type: Boolean,
     default: false
   }
@@ -95,6 +99,12 @@ const value = computed({
 const input = ref()
 const id = uuid()
 const isClearable = computed(() => clearable.value && Boolean(value?.value))
+
+onMounted(() => {
+  if (props.autofocus) {
+    input.value.focus()
+  }
+})
 
 function onInput(e: Event) {
   if (type.value === 'textarea') textAreaAdjust()

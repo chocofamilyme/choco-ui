@@ -64,6 +64,7 @@ export const AllSlots = Template.bind({})
 AllSlots.args = {
   value: '',
   placeholder: 'Найти что-угодно',
+  autofocus: true,
   slots: {
     prepend: `<fa-icon :icon="['fas', 'search']" />`,
     clearButton: `<fa-icon :icon="['fas', 'xmark']" />`,

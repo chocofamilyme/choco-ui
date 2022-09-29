@@ -3,6 +3,7 @@
     <ChInput
       :model-value="modelValue"
       :placeholder="placeholder"
+      :autofocus="autofocus"
       clearable
       class="ch-search-input__input"
       @update:modelValue="emit('onInput', $event)"
@@ -47,6 +48,10 @@ defineProps({
   placeholder: {
     type: String,
     default: ''
+  },
+  autofocus: {
+    type: Boolean,
+    default: false
   }
 })
 
