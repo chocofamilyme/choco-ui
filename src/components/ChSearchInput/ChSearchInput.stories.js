@@ -34,7 +34,7 @@ const Template = ({ slots = {}, value = '', ...args }) => ({
     <ch-search-input 
       v-bind="args" 
       :model-value="value" 
-      style="--color-secondary-grey: white;" 
+      style="--color-secondary-grey: white; --color-active: transparent;" 
       @onInput="onInput"
       @onCancel="onCancel"
     >
