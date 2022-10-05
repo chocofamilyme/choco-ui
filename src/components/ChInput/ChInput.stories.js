@@ -2,15 +2,15 @@ import { ref } from 'vue'
 import ChInput from './ChInput.vue'
 
 export default {
-  title: 'Input',
+  title: 'ChInput',
   component: ChInput,
   argTypes: {
     disabled: { control: 'boolean' },
     clearable: { control: 'boolean' },
     modelValue: { control: 'text' },
     label: { control: 'text' },
-    type: {
-      options: ['input', 'password', 'textarea'],
+    component: {
+      options: ['input', 'textarea'],
       control: 'select'
     },
     placeholder: { control: 'text' },
@@ -103,12 +103,11 @@ WithPrependSlot.args = {
 export const WithAfterText = Template.bind({})
 WithAfterText.args = {
   label: 'Input',
-
   afterText: 'text'
 }
 
 export const Textarea = Template.bind({})
 Textarea.args = {
   label: 'Input',
-  type: 'textarea'
+  component: 'textarea'
 }
