@@ -10,6 +10,7 @@ import { Meta } from '@storybook/addon-docs'
     <ChSearchInput 
       :model-value="value" 
       placeholder="Поиск"
+      autofocus
       style="--color-secondary-grey: white;" 
       @onInput="onInput"
       @onCancel="onCancel"
@@ -50,10 +51,11 @@ import { Meta } from '@storybook/addon-docs'
 ```
 
 ### Props
-| Название      | Тип                  | Описание                                                             |
-|---------------|----------------------|----------------------------------------------------------------------|
-| modelValue    | String               | Значенние поля                                                       |
-| placeholder   | String               | Placeholder                                                          |
+| Название      | Тип                  | Описание                                                     |
+|---------------|----------------------|--------------------------------------------------------------|
+| modelValue    | String               | Значенние поля                                               |
+| placeholder   | String               | Placeholder                                                  |
+| autofocus     | Boolean              | Должен ли появляться автофокус у инпута при его создании     |
 
 ### Emits
 
@@ -65,7 +67,7 @@ import { Meta } from '@storybook/addon-docs'
 
 #### Slots
 
-| Название          | Описание                                                                                                                     |
+| Название          | Описание                                                                |
 |-------------------|-------------------------------------------------------------------------|
 | prepend           | Слот перед вводом, например иконка поиска                               |
 | append            | Слот после ввода                                                        |

@@ -58,7 +58,6 @@
 
 <script setup lang="ts">
 import { ref, inject, watch, onBeforeUnmount } from 'vue'
-import type { Ref } from 'vue'
 
 import { injectionKey } from './plugin/injection-key.config'
 import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
@@ -111,9 +110,10 @@ const onHandleBarClick = () => {
 
 const extractTouch = (e: TouchEvent) => e.changedTouches[0].clientY
 
+const hasScrollbar = (elem: HTMLElement) => elem.scrollHeight > elem.clientHeight
+
 const onSheetTouchStart = (e: TouchEvent) => {
-  bottomSheetState.value.sheetTouchStarted =
-    (contentRef as Ref<HTMLDivElement>)?.value.scrollTop === 0
+  bottomSheetState.value.sheetTouchStarted = !hasScrollbar(e.target as HTMLElement)
   bottomSheetState.value.sheetTouchStart = extractTouch(e)
 }
 

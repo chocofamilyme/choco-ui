@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, watch } from 'vue'
 import { injectionKey } from './plugin/injection-key.config'
 import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
 
@@ -50,6 +50,8 @@ const hideOnOutsideClick = () => {
 }
 
 const params = computed(() => controller?.getParams(props.name) || {})
+
+onBeforeUnmount(() => controller?.hide(props.name))
 </script>
 
 <script lang="ts">

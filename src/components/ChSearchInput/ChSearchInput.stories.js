@@ -34,7 +34,7 @@ const Template = ({ slots = {}, value = '', ...args }) => ({
     <ch-search-input 
       v-bind="args" 
       :model-value="value" 
-      style="--color-secondary-grey: white;" 
+      style="--color-secondary-grey: white; --color-active: transparent;" 
       @onInput="onInput"
       @onCancel="onCancel"
     >
@@ -64,6 +64,7 @@ export const AllSlots = Template.bind({})
 AllSlots.args = {
   value: '',
   placeholder: 'Найти что-угодно',
+  autofocus: true,
   slots: {
     prepend: `<fa-icon :icon="['fas', 'search']" />`,
     clearButton: `<fa-icon :icon="['fas', 'xmark']" />`,
