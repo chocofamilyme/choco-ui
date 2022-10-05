@@ -111,3 +111,9 @@ Textarea.args = {
   label: 'Input',
   component: 'textarea'
 }
+
+export const WithTelKeyBoard = Template.bind({})
+WithTelKeyBoard.args = {
+  value: 'For mobile only',
+  type: 'tel'
+}
