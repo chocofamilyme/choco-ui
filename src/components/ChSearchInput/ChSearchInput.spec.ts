@@ -23,7 +23,7 @@ describe('ChSearchInput', () => {
   })
 
   it('should emit "onInput" event with right value, when change value in input', async () => {
-    SearchInput?.find('input[type="input"]').setValue('my value')
+    findByTestId(SearchInput as VueWrapper, 'ch-input-input-component').setValue('my value')
 
     await SearchInput?.vm.$nextTick()
     expect(SearchInput?.emitted().onInput).toBeTruthy()
@@ -32,33 +32,33 @@ describe('ChSearchInput', () => {
   })
 
   it('should show cancel button, when focus on input', async () => {
-    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(false)
+    expect(findByTestId(SearchInput as VueWrapper, 'cancel-button').exists()).toBe(false)
 
-    SearchInput?.find('input[type="input"]').trigger('focus')
+    findByTestId(SearchInput as VueWrapper, 'ch-input-input-component').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
-    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(true)
+    expect(findByTestId(SearchInput as VueWrapper, 'cancel-button').exists()).toBe(true)
   })
 
   it('should emit "onCancel" event, when click to cancel button', async () => {
-    SearchInput?.find('input[type="input"]').trigger('focus')
+    findByTestId(SearchInput as VueWrapper, 'ch-input-input-component').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
-    findByTestId(SearchInput as VueWrapper, 'сancel-button').trigger('click')
+    findByTestId(SearchInput as VueWrapper, 'cancel-button').trigger('click')
 
     await SearchInput?.vm.$nextTick()
     expect(SearchInput?.emitted().onCancel).toBeTruthy()
   })
 
   it('should hide cancel button, when click to cancel button', async () => {
-    SearchInput?.find('input[type="input"]').trigger('focus')
+    findByTestId(SearchInput as VueWrapper, 'ch-input-input-component').trigger('focus')
 
     await SearchInput?.vm.$nextTick()
-    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(true)
-    findByTestId(SearchInput as VueWrapper, 'сancel-button').trigger('click')
+    expect(findByTestId(SearchInput as VueWrapper, 'cancel-button').exists()).toBe(true)
+    findByTestId(SearchInput as VueWrapper, 'cancel-button').trigger('click')
 
     await SearchInput?.vm.$nextTick()
-    expect(findByTestId(SearchInput as VueWrapper, 'сancel-button').exists()).toBe(false)
+    expect(findByTestId(SearchInput as VueWrapper, 'cancel-button').exists()).toBe(false)
   })
 
   it('should render all slots', async () => {
