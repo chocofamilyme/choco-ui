@@ -20,13 +20,13 @@
         <slot name="clearButton" />
       </template>
     </ChInput>
-    <Transition name="сancel-button-leave">
+    <Transition name="cancel-button-leave">
       <ChButton
         v-if="isVisibleCancelButton"
         type="button"
         size="xs"
         simple
-        data-test-id="сancel-button"
+        data-test-id="cancel-button"
         class="ch-search-input__button"
         @click="onCancel"
       >
@@ -101,7 +101,7 @@ export default defineComponent({
     color: var(--color-secondary-text)
     overflow: hidden
 
-.сancel-button-leave
+.cancel-button-leave
   &-enter-active,
   &-leave-active
     transition: all 0.5s ease

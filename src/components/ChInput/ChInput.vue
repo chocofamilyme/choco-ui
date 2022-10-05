@@ -14,14 +14,11 @@
             <slot name="prepend" />
           </div>
           <component
-            :is="type === 'password' ? 'input' : type"
-            :type="type === 'password' ? 'password' : 'text'"
+            :is="component"
+            :type="type"
             :id="id"
             ref="input"
             :value="value"
-            @input="onInput"
-            @focus="emit('focus')"
-            @blur="emit('blur')"
             :disabled="disabled"
             :placeholder="placeholder"
             :class="[
@@ -31,6 +28,10 @@
                 'ch-input__input_has-after-slots': isClearable || Boolean($slots.append)
               }
             ]"
+            data-test-id="ch-input-input-component"
+            @input="onInput"
+            @focus="emit('focus')"
+            @blur="emit('blur')"
           />
         </div>
       </div>
@@ -62,14 +63,20 @@
 import { computed, toRefs, ref, onMounted } from 'vue'
 import uuid from '@/utils/uuid'
 
+type InputComponent = 'input' | 'textarea'
+
 const props = defineProps({
   disabled: Boolean,
   clearable: Boolean,
   modelValue: String,
   label: String,
+  component: {
+    type: String as () => InputComponent,
+    default: 'input'
+  },
   type: {
     type: String,
-    default: 'input'
+    default: 'text'
   },
   placeholder: String,
   outerLabel: String,
@@ -84,7 +91,7 @@ const props = defineProps({
   }
 })
 
-const { clearable, modelValue, type } = toRefs(props)
+const { clearable, modelValue, component } = toRefs(props)
 const emit = defineEmits(['update:modelValue', 'focus', 'blur'])
 
 const value = computed({
@@ -107,7 +114,7 @@ onMounted(() => {
 })
 
 function onInput(e: Event) {
-  if (type.value === 'textarea') textAreaAdjust()
+  if (component.value === 'textarea') textAreaAdjust()
   const target = e.target as HTMLInputElement
   value.value = target.value
 }
