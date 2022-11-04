@@ -15,9 +15,10 @@ describe('ChSearchInput', () => {
         placeholder: 'Поиск'
       },
       slots: {
-        prepend: `<template #prepend>prepend</template>`,
-        append: `<template #append>append</template>`,
-        clearButton: `<template #clearButton>clearButton</template>`
+        prepend: 'prepend',
+        append: 'append',
+        clearButton: 'clearButton',
+        cancelButtonContent: 'Cancel'
       }
     }) as VueWrapper
   })
@@ -65,5 +66,9 @@ describe('ChSearchInput', () => {
     expect(SearchInput?.html()).toContain('prepend')
     expect(SearchInput?.html()).toContain('append')
     expect(SearchInput?.html()).toContain('clearButton')
+
+    findByTestId(SearchInput as VueWrapper, 'ch-input-input-component').trigger('focus')
+    await SearchInput?.vm.$nextTick()
+    expect(SearchInput?.html()).toContain('Cancel')
   })
 })
