@@ -204,7 +204,7 @@ export default defineComponent({
   bottom: 0
   display: flex
   width: 100%
-  max-height: 95%
+  max-height: calc(100% - 60px) // optimal value to avoid collision with native navigation buttons
 
   &__content
     position: relative
