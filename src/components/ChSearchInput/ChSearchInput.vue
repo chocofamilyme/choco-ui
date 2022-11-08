@@ -7,8 +7,8 @@
       clearable
       class="ch-search-input__input"
       @update:modelValue="emit('onInput', $event)"
-      @focus="onFocus"
-      @blur="onBlur"
+      @focus="() => setCancelButtonVisibility(true)"
+      @blur="() => setCancelButtonVisibility(false)"
     >
       <template #prepend v-if="Boolean($slots.prepend)">
         <slot name="prepend" />
@@ -22,15 +22,20 @@
     </ChInput>
     <Transition name="cancel-button-leave">
       <ChButton
-        v-if="isVisibleCancelButton"
+        v-if="isCancelButtonVisible"
         type="button"
         size="xs"
         simple
         data-test-id="cancel-button"
         class="ch-search-input__button"
-        @click="onCancel"
+        @click="
+          () => {
+            setCancelButtonVisibility(false)
+            emit('onCancel')
+          }
+        "
       >
-        Отмена
+        <slot name="cancelButtonContent">Отмена</slot>
       </ChButton>
     </Transition>
   </div>
@@ -59,18 +64,9 @@ const emit = defineEmits<{
   (e: 'onInput', value: string): void
   (e: 'onCancel'): void
 }>()
-const isVisibleCancelButton = ref(false)
 
-function onFocus() {
-  isVisibleCancelButton.value = true
-}
-function onBlur() {
-  isVisibleCancelButton.value = false
-}
-function onCancel() {
-  isVisibleCancelButton.value = false
-  emit('onCancel')
-}
+const isCancelButtonVisible = ref(false)
+const setCancelButtonVisibility = (isVisible: boolean) => (isCancelButtonVisible.value = isVisible)
 </script>
 
 <script lang="ts">

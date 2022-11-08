@@ -24,6 +24,9 @@ import { Meta } from '@storybook/addon-docs'
       <template #clearButton>
         <fa-icon :icon="['fas', 'xmark']" />
       </template>
+      <template #cancelButtonContent>
+        Cancel text
+      </template>
     </ChSearchInput>
   </div>
 <template>
@@ -67,11 +70,12 @@ import { Meta } from '@storybook/addon-docs'
 
 #### Slots
 
-| Название          | Описание                                                                |
-|-------------------|-------------------------------------------------------------------------|
-| prepend           | Слот перед вводом, например иконка поиска                               |
-| append            | Слот после ввода                                                        |
-| clearButton       | Слот для иконки кнопки удаления, по умолчанию будет крестик из fa-icon  |
+| Название            | Описание                                                                |
+|---------------------|-------------------------------------------------------------------------|
+| prepend             | Слот перед вводом, например иконка поиска                               |
+| append              | Слот после ввода                                                        |
+| clearButton         | Слот для иконки кнопки удаления, по умолчанию будет крестик из fa-icon  |
+| cancelButtonContent | Слот для текста кнопки отмены                                           |
 
 
 
