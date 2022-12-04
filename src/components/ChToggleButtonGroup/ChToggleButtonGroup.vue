@@ -32,5 +32,7 @@ export default defineComponent({
   border-radius: 12px
   padding: 4px
   display: inline-flex
-  align-items: center
+
+  & > :not(:first-child)
+    margin-left: 0.5rem
 </style>
