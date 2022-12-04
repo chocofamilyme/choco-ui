@@ -15,7 +15,7 @@ const Template = args => ({
     return { args, currentId }
   },
   template: `
-    <ChToggleButtonGroup v-bind="args" v-bind:current-id="currentId">
+    <ChToggleButtonGroup v-bind="args" v-bind:current-id="currentId" style="width: 300px">
       <ChToggleButton name="toggle-button" id="1" @change="currentId = '1'">1</ChToggleButton>
       <ChToggleButton name="toggle-button" id="2" @change="currentId = '2'">2</ChToggleButton>
       <ChToggleButton name="toggle-button" id="3" @change="currentId = '3'">3</ChToggleButton>
