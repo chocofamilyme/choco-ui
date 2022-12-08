@@ -40,7 +40,8 @@ export default defineComponent({
   display: flex
   justify-content: center
   align-items: center
-  padding: 12px 24px
+  min-height: 2.5rem
+  padding: 8px
   border-radius: 8px
   font-style: normal
   font-weight: 400
@@ -55,7 +56,8 @@ export default defineComponent({
   &__input
     display: none
   &__label
-    display: block
+    display: flex
+    flex-grow: 1
   &_active
     background: var(--color-light)
     box-shadow: $main-shadow
