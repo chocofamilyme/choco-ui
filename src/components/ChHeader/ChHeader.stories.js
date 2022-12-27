@@ -66,6 +66,18 @@ const OnlyLeftActionTemplate = () => ({
   `)
 })
 
+const WithColoredChHeaderButtonTemplate = () => ({
+  components,
+  template: getWrapperTemplate(`
+    <ChHeader>
+      <template #leftAction>
+        <ChHeaderBackButton style="color: blue" />
+      </template>
+      ${headerContent}
+    </ChHeader>
+  `)
+})
+
 const WithoutActionsTemplate = () => ({
   components,
   template: getWrapperTemplate(`
@@ -94,4 +106,5 @@ export const Default = DefaultTemplate.bind({})
 export const OnlyLeftAction = OnlyLeftActionTemplate.bind({})
 export const OnlyRightAction = OnlyRightActionTemplate.bind({})
 export const WithoutActions = WithoutActionsTemplate.bind({})
+export const WithColoredChHeaderButton = WithColoredChHeaderButtonTemplate.bind({})
 export const WithCustomActions = WithCustomActionsTemplate.bind({})
