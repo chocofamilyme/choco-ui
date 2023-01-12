@@ -19,8 +19,8 @@ const Template = (args, { parameters }) => ({
     return { args, parameters, alertRef }
   },
   methods: {
-    showAlert() {
-      this.alertRef.show()
+    showAlert(content) {
+      this.alertRef.show(content)
     },
     hideAlert() {
       this.alertRef.hide()
@@ -28,7 +28,7 @@ const Template = (args, { parameters }) => ({
   },
   template: `
     <div>
-      <button type="button" @click="showAlert">
+      <button type="button" @click="showAlert(parameters.alertContent)">
         Show alert
       </button>
       <button 
@@ -39,12 +39,14 @@ const Template = (args, { parameters }) => ({
         Hide alert
       </button>
       <div style="position: relative; margin-top: 20px;">
-        <ChAlert 
+        <ChAlert
           v-bind="args"
           ref="alertRef" 
           style="width: 300px"
         >
-          {{ parameters.content || 'Hello, ChAlert!' }}
+          <template #default="{ content }">
+            {{ content || parameters.content || 'Hello, ChAlert!' }}
+          </template>
           <template #icon>
             <ChAlertIcon>
               <fa-icon :icon="['fas', 'user']" />
@@ -81,4 +83,9 @@ Persistent.args = {
 export const WithFooter = Template.bind({})
 WithFooter.parameters = {
   withFooter: true
+}
+
+export const PassAlertContentInShow = Template.bind({})
+PassAlertContentInShow.parameters = {
+  alertContent: 'This text is passed via show method!'
 }
