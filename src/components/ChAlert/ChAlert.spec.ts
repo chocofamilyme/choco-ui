@@ -79,7 +79,7 @@ describe('ChAlert', () => {
     expect(findByTestId(wrapper, 'alert-content').exists()).toBe(false)
   })
 
-  it('should display deafult slot content', async () => {
+  it('should display default slot content', async () => {
     const wrapper = getWrapper()
     wrapper.vm.show()
     await wrapper.vm.$nextTick()
@@ -98,5 +98,28 @@ describe('ChAlert', () => {
     wrapper.vm.show()
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toContain(footerSlotContent)
+  })
+
+  it('should display content passed to show method', async () => {
+    const wrapper = mount(ChAlert, {
+      slots: {
+        icon: `<template #icon="{ content }">{{ content.icon }}</template>`,
+        default: `<template #default="{ content }">{{ content.main }}</template>`,
+        footer: `<template #footer="{ content }">{{ content.footer }}</template>`
+      }
+    })
+
+    const showContent = {
+      main: 'Main content',
+      icon: 'Icon content',
+      footer: 'Footer content'
+    }
+
+    wrapper.vm.show(showContent)
+    await wrapper.vm.$nextTick()
+    const alertHtml = wrapper.html()
+    expect(alertHtml).toContain(showContent.main)
+    expect(alertHtml).toContain(showContent.icon)
+    expect(alertHtml).toContain(showContent.footer)
   })
 })
