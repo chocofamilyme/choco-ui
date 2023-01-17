@@ -10,8 +10,14 @@ import { Meta } from '@storybook/addon-docs';
 
 ```html
 <template>
-  <ChAlert ref="alertRef" duration="5000" persistent>
-    <p>Alert content</p>
+  <ChAlert
+    ref="alertRef"
+    duration="5000"
+    persistent
+  >
+    <template #default="{ content }">
+      <p>{{ content }}</p>
+    </template>
     <template #icon>
       <ChAlertIcon>Icon</ChAlertIcon>
     </template>
@@ -27,7 +33,7 @@ import { Meta } from '@storybook/addon-docs';
 
   const alertRef = ref()
 
-  alertRef.show() // Shows alert
+  alertRef.show('Alert content') // Shows alert with content == 'Alert content'
   alertRef.hide() // Hides alert
 </script>
 ```
@@ -47,7 +53,14 @@ ChAlert предоставляет public методы `show`, `hide` и пер�
 
 ```html
 <template>
-  <ChAlert ref="alertRef"></ChAlert>
+  <ChAlert ref="alertRef">
+    <template #default="{ content }">
+      <p>{{ content.main }}</p>
+    </template>
+    <template #footer="{ content }">
+      <p>{{ content.footer }}</p>
+    </template>
+  </ChAlert>
 </template>
 
 <script>
@@ -56,15 +69,15 @@ ChAlert предоставляет public методы `show`, `hide` и пер�
 
   const alertRef = ref()
 
-  alertRef.show() // Shows alert
+  alertRef.show({ main: 'Content may be of any type', footer: 'This is footer content' }) // Shows alert
   alertRef.hide() // Hides alert
 </script>
 ```
-| Название      | Тип                 | Описание                                                                |
-|---------------|---------------------|-------------------------------------------------------------------------|
-| show          | Function            | Метод для отображения алерта                                            |
-| hide          | Function            | Метод для закрытия    алерта                                            |
-| isVisible     | Readonly<`Boolean`> | Возвращает открыт ли алерт или нет                                      |
+| Название      | Тип                 | Описание                                                                                              |
+|---------------|---------------------|-------------------------------------------------------------------------------------------------------|
+| show          | Function            | Метод для отображения алерта. Может быть вызван с параметрами, которые будут записаны в поле content  |
+| hide          | Function            | Метод для закрытия    алерта                                                                          |
+| isVisible     | Readonly<`Boolean`> | Возвращает открыт ли алерт или нет                                                                    |
 
 ### Slots
 

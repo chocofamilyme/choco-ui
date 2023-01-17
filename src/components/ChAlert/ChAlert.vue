@@ -3,12 +3,12 @@
     <div v-if="isVisible" class="ch-alert" data-test-id="alert-content">
       <div class="ch-alert__content">
         <div role="alert" aria-live="polite">
-          <slot />
+          <slot v-bind="{ content }" />
         </div>
-        <slot name="icon" />
+        <slot name="icon" v-bind="{ content }" />
       </div>
       <div v-if="$slots.footer" class="ch-alert__footer">
-        <slot name="footer" />
+        <slot name="footer" v-bind="{ content }" />
       </div>
     </div>
   </Transition>
@@ -30,10 +30,12 @@ const props = defineProps({
 })
 
 const timeoutId = ref()
+const content = ref()
 
 const isVisible = ref(false)
-const show = () => {
+const show = (alertContent?: unknown) => {
   isVisible.value = true
+  content.value = alertContent
   if (!props.persistent) {
     timeoutId.value = setTimeout(hide, props.duration)
   }
