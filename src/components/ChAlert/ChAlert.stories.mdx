@@ -53,7 +53,14 @@ ChAlert предоставляет public методы `show`, `hide` и пер�
 
 ```html
 <template>
-  <ChAlert ref="alertRef"></ChAlert>
+  <ChAlert ref="alertRef">
+    <template #default="{ content }">
+      <p>{{ content.main }}</p>
+    </template>
+    <template #footer="{ content }">
+      <p>{{ content.footer }}</p>
+    </template>
+  </ChAlert>
 </template>
 
 <script>
@@ -62,7 +69,7 @@ ChAlert предоставляет public методы `show`, `hide` и пер�
 
   const alertRef = ref()
 
-  alertRef.show({ text: 'Content may be of any type' }) // Shows alert
+  alertRef.show({ main: 'Content may be of any type', footer: 'This is footer content' }) // Shows alert
   alertRef.hide() // Hides alert
 </script>
 ```
