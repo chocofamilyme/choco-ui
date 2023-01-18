@@ -1,5 +1,9 @@
 <template>
-  <div class="glide__bullets ch-carousel__bullets-container" data-glide-el="controls[nav]">
+  <div
+    class="glide__bullets ch-carousel__bullets-container"
+    data-glide-el="controls[nav]"
+    data-test-id="carousel-bullets-container"
+  >
     <button
       v-for="i in numberOfSlides"
       :key="i"
@@ -55,12 +59,11 @@ export default defineComponent({
     width: 0.25rem
     height: 0.25rem
     border-radius: $border-full
-    opacity: 0.5
-    background-color: var(--ch-carousel-bg-color, #A4A2B7)
+    background-color: var(--ch-carousel-bg-color, #D4D3DF)
     transition: 0.2s
 
 .glide__bullet--active .ch-carousel__bullet-dot
   width: 0.5rem
   height: 0.5rem
-  opacity: 1
+  background-color: var(--ch-carousel-active-bullet-color, #A4A2B7)
 </style>
