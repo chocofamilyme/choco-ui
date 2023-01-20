@@ -19,6 +19,10 @@ import { Meta } from '@storybook/addon-docs';
       <template #left>Left content</template>
       <span>Right content</span>
     </ChCarouselCardItem>
+    <ChCarouselItem>
+      <div>General content item</div>
+      <SomeComponent />
+    </ChCarouselItem>
     <template #bullets>
       <ChCarouselBullets />
     </template>
@@ -26,7 +30,12 @@ import { Meta } from '@storybook/addon-docs';
 </template>
 
 <script setup>
-import { ChCarousel, ChCarouselCardItem, ChCarouselBullets } from 'choco-ui'
+import {
+  ChCarousel,
+  ChCarouselItem,
+  ChCarouselCardItem,
+  ChCarouselBullets
+} from 'choco-ui'
 </script>
 ```
 
@@ -47,9 +56,13 @@ import { ChCarousel, ChCarouselCardItem, ChCarouselBullets } from 'choco-ui'
 | default       | Слот для отображения элементов в карусели. Элементы должны быть обернуты в компонент ChCarouselCardItem                                                                                                                      |
 | bullets       | Слот для отображения точек-навигации в карусели. Для отображения есть компонент ChCarouselBullets                                                  |
 
+### ChCarouselItem
+
+Компонент - общий элемент слайдера без ui, который может использоваться во всех случаях
+
 ### ChCarouselCardItem
 
-Компонент - элемент слайдера
+Компонент - элемент слайдера со стилями для отображения карточки с левым и правым слотами
 
 #### Slots
 | Слот          | Описание                                                                       |
