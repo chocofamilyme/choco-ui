@@ -10,7 +10,6 @@
         data-test-id="bottom-sheet-blackout"
         @touchstart="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
-        @click="hide"
       ></div>
       <div class="bottom-sheet">
         <div
