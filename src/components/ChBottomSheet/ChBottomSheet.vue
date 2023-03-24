@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, watch, onBeforeUnmount } from 'vue'
+import { ref, inject, watch, onUnmounted } from 'vue'
 
 import { injectionKey } from './plugin/injection-key.config'
 import type { ModalBottomSheetController } from '@/composable/modal-bottom-sheet-controller/use-modal-bottom-sheet-controller'
@@ -91,7 +91,7 @@ if (controller) {
   })
 }
 
-onBeforeUnmount(() => controller?.onDestroy(props.name))
+onUnmounted(() => controller?.onDestroy(props.name))
 
 const onBlackoutTouchStart = () => (bottomSheetState.value.blackoutTouchStarted = true)
 
