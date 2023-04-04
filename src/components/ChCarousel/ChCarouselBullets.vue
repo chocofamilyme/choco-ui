@@ -5,11 +5,11 @@
     data-test-id="carousel-bullets-container"
   >
     <button
-      v-for="i in numberOfSlides"
+      v-for="i in numberOfSlides || 0"
       :key="i"
       class="glide__bullet ch-carousel__bullet"
       :data-glide-dir="`=${i - 1}`"
-      :aria-current="isActive(i)"
+      :aria-current="isActive(i - 1)"
       data-test-id="carousel-bullets"
     >
       <span class="ch-carousel__bullet-dot"></span>
@@ -19,12 +19,11 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import type Glide from '@glidejs/glide'
 import { carouselConfig } from './config'
 
-const glider = inject<Glide.Properties>(carouselConfig.gliderInjectionKey)
-const numberOfSlides = inject<number[]>(carouselConfig.numberOfSlidesInjectionKey) || 0
-const isActive = (idx: number) => idx === glider?.index
+const glider = inject(carouselConfig.gliderInjectionKey)
+const numberOfSlides = inject(carouselConfig.numberOfSlidesInjectionKey)
+const isActive = (idx: number) => idx === glider?.value?.index
 </script>
 
 <script lang="ts">
