@@ -51,6 +51,8 @@ describe('ChSlider', () => {
         {
           "__moveHandles": [Function],
           "destroy": [Function],
+          "disable": [Function],
+          "enable": [Function],
           "get": [Function],
           "getOrigins": [Function],
           "getPositions": [Function],

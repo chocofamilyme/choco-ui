@@ -45,9 +45,9 @@ export default defineComponent({
     display: flex
     align-items: center
     justify-content: center
-    width: 2.25rem
-    height: 2.25rem
-    opacity: 0.5
+    width: 2.5rem
+    height: 2.5rem
+    opacity: 0.3
     transition: 300ms
 
   &__badge

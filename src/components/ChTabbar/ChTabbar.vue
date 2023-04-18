@@ -17,8 +17,6 @@ export default defineComponent({
   display: flex
   align-items: center
   justify-content: space-around
-  height: 3.5rem
+  padding: 0.75rem 0
   background-color: #fff
-  border-radius: 2.5rem
-  box-shadow: $main-shadow
 </style>
