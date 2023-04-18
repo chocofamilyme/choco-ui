@@ -20,9 +20,10 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import type Glide from '@glidejs/glide'
+import type { prototype } from '@glidejs/glide'
 import { carouselConfig } from './config'
 
-const glider = inject<Glide.Properties>(carouselConfig.gliderInjectionKey)
+const glider = inject<typeof prototype>(carouselConfig.gliderInjectionKey)
 const numberOfSlides = inject<number[]>(carouselConfig.numberOfSlidesInjectionKey) || 0
 const isActive = (idx: number) => idx === glider?.index
 </script>
