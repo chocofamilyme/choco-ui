@@ -42,35 +42,70 @@ describe('ChSlider', () => {
   it('should expose sliderAPI object of type noUiSlider.API', () => {
     const wrapper = shallowMount(ChSlider)
     expect(wrapper.vm.sliderAPI).toBeTruthy()
-    expect(wrapper.vm.sliderAPI).toMatchInlineSnapshot(
+    expect(wrapper.vm.sliderAPI).toMatchInlineSnapshot(`
       {
-        target: expect.any(HTMLElement),
-        options: expect.any(Object)
-      },
-      `
-        {
-          "__moveHandles": [Function],
-          "destroy": [Function],
-          "disable": [Function],
-          "enable": [Function],
-          "get": [Function],
-          "getOrigins": [Function],
-          "getPositions": [Function],
-          "getTooltips": [Function],
-          "off": [Function],
-          "on": [Function],
-          "options": Any<Object>,
-          "pips": [Function],
-          "removePips": [Function],
-          "removeTooltips": [Function],
-          "reset": [Function],
-          "set": [Function],
-          "setHandle": [Function],
-          "steps": [Function],
-          "target": Any<HTMLElement>,
-          "updateOptions": [Function],
-        }
-      `
-    )
+        "__moveHandles": [Function],
+        "destroy": [Function],
+        "get": [Function],
+        "getOrigins": [Function],
+        "getPositions": [Function],
+        "getTooltips": [Function],
+        "off": [Function],
+        "on": [Function],
+        "options": {
+          "cssPrefix": "ch-slider__",
+          "range": {
+            "max": [
+              10,
+            ],
+            "min": [
+              0,
+            ],
+          },
+          "start": [
+            0,
+          ],
+        },
+        "pips": [Function],
+        "removePips": [Function],
+        "removeTooltips": [Function],
+        "reset": [Function],
+        "set": [Function],
+        "setHandle": [Function],
+        "steps": [Function],
+        "target": <div
+          class="ch-slider__body ch-slider__target ch-slider__ltr ch-slider__horizontal ch-slider__txt-dir-ltr"
+        >
+          <div
+            class="ch-slider__base"
+          >
+            <div
+              class="ch-slider__connects"
+            />
+            <div
+              class="ch-slider__origin"
+              style="transform: translate(-100%, 0); z-index: 4;"
+            >
+              <div
+                aria-orientation="horizontal"
+                aria-valuemax="10.0"
+                aria-valuemin="0.0"
+                aria-valuenow="0.0"
+                aria-valuetext="0.00"
+                class="ch-slider__handle ch-slider__handle-lower"
+                data-handle="0"
+                role="slider"
+                tabindex="0"
+              >
+                <div
+                  class="ch-slider__touch-area"
+                />
+              </div>
+            </div>
+          </div>
+        </div>,
+        "updateOptions": [Function],
+      }
+    `)
   })
 })
