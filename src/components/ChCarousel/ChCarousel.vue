@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, provide, nextTick } from 'vue'
-import Glide, { prototype } from '@glidejs/glide'
+import Glide from '@glidejs/glide'
 import '@glidejs/glide/dist/css/glide.core.min.css'
 
 import { carouselConfig } from './config'
@@ -36,7 +36,7 @@ const props = defineProps({
 const carouselRef = ref()
 const trackRef = ref()
 const numberOfSlides = ref(0)
-const glider = ref<typeof prototype>()
+const glider = ref<Glide.Properties>()
 
 provide(carouselConfig.gliderInjectionKey, glider)
 provide(carouselConfig.numberOfSlidesInjectionKey, numberOfSlides)
@@ -56,3 +56,4 @@ export default defineComponent({
   name: 'ChCarousel'
 })
 </script>
+``
