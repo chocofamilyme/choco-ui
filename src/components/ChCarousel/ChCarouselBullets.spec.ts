@@ -9,6 +9,8 @@ const getWrapper = (numberOfSlides: number) =>
   mount(ChCarouselBullets, {
     global: {
       provide: {
+        // Ignore intentionally since TS does not allow to use InjectionKey as a keys
+        // @ts-ignore
         [carouselConfig.numberOfSlidesInjectionKey]: numberOfSlides
       }
     }
