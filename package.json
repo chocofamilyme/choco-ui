@@ -1,6 +1,6 @@
 {
   "name": "choco-ui",
-  "version": "0.13.2",
+  "version": "1.0.0",
   "engines": {
     "npm": "^8.11.0",
     "node": "^16.15.1"
