@@ -29,4 +29,4 @@ export {
   ChCarouselBullets
 } from './components/ChCarousel'
 export { ChAlert, ChAlertIcon, ChAlertButton } from './components/ChAlert'
-export { ChTabbar, ChTabbarItem, ChTabbarChocoItem } from './components/ChTabbar'
+export { ChTabbar, ChTabbarItem } from './components/ChTabbar'
