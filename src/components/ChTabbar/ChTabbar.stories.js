@@ -1,6 +1,5 @@
 import ChTabbar from './ChTabbar.vue'
 import ChTabbarItem from './ChTabbarItem.vue'
-import ChTabbarChocoItem from './ChTabbarChocoItem.vue'
 
 export default {
   title: 'ChTabbar',
@@ -11,7 +10,7 @@ export default {
 }
 
 const Template = (args, { parameters }) => ({
-  components: { ChTabbar, ChTabbarItem, ChTabbarChocoItem },
+  components: { ChTabbar, ChTabbarItem },
   setup: () => ({ args, parameters }),
   template: `
     <div style="display: flex; flex-direction: column; height: 480px; width: 375px; background: #F1F2F7; padding: 16px;">
@@ -25,14 +24,9 @@ const Template = (args, { parameters }) => ({
         >
           <fa-icon :icon="['fas', 'user']" />
         </ChTabbarItem>
-        <ChTabbarChocoItem v-if="parameters.withChoco" />
       </ChTabbar>
     </div>
   `
 })
 
 export const Default = Template.bind({})
-export const WithChocoItem = Template.bind({})
-WithChocoItem.parameters = {
-  withChoco: true
-}
