@@ -48,7 +48,7 @@ export function useModalBottomSheetController() {
   function hide(name: string) {
     /**
      * Need to unlock scroll the same time it was locked.
-     * Otherwise counter of locked scrolls goes to negative and on breaks on the next unlocks
+     * Otherwise counter of locked scrolls goes to negative and breaks on the next unlocks
      */
     if (isVisible(name)) {
       unlockScroll(name)
