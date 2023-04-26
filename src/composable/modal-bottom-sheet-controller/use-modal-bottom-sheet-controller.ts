@@ -46,8 +46,14 @@ export function useModalBottomSheetController() {
   }
 
   function hide(name: string) {
-    unlockScroll(name)
-    state.value = state.value.filter(modal => modal.activeName !== name)
+    /**
+     * Need to unlock scroll the same time it was locked.
+     * Otherwise counter of locked scrolls goes to negative and on breaks on the next unlocks
+     */
+    if (isVisible(name)) {
+      unlockScroll(name)
+      state.value = state.value.filter(modal => modal.activeName !== name)
+    }
   }
 
   function onDestroy(name: string) {
