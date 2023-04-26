@@ -70,7 +70,7 @@ const emit = defineEmits(['onClose', 'onOpen', 'onSheetTouchEnd', 'onHandleBarCl
 
 const controllerInjectionKey = inject<string>(injectionKey) as string
 const controller = inject<ModalBottomSheetController>(controllerInjectionKey)
-const bottomSheetRef = ref()
+const bottomSheetRef = ref<HTMLElement>()
 const contentRef = ref()
 const bottomSheetState = ref({
   blackoutTouchStarted: false,
@@ -124,7 +124,11 @@ const onSheetTouchMove = (e: TouchEvent) => {
 }
 
 const onSheetTouchEnd = () => {
-  const bottomSheetHeight = (bottomSheetRef.value as HTMLElement).offsetHeight
+  if (!bottomSheetRef.value) {
+    return
+  }
+
+  const bottomSheetHeight = bottomSheetRef.value.offsetHeight
   const closingLimit = bottomSheetHeight * 0.4
   if (
     bottomSheetState.value.sheetTouchStarted &&
