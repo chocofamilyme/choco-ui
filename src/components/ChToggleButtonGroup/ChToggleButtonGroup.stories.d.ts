@@ -1,3 +1,3 @@
 export declare class WithLabel {
-  static args: any
+  static args: unknown
 }
