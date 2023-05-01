@@ -109,10 +109,12 @@ const onHandleBarClick = () => {
 
 const extractTouch = (e: TouchEvent) => e.changedTouches[0].clientY
 
-const hasScrollbar = (elem: HTMLElement) => elem.scrollHeight > elem.clientHeight
+const isScrollAtTop = (elem: HTMLElement) => {
+  return elem.scrollTop === 0
+}
 
 const onSheetTouchStart = (e: TouchEvent) => {
-  bottomSheetState.value.sheetTouchStarted = !hasScrollbar(e.target as HTMLElement)
+  bottomSheetState.value.sheetTouchStarted = isScrollAtTop(contentRef.value as HTMLElement)
   bottomSheetState.value.sheetTouchStart = extractTouch(e)
 }
 
