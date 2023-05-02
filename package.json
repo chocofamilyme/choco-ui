@@ -50,7 +50,7 @@
     "@storybook/addon-links": "^6.4.22",
     "@storybook/builder-vite": "^0.1.33",
     "@storybook/vue3": "^6.4.22",
-    "@types/glidejs__glide": "^3.4.2",
+    "@types/glidejs__glide": "^3.6.1",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.27",
     "@vitejs/plugin-vue": "^2.3.1",
