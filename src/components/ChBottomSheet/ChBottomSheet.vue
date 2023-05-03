@@ -18,7 +18,6 @@
           class="bottom-sheet__content"
           role="dialog"
           aria-modal="true"
-          data-test-id="bottom-sheet"
         >
           <div
             class="bottom-sheet__handle-bar-container"

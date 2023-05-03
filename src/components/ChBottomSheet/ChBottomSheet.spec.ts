@@ -101,8 +101,16 @@ describe('ChBottomSheet', () => {
     expect(bottomSheet?.emitted('onClose')).toBeFalsy()
   })
 
-  it('should emit "onSheetTouchEnd" event when the sheet touch is interrupted', () => {
-    const bottomSheetInstance = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet')
+  it('should emit "onSheetTouchEnd" event when the sheet touch on header is interrupted', () => {
+    const bottomSheetInstance = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-header')
+    bottomSheetInstance.trigger('touchstart')
+    bottomSheetInstance.trigger('touchmove')
+    bottomSheetInstance.trigger('touchend')
+    expect(bottomSheet?.emitted('onSheetTouchEnd')).toBeTruthy()
+  })
+
+  it('should emit "onSheetTouchEnd" event when the sheet touch on content is interrupted', () => {
+    const bottomSheetInstance = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-content')
     bottomSheetInstance.trigger('touchstart')
     bottomSheetInstance.trigger('touchmove')
     bottomSheetInstance.trigger('touchend')
