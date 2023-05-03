@@ -19,9 +19,6 @@
           role="dialog"
           aria-modal="true"
           data-test-id="bottom-sheet"
-          @touchstart="onSheetTouchStart"
-          @touchmove="onSheetTouchMove"
-          @touchend="onSheetTouchEnd"
         >
           <div
             class="bottom-sheet__handle-bar-container"
@@ -30,7 +27,12 @@
           >
             <span class="bottom-sheet__handle-bar"></span>
           </div>
-          <div data-test-id="bottom-sheet-header">
+          <div
+            data-test-id="bottom-sheet-header"
+            @touchstart="onSheetTouchStart"
+            @touchmove="onSheetTouchMove"
+            @touchend="onSheetTouchEnd"
+          >
             <slot
               name="header"
               v-bind="{ hide, params: controller?.getParams(props.name) || {} }"
@@ -41,6 +43,9 @@
             class="bottom-sheet__body"
             data-test-id="bottom-sheet-content"
             :data-preserve-scroll="name"
+            @touchstart="onContentTouchStart"
+            @touchmove="onSheetTouchMove"
+            @touchend="onSheetTouchEnd"
           >
             <slot
               v-bind="{
@@ -109,13 +114,19 @@ const onHandleBarClick = () => {
 
 const extractTouch = (e: TouchEvent) => e.changedTouches[0].clientY
 
-const isScrollAtTop = (elem: HTMLElement) => {
-  return elem.scrollTop === 0
+const isContentScrollAtTop = () => {
+  return contentRef.value.scrollTop === 0
 }
 
 const onSheetTouchStart = (e: TouchEvent) => {
-  bottomSheetState.value.sheetTouchStarted = isScrollAtTop(contentRef.value as HTMLElement)
+  bottomSheetState.value.sheetTouchStarted = true
   bottomSheetState.value.sheetTouchStart = extractTouch(e)
+}
+
+const onContentTouchStart = (e: TouchEvent) => {
+  if (isContentScrollAtTop()) {
+    onSheetTouchStart(e)
+  }
 }
 
 const onSheetTouchMove = (e: TouchEvent) => {
