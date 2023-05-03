@@ -29,9 +29,9 @@
           </div>
           <div
             data-test-id="bottom-sheet-header"
-            @touchstart="onSheetTouchStart"
-            @touchmove="onSheetTouchMove"
-            @touchend="onSheetTouchEnd"
+            @touchstart.stop="onSheetTouchStart"
+            @touchmove.stop="onSheetTouchMove"
+            @touchend.stop="onSheetTouchEnd"
           >
             <slot
               name="header"
@@ -43,9 +43,9 @@
             class="bottom-sheet__body"
             data-test-id="bottom-sheet-content"
             :data-preserve-scroll="name"
-            @touchstart="onContentTouchStart"
-            @touchmove="onSheetTouchMove"
-            @touchend="onSheetTouchEnd"
+            @touchstart.stop="onContentTouchStart"
+            @touchmove.stop="onSheetTouchMove"
+            @touchend.stop="onSheetTouchEnd"
           >
             <slot
               v-bind="{
