@@ -102,7 +102,10 @@ describe('ChBottomSheet', () => {
   })
 
   it('should emit "onSheetTouchEnd" event when the sheet touch on header is interrupted', () => {
-    const bottomSheetInstance = findByTestId(bottomSheet as VueWrapper, 'bottom-sheet-header')
+    const bottomSheetInstance = findByTestId(
+      bottomSheet as VueWrapper,
+      'bottom-sheet-header-with-handle'
+    )
     bottomSheetInstance.trigger('touchstart')
     bottomSheetInstance.trigger('touchmove')
     bottomSheetInstance.trigger('touchend')

@@ -20,22 +20,24 @@
           aria-modal="true"
         >
           <div
-            class="bottom-sheet__handle-bar-container"
-            data-test-id="bottom-sheet-handle-bar"
-            @click="onHandleBarClick"
-          >
-            <span class="bottom-sheet__handle-bar"></span>
-          </div>
-          <div
-            data-test-id="bottom-sheet-header"
+            data-test-id="bottom-sheet-header-with-handle"
             @touchstart.stop="onSheetTouchStart"
             @touchmove.stop="onSheetTouchMove"
             @touchend.stop="onSheetTouchEnd"
           >
-            <slot
-              name="header"
-              v-bind="{ hide, params: controller?.getParams(props.name) || {} }"
-            ></slot>
+            <div
+              class="bottom-sheet__handle-bar-container"
+              data-test-id="bottom-sheet-handle-bar"
+              @click="onHandleBarClick"
+            >
+              <span class="bottom-sheet__handle-bar"></span>
+            </div>
+            <div data-test-id="bottom-sheet-header">
+              <slot
+                name="header"
+                v-bind="{ hide, params: controller?.getParams(props.name) || {} }"
+              ></slot>
+            </div>
           </div>
           <div
             ref="contentRef"
