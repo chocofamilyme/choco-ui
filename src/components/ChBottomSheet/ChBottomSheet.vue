@@ -44,9 +44,9 @@
             class="bottom-sheet__body"
             data-test-id="bottom-sheet-content"
             :data-preserve-scroll="name"
-            @touchstart.stop="onContentTouchStart"
-            @touchmove.stop="onSheetTouchMove"
-            @touchend.stop="onSheetTouchEnd"
+            @touchstart="onContentTouchStart"
+            @touchmove="onSheetTouchMove"
+            @touchend="onSheetTouchEnd"
           >
             <slot
               v-bind="{
