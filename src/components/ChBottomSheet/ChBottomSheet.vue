@@ -8,7 +8,7 @@
       <div
         class="bottom-sheet-container__blackout"
         data-test-id="bottom-sheet-blackout"
-        @touchstart="onBlackoutTouchStart"
+        @touchstart.stop="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
       ></div>
       <div class="bottom-sheet">
@@ -44,7 +44,7 @@
             class="bottom-sheet__body"
             data-test-id="bottom-sheet-content"
             :data-preserve-scroll="name"
-            @touchstart="onContentTouchStart"
+            @touchstart.stop="onContentTouchStart"
             @touchmove="onSheetTouchMove"
             @touchend="onSheetTouchEnd"
           >
