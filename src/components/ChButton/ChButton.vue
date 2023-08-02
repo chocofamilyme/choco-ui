@@ -48,8 +48,6 @@ export default defineComponent({
 
 <style lang="sass" scoped>
 .ch-button
-  --ch-button-border-width: 1px
-
   font-style: normal
   font-weight: 900
   font-size: 24px
