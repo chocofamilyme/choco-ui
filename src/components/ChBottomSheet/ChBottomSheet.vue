@@ -8,7 +8,7 @@
       <div
         class="bottom-sheet-container__blackout"
         data-test-id="bottom-sheet-blackout"
-        @touchstart.stop="onBlackoutTouchStart"
+        @touchstart.prevent="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
       ></div>
       <div class="bottom-sheet">
@@ -21,9 +21,9 @@
         >
           <div
             data-test-id="bottom-sheet-header-with-handle"
-            @touchstart.stop="onSheetTouchStart"
-            @touchmove.stop="onSheetTouchMove"
-            @touchend.stop="onSheetTouchEnd"
+            @touchstart="onSheetTouchStart"
+            @touchmove="onSheetTouchMove"
+            @touchend="onSheetTouchEnd"
           >
             <div
               class="bottom-sheet__handle-bar-container"
@@ -44,7 +44,7 @@
             class="bottom-sheet__body"
             data-test-id="bottom-sheet-content"
             :data-preserve-scroll="name"
-            @touchstart.stop="onContentTouchStart"
+            @touchstart="onContentTouchStart"
             @touchmove="onSheetTouchMove"
             @touchend="onSheetTouchEnd"
           >
@@ -134,6 +134,14 @@ const onSheetTouchMove = (e: TouchEvent) => {
   if (bottomSheetState.value.sheetTouchStarted) {
     const shift = extractTouch(e) - bottomSheetState.value.sheetTouchStart
     bottomSheetState.value.sheetShift = Math.max(0, shift)
+
+    /**
+     * should prevent default behaviour only when bottom sheet starts to shift
+     * otherwise other scrollable children elements won't work
+     */
+    if (shift > 0) {
+      e.preventDefault()
+    }
   }
 }
 
